@@ -136,6 +136,7 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Dll\C1.WPF.4.dll" />
     <Content Include="Dll\Newtonsoft.Json.dll" />
     <Content Include="Dll\Xceed.Wpf.AvalonDock.dll" />
     <Content Include="Dll\Xceed.Wpf.AvalonDock.Themes.Aero.dll" />

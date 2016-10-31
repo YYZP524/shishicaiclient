@@ -36,6 +36,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="C1.WPF.4, Version=4.0.20151.455, Culture=neutral, PublicKeyToken=2aa4ec5576d6c3ce" />
+    <Reference Include="C1.WPF.Docking.4, Version=4.0.20151.455, Culture=neutral, PublicKeyToken=2aa4ec5576d6c3ce" />
     <Reference Include="Newtonsoft.Json">
       <HintPath>D:\引用\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -68,6 +70,9 @@
     <Compile Include="Leftelll.xaml.cs">
       <DependentUpon>Leftelll.xaml</DependentUpon>
     </Compile>
+    <Compile Include="LiweiTest.xaml.cs">
+      <DependentUpon>LiweiTest.xaml</DependentUpon>
+    </Compile>
     <Compile Include="login.xaml.cs">
       <DependentUpon>login.xaml</DependentUpon>
     </Compile>
@@ -76,6 +81,10 @@
       <DependentUpon>sign.xaml</DependentUpon>
     </Compile>
     <Page Include="Leftelll.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="LiweiTest.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -114,6 +123,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

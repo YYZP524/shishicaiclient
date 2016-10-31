@@ -12,6 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Net.Sockets;
+using C1.WPF;
  
         
 
@@ -33,7 +34,13 @@ namespace shishicaiclient
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
 
+            LiweiTest newtext = new LiweiTest();
+            C1Window win = new C1Window();
+            win.Content = newtext();
+            win.Show();
+            
 
+            
             //连接到指定服务器的指定端口
             PublicClass.socket.Connect("192.168.1.109", 4530);
             if (!PublicClass.socket.Connected)

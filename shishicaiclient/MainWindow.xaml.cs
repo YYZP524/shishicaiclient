@@ -12,11 +12,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Net.Sockets;
-<<<<<<< HEAD
 using C1.WPF;
-=======
 using Newtonsoft.Json.Linq;
->>>>>>> origin/master
  
         
 

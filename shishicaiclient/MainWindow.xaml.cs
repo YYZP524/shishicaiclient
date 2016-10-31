@@ -32,8 +32,12 @@ namespace shishicaiclient
         static byte[] buffer = new byte[1024*1024];
 
         string histroyopen = "";
-        int i;
 
+       public class jsonclass
+        {
+            public  string expect { get; set; }
+            public  string opencode { get; set; }
+        }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
 
@@ -65,8 +69,15 @@ namespace shishicaiclient
                 //读取出来消息内容
                 var message = Encoding.Unicode.GetString(buffer, 0, length);
                 histroyopen = message;
-                JArray jsonstr = JArray.Parse(histroyopen);
-               
+                JToken jsonstr = JToken.Parse(histroyopen);
+                JArray jsonstrs = JArray.Parse(jsonstr["data"].ToString());
+              
+                for (int i = 0; i < jsonstrs.Count; i++)
+                {
+                    PublicClass.Code_json.Add(jsonstrs[i]);
+                   
+                }
+                string ccc = PublicClass.Code_json[0]["expect"].ToString();
                 //显示消息
                 MessageBox.Show(message);
                

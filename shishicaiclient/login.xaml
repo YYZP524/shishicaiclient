@@ -3,25 +3,14 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="用户登录" Height="300" Width="450">
     <Grid>
-        <Border BorderBrush="Black" BorderThickness="2" Height="120" Width="400">
-
+        
             <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="3*"/>
-                    <ColumnDefinition Width="7*"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock Grid.Row="0" Grid.Column="0" Text="用户名" Margin="5" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                <TextBox Grid.Row="0" Grid.Column="1" Margin="5" Name="name"/>
-                <TextBlock Grid.Row="1" Grid.Column="0" Text="密码" Margin="5" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                <PasswordBox Grid.Row="1" Grid.Column="1" Margin="5" Name="password" />
-                <Button Grid.Column="1" Grid.Row="2" x:Name="loginbtn" Margin="5" Width="50" BorderBrush="#FFCFCAEF" Background="#FFC9CEBE" Click="loginbtn_Click">登录</Button>
-            </Grid>
-        </Border>
+
+            <TextBlock  Text="用户名" Margin="77,80,315,166"  Width="36" Height="19"/>
+            <TextBox Margin="141,74,117,164" Name="name" Width="180" Height="30" />
+            <TextBlock  Text="密码" Margin="77,138,315,104"  Width="36" Height="19" />
+            <PasswordBox Width="180" Height="30" Margin="141,128,107,104" Name="password"/>
+            <Button x:Name="loginbtn" Margin="194,194,165,32" BorderBrush="#FFCFCAEF" Background="#FFC9CEBE" Click="loginbtn_Click">登录</Button>
+        </Grid>
     </Grid>
 </Window>

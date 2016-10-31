@@ -37,7 +37,7 @@ namespace shishicaiclient
 
             LiweiTest newtext = new LiweiTest();
             C1Window win = new C1Window();
-            win.Content = newtext();
+            win.Content = newtext;
             win.Show();
             
 

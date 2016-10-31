@@ -12,7 +12,11 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Net.Sockets;
+<<<<<<< HEAD
 using C1.WPF;
+=======
+using Newtonsoft.Json.Linq;
+>>>>>>> origin/master
  
         
 
@@ -27,9 +31,9 @@ namespace shishicaiclient
             InitializeComponent();
         }
     
-        static byte[] buffer = new byte[1024];
+        static byte[] buffer = new byte[1024*1024];
 
-      
+        string histroyopen = "";
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
@@ -55,7 +59,7 @@ namespace shishicaiclient
            
         }
         //接收消息
-        public static void ReceiveMessage(IAsyncResult ar)
+        public  void ReceiveMessage(IAsyncResult ar)
         {
             try
             {
@@ -63,8 +67,12 @@ namespace shishicaiclient
                 var length = socket.EndReceive(ar);
                 //读取出来消息内容
                 var message = Encoding.Unicode.GetString(buffer, 0, length);
+                histroyopen = message;
+                JArray jsonstr = JArray.Parse(histroyopen);
+                
                 //显示消息
                 MessageBox.Show(message);
+               
                 //接收下一个消息(因为这是一个递归的调用，所以这样就可以一直接收消息了）
                 socket.BeginReceive(buffer, 0, buffer.Length, SocketFlags.None, new AsyncCallback(ReceiveMessage), socket);
             }
@@ -86,6 +94,7 @@ namespace shishicaiclient
             login login = new login();
             login.Show();
         }
+        
         
 
        

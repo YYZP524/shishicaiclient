@@ -13,7 +13,7 @@ namespace shishicaiclient
        public static  Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
         public static string zhucejson;
         public static string loginjson;
-        public List<JToken> code_json = new List<JToken>();
+        public static List<JToken> Code_json = new List<JToken>();
 
 
         }

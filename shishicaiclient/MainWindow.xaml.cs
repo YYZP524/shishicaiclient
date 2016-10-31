@@ -13,6 +13,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Net.Sockets;
 using Newtonsoft.Json.Linq;
+using C1.WPF;
+
  
         
 
@@ -35,6 +37,10 @@ namespace shishicaiclient
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
 
+            //C1Window win = new C1Window();
+            //LiweiTest test = new LiweiTest();
+            //win.Content = test;
+            //win.Show();
 
             //连接到指定服务器的指定端口
             PublicClass.socket.Connect("192.168.1.109", 4530);

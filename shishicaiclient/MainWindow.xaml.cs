@@ -11,17 +11,76 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Net.Sockets;
+ 
+        
 
-namespace shishicaiclient
+    
+namespace shishicaiclient 
 {
-    /// <summary>
-    /// MainWindow.xaml 的交互逻辑
-    /// </summary>
+
     public partial class MainWindow : Window
     {
         public MainWindow()
         {
             InitializeComponent();
         }
+    
+        static byte[] buffer = new byte[1024];
+
+      
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+
+
+            //连接到指定服务器的指定端口
+            PublicClass.socket.Connect("192.168.1.109", 4530);
+            if (!PublicClass.socket.Connected)
+            {
+                MessageBox.Show("connect to the server");
+            }
+            else
+            {
+                MessageBox.Show("welcome");
+                PublicClass.socket.BeginReceive(buffer, 0, buffer.Length, SocketFlags.None, new AsyncCallback(ReceiveMessage), PublicClass.socket);
+            }
+           
+        }
+        //接收消息
+        public static void ReceiveMessage(IAsyncResult ar)
+        {
+            try
+            {
+                var socket = ar.AsyncState as Socket;
+                var length = socket.EndReceive(ar);
+                //读取出来消息内容
+                var message = Encoding.Unicode.GetString(buffer, 0, length);
+                //显示消息
+                MessageBox.Show(message);
+                //接收下一个消息(因为这是一个递归的调用，所以这样就可以一直接收消息了）
+                socket.BeginReceive(buffer, 0, buffer.Length, SocketFlags.None, new AsyncCallback(ReceiveMessage), socket);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        
+      //发送用户注册信息
+        private void sign_Click(object sender, RoutedEventArgs e)
+        {
+            Window1 neww = new Window1();
+            neww.Show();
+        }
+        //发送用户登录信息
+        private void login_Click(object sender, RoutedEventArgs e)
+        {
+            login login = new login();
+            login.Show();
+        }
+        
+
+       
     }
 }

@@ -38,6 +38,7 @@ namespace shishicaiclient
             public  string expect { get; set; }
             public  string opencode { get; set; }
         }
+     
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
 
@@ -57,11 +58,13 @@ namespace shishicaiclient
                 MessageBox.Show("welcome");
                 PublicClass.socket.BeginReceive(buffer, 0, buffer.Length, SocketFlags.None, new AsyncCallback(ReceiveMessage), PublicClass.socket);
             }
-           
+
+
         }
         //接收消息
         public  void ReceiveMessage(IAsyncResult ar)
         {
+    
             try
             {
                 var socket = ar.AsyncState as Socket;
@@ -69,15 +72,20 @@ namespace shishicaiclient
                 //读取出来消息内容
                 var message = Encoding.Unicode.GetString(buffer, 0, length);
                 histroyopen = message;
+                //提取服务端传输的json
                 JToken jsonstr = JToken.Parse(histroyopen);
                 JArray jsonstrs = JArray.Parse(jsonstr["data"].ToString());
-              
+                //将json按条提取
                 for (int i = 0; i < jsonstrs.Count; i++)
                 {
                     PublicClass.Code_json.Add(jsonstrs[i]);
+                    string hisexpect = PublicClass.Code_json[i]["expect"].ToString();
+                    string hisopencode = PublicClass.Code_json[i]["opencode"].ToString();
+                    
                    
                 }
-                string ccc = PublicClass.Code_json[0]["expect"].ToString();
+                
+           
                 //显示消息
                 MessageBox.Show(message);
                

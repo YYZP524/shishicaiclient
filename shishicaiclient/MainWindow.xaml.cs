@@ -38,6 +38,12 @@ namespace shishicaiclient
             public  string expect { get; set; }
             public  string opencode { get; set; }
         }
+<<<<<<< HEAD
+=======
+     
+        
+
+>>>>>>> origin/master
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
 
@@ -59,7 +65,104 @@ namespace shishicaiclient
             }
            
         }
-        //接收消息
+
+        //用页面
+        private void show_leftopenjiang(string opencode, string expect)
+        {
+               Dispatcher.Invoke(new Action(delegate
+            {
+            StackPanel stack = new StackPanel(); //实例化
+            stack.Orientation = Orientation.Horizontal;  //stackpanel横向调节
+            Label lab = new Label();
+            lab.Content = expect;
+            lab.Foreground = Brushes.Gray;  //  lab字体颜色
+            stack.Children.Add(lab);  //把lab放在stack里
+            string[] sinopen = opencode.Split(',');   
+            foreach (var sin in sinopen)
+            {
+                LeftEll ell = new LeftEll();
+                ell.create_lab(sin, 0);
+                ell.Width = 24;
+                ell.Height = 24;
+                stack.Children.Add(ell);
+            }
+
+            string [] kk = opencode.Split(',');
+             int number1 = int.Parse(kk[1]); //第二个数字
+             int number4 = int.Parse(kk[4]); //最后一个数字
+          
+            //判断龙虎和
+             if (number1 > number4)
+             {
+                 LeftEll ellreturn = new LeftEll();
+                 ellreturn.create_lab("龙", 1);
+                 ellreturn.Width = 24;
+                 ellreturn.Height = 24;
+                 stack.Children.Add(ellreturn);
+             }
+             else if (number1 < number4)
+             {
+                 LeftEll ellreturn = new LeftEll();
+                 ellreturn.create_lab("虎", 1);
+                 ellreturn.Width = 24;
+                 ellreturn.Height = 24;
+                 stack.Children.Add(ellreturn);
+             }
+             else
+             {
+                 LeftEll ellreturn = new LeftEll();
+                 ellreturn.create_lab("和", 1);
+                 ellreturn.Width = 24;
+                 ellreturn.Height = 24;
+                 stack.Children.Add(ellreturn);
+             }
+           
+
+                //判断单双
+             int last = number4;
+             if (last % 2 == 0)
+             {
+                 LeftEll ellreturn = new LeftEll();
+                 ellreturn.create_lab("双", 1);
+                 ellreturn.Width = 24;
+                 ellreturn.Height = 24;
+                 stack.Children.Add(ellreturn);
+             }
+             else
+             {
+                 LeftEll ellreturn = new LeftEll();
+                 ellreturn.create_lab("单", 1);
+                 ellreturn.Width = 24;
+                 ellreturn.Height = 24;
+                 stack.Children.Add(ellreturn);
+             }
+
+
+             int sum = number1 + int.Parse(kk[2]) + int.Parse(kk[3]) + number4;
+             if (sum < 18)
+             {
+                 LeftEll ellreturn = new LeftEll();
+                 ellreturn.create_lab("小", 1);
+                 ellreturn.Width = 24;
+                 ellreturn.Height = 24;
+                 stack.Children.Add(ellreturn);
+             }
+             else
+             {
+                 LeftEll ellreturn = new LeftEll();
+                 ellreturn.create_lab("大", 1);
+                 ellreturn.Width = 24;
+                 ellreturn.Height = 24;
+                 stack.Children.Add(ellreturn);
+             }
+             
+            
+   
+            left_opencode.Items.Add(stack);
+            }));
+        }
+
+        //接收初始历史记录消息
         public  void ReceiveMessage(IAsyncResult ar)
         {
             try
@@ -71,16 +174,31 @@ namespace shishicaiclient
                 MessageBox.Show(message);
                 histroyopen = message;
                 JToken jsonstr = JToken.Parse(histroyopen);
+                if(jsonstr["opercode"].ToString()=="10")   //操作数为10是历史记录
+                {
                 JArray jsonstrs = JArray.Parse(jsonstr["data"].ToString());
               
                 for (int i = 0; i < jsonstrs.Count; i++)
                 {
                     PublicClass.Code_json.Add(jsonstrs[i]);
+<<<<<<< HEAD
                    
                 }
                 string ccc = PublicClass.Code_json[0]["expect"].ToString();
                 //显示消息
             
+=======
+                    string ccc = jsonstrs[i]["opencode"].ToString();
+                    show_leftopenjiang(jsonstrs[i]["opencode"].ToString(), jsonstrs[i]["expect"].ToString());
+                    
+                }
+            }
+
+                
+           
+                //显示消息
+                //MessageBox.Show(message);
+>>>>>>> origin/master
                
                 //接收下一个消息(因为这是一个递归的调用，所以这样就可以一直接收消息了）
                 socket.BeginReceive(buffer, 0, buffer.Length, SocketFlags.None, new AsyncCallback(ReceiveMessage), socket);

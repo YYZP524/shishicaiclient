@@ -27,6 +27,7 @@
                         <avalonDock:LayoutAnchorablePane>
                             <avalonDock:LayoutAnchorable Title="开奖号码" CanClose="False" CanHide="False" x:Name="leftpanel" CanFloat="False" AutoHideMinWidth="300">
                                 <ListBox x:Name="left_opencode"/>
+                                
                             </avalonDock:LayoutAnchorable>
 
                         </avalonDock:LayoutAnchorablePane>

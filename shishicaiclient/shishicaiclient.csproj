@@ -77,8 +77,8 @@
     <Compile Include="login.xaml.cs">
       <DependentUpon>login.xaml</DependentUpon>
     </Compile>
-    <Compile Include="sign1.xaml.cs">
-      <DependentUpon>sign1.xaml</DependentUpon>
+    <Compile Include="sub_sign.xaml.cs">
+      <DependentUpon>sub_sign.xaml</DependentUpon>
     </Compile>
     <Compile Include="PublicClass.cs" />
     <Compile Include="sign.xaml.cs">
@@ -96,7 +96,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="sign1.xaml">
+    <Page Include="sub_sign.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

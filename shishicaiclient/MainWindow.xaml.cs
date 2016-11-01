@@ -48,7 +48,7 @@ namespace shishicaiclient
             //win.Show();
 
             //连接到指定服务器的指定端口
-            PublicClass.socket.Connect("192.168.1.109", 4530);
+            //PublicClass.socket.Connect("192.168.1.109", 4530);
             if (!PublicClass.socket.Connected)
             {
                 MessageBox.Show("connect to the server");
@@ -101,8 +101,21 @@ namespace shishicaiclient
       //发送用户注册信息
         private void sign_Click(object sender, RoutedEventArgs e)
         {
-            Window1 neww = new Window1();
-            neww.Show();
+            //Window1 neww = new Window1();
+            //neww.Show();
+            sub_sign login = new sub_sign();
+            C1Window win = new C1Window();
+            win.Width = 300;
+            win.Height = 300;
+            win.ShowMaximizeButton = false;
+            win.ShowMinimizeButton = false;
+            win.IsResizable = false;
+            win.Margin = new Thickness((SystemParameters.WorkArea.Width - win.Width) / 2, (SystemParameters.WorkArea.Height - win.Height) / 2, 0, 0);
+            
+            win.Content = login;
+            win.Show();
+            //SystemParameters.PrimaryScreenWidth;//屏幕宽度
+            //SystemParameters.PrimaryScreenHeight;//屏幕高度
         }
         //发送用户登录信息
         private void login_Click(object sender, RoutedEventArgs e)

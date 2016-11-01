@@ -31,7 +31,7 @@ namespace shishicaiclient
         {
             if (password.Password == passwordchar.Password)//判断两次输入是否一致
             {
-
+                
                 //用户名密码封装json
                 var o = new
                 {

@@ -39,15 +39,7 @@ namespace shishicaiclient
             public  string expect { get; set; }
             public  string opencode { get; set; }
         }
-<<<<<<< HEAD
 
-=======
-
-     
-        
-
-
->>>>>>> origin/master
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
 
@@ -187,25 +179,15 @@ namespace shishicaiclient
                 for (int i = 0; i < jsonstrs.Count; i++)
                 {
                     PublicClass.Code_json.Add(jsonstrs[i]);
-<<<<<<< HEAD
-                    string ccc = jsonstrs[i]["opencode"].ToString();
+                   string ccc = jsonstrs[i]["opencode"].ToString();
                     show_leftopenjiang(jsonstrs[i]["opencode"].ToString(), jsonstrs[i]["expect"].ToString());
                    
                 }
-
-            }
-=======
-
-                    string ccc = jsonstrs[i]["opencode"].ToString();
-                    show_leftopenjiang(jsonstrs[i]["opencode"].ToString(), jsonstrs[i]["expect"].ToString());
                 }
 
                
               
                     
-                }
-            
->>>>>>> origin/master
 
                 
            

@@ -36,7 +36,7 @@ namespace shishicaiclient
             };
             var json = JsonConvert.SerializeObject(o);
             str = json.ToString();
-            str = "[" + str + "]";
+            //str = "[" + str + "]";
             PublicClass.loginjson = str;
             var message = PublicClass.loginjson;
             var outputBuffer = Encoding.Unicode.GetBytes(message);

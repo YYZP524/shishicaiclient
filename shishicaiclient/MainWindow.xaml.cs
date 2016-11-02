@@ -38,12 +38,11 @@ namespace shishicaiclient
             public  string expect { get; set; }
             public  string opencode { get; set; }
         }
-<<<<<<< HEAD
-=======
+
      
         
 
->>>>>>> origin/master
+
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
 
@@ -181,26 +180,25 @@ namespace shishicaiclient
                 for (int i = 0; i < jsonstrs.Count; i++)
                 {
                     PublicClass.Code_json.Add(jsonstrs[i]);
-<<<<<<< HEAD
-                   
-                }
-                string ccc = PublicClass.Code_json[0]["expect"].ToString();
-                //显示消息
-            
-=======
+
                     string ccc = jsonstrs[i]["opencode"].ToString();
                     show_leftopenjiang(jsonstrs[i]["opencode"].ToString(), jsonstrs[i]["expect"].ToString());
+                }
+
+               
+              
                     
                 }
-            }
+            
 
                 
            
                 //显示消息
                 //MessageBox.Show(message);
->>>>>>> origin/master
+
                
                 //接收下一个消息(因为这是一个递归的调用，所以这样就可以一直接收消息了）
+            
                 socket.BeginReceive(buffer, 0, buffer.Length, SocketFlags.None, new AsyncCallback(ReceiveMessage), socket);
             }
             catch (Exception ex)

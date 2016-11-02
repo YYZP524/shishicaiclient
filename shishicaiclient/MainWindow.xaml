@@ -9,12 +9,17 @@
             <RowDefinition Height="26"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Menu Grid.Row="0" >
+        <Menu Grid.Row="0">
             <MenuItem Header="用户">
+
                 <MenuItem Name="sign" Header="注册" Click="sign_Click" />
                 <MenuItem Name="login" Header="登陆" Click="login_Click" />
             </MenuItem>
-            </Menu>
+            
+          
+
+
+        </Menu>
         <ToolBar Grid.Row="1"/>
         <avalonDock:DockingManager x:Name="dockingManager" Grid.Row="2" >
             <avalonDock:DockingManager.Theme>

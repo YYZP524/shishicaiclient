@@ -42,7 +42,8 @@ namespace shishicaiclient
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-
+            IPAddress ipAddr = Dns.Resolve(Dns.GetHostName()).AddressList[0];//获得当前IP地址
+           PublicClass.localIP = ipAddr.ToString();
             //C1Window win = new C1Window();
             //LiweiTest test = new LiweiTest();
             //win.Content = test;
@@ -60,7 +61,7 @@ namespace shishicaiclient
                 PublicClass.socket.BeginReceive(buffer, 0, buffer.Length, SocketFlags.None, new AsyncCallback(ReceiveMessage), PublicClass.socket);
             }
 
-            GetInternalIP();
+           
            
         }
 
@@ -172,6 +173,7 @@ namespace shishicaiclient
                 MessageBox.Show(message);
                 histroyopen = message;
                 JToken jsonstr = JToken.Parse(histroyopen);
+             
                 if(jsonstr["opercode"].ToString()=="10")   //操作数为10是历史记录
                 {
                 JArray jsonstrs = JArray.Parse(jsonstr["data"].ToString());
@@ -206,21 +208,7 @@ namespace shishicaiclient
         }
 
          
-        public string GetInternalIP()
-      {
-     IPHostEntry host;
-      
-      host = Dns.GetHostEntry(Dns.GetHostName());
-      foreach (IPAddress ip in host.AddressList)
-      {
-          if (ip.AddressFamily.ToString() == "InterNetwork")
-         {
-             PublicClass.localIP = ip.ToString();
-             break;
-         }
-     }
-     return PublicClass.localIP;
- }
+        
 
 
 

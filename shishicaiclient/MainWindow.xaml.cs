@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using System.Net.Sockets;
 using Newtonsoft.Json.Linq;
 using C1.WPF;
+using System.Net;
 
  
         
@@ -38,12 +39,7 @@ namespace shishicaiclient
             public  string expect { get; set; }
             public  string opencode { get; set; }
         }
-<<<<<<< HEAD
-=======
-     
-        
 
->>>>>>> origin/master
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
 
@@ -53,7 +49,7 @@ namespace shishicaiclient
             //win.Show();
 
             //连接到指定服务器的指定端口
-            PublicClass.socket.Connect("192.168.1.109", 4530);
+            PublicClass.socket.Connect("192.168.1.106", 4530);
             if (!PublicClass.socket.Connected)
             {
                 MessageBox.Show("connect to the server");
@@ -63,6 +59,8 @@ namespace shishicaiclient
                 MessageBox.Show("welcome");
                 PublicClass.socket.BeginReceive(buffer, 0, buffer.Length, SocketFlags.None, new AsyncCallback(ReceiveMessage), PublicClass.socket);
             }
+
+            GetInternalIP();
            
         }
 
@@ -181,24 +179,18 @@ namespace shishicaiclient
                 for (int i = 0; i < jsonstrs.Count; i++)
                 {
                     PublicClass.Code_json.Add(jsonstrs[i]);
-<<<<<<< HEAD
-                   
-                }
-                string ccc = PublicClass.Code_json[0]["expect"].ToString();
-                //显示消息
-            
-=======
                     string ccc = jsonstrs[i]["opencode"].ToString();
                     show_leftopenjiang(jsonstrs[i]["opencode"].ToString(), jsonstrs[i]["expect"].ToString());
-                    
+                   
                 }
+
             }
 
                 
            
                 //显示消息
                 //MessageBox.Show(message);
->>>>>>> origin/master
+
                
                 //接收下一个消息(因为这是一个递归的调用，所以这样就可以一直接收消息了）
                 socket.BeginReceive(buffer, 0, buffer.Length, SocketFlags.None, new AsyncCallback(ReceiveMessage), socket);
@@ -208,7 +200,27 @@ namespace shishicaiclient
                 MessageBox.Show(ex.Message);
             }
         }
-        
+
+         
+        public string GetInternalIP()
+      {
+     IPHostEntry host;
+      
+      host = Dns.GetHostEntry(Dns.GetHostName());
+      foreach (IPAddress ip in host.AddressList)
+      {
+          if (ip.AddressFamily.ToString() == "InterNetwork")
+         {
+             PublicClass.localIP = ip.ToString();
+             break;
+         }
+     }
+     return PublicClass.localIP;
+ }
+
+
+
+
       //发送用户注册信息
         private void sign_Click(object sender, RoutedEventArgs e)
         {

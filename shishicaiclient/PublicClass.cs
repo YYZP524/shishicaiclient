@@ -14,7 +14,7 @@ namespace shishicaiclient
         public static string zhucejson;
         public static string loginjson;
         public static List<JToken> Code_json = new List<JToken>();
-
+        public static string localIP = "?";
 
         }
         

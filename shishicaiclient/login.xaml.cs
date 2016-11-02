@@ -32,6 +32,7 @@ namespace shishicaiclient
                 opercode = "14",
                 name = name.Text,
                 password = password.Password,
+                clientIP = PublicClass.localIP,
             };
             var json = JsonConvert.SerializeObject(o);
             str = json.ToString();

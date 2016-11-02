@@ -60,6 +60,7 @@ namespace shishicaiclient
                     opercode = "13",
                     name = username.Text,
                     password = pwd.Password,
+                   
                 };
                 var json = JsonConvert.SerializeObject(o);//json传值
                 string str = null;

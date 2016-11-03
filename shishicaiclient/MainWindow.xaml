@@ -5,17 +5,25 @@
         Title="MainWindow" Height="350" Width="525" Loaded="Window_Loaded" WindowState="Maximized" xmlns:c1="http://schemas.componentone.com/winfx/2006/xaml">
     <Grid >
         <Grid.RowDefinitions>
-            <RowDefinition Height="23"/>
+            <RowDefinition Height="30"/>
             <RowDefinition Height="26"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Menu Grid.Row="0" >
-            <MenuItem Header="用户">
-                <MenuItem Name="sign" Header="注册" Click="sign_Click" />
-                <MenuItem Name="login" Header="登陆" Click="login_Click" />
-            </MenuItem>
-            </Menu>
+            <Menu.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <DockPanel HorizontalAlignment="Right"/>
+                </ItemsPanelTemplate>
+            </Menu.ItemsPanel>
+            <Label  Height="29" Name="user" Foreground="Blue" FontSize="13" HorizontalContentAlignment="Center"  Width="100"></Label>
+            <Label  Height="29" Name="amount" Foreground="Red" FontSize="13" HorizontalContentAlignment="Center"  Width="100"></Label>
+            <Label Content="修改密码" Height="29" Name="changepwd" FontSize="13" HorizontalContentAlignment="Center"  Width="63" MouseDown="changepwd_MouseDown" Visibility="Collapsed"></Label>
+            <Label Content="注册" Height="29" FontSize="13" HorizontalContentAlignment="Center"  Name="sign"  Width="42" MouseDown="sign_MouseDown"></Label>
+            <Label Content="登录" Height="29"  FontSize="13" HorizontalContentAlignment="Center"  Name="login" Width="42" MouseDown="login_MouseDown"></Label>
+            <Label Content="注销登录" Height="29" FontSize="13" HorizontalContentAlignment="Center" Name="exit" Width="61" MouseDown="exit_MouseDown"></Label>  
+        </Menu>
         <ToolBar Grid.Row="1"/>
+       
         <avalonDock:DockingManager x:Name="dockingManager" Grid.Row="2" >
             <avalonDock:DockingManager.Theme>
                 <avalonDock:AeroTheme/>

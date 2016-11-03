@@ -66,7 +66,6 @@ namespace shishicaiclient
                 var json = JsonConvert.SerializeObject(o);//json传值
                 string str = null;
                 str = json.ToString();
-                str = "[" + str + "]";
                 PublicClass.zhucejson = str;
                 var message = PublicClass.zhucejson;
                 var outputBuffer = Encoding.Unicode.GetBytes(message);

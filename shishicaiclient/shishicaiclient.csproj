@@ -68,6 +68,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="chang.xaml.cs">
+      <DependentUpon>chang.xaml</DependentUpon>
+    </Compile>
     <Compile Include="LeftEll.xaml.cs">
       <DependentUpon>LeftEll.xaml</DependentUpon>
     </Compile>
@@ -84,6 +87,10 @@
     <Compile Include="sign.xaml.cs">
       <DependentUpon>sign.xaml</DependentUpon>
     </Compile>
+    <Page Include="chang.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="LeftEll.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

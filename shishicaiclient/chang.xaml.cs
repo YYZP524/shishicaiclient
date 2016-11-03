@@ -9,6 +9,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Newtonsoft.Json;
 using System.Net.Sockets;
@@ -16,29 +17,26 @@ using System.Net.Sockets;
 namespace shishicaiclient
 {
     /// <summary>
-    /// login.xaml 的交互逻辑
+    /// changpwd.xaml 的交互逻辑
     /// </summary>
-    public partial class login : UserControl
+    public partial class chang : UserControl
     {
-        public login()
+        public chang()
         {
             InitializeComponent();
         }
         string str = "";
-        private void loginbtn_Click(object sender, RoutedEventArgs e)
+        private void reg_Click(object sender, RoutedEventArgs e)
         {
-           
             var o = new
             {
-                opercode = "14",
-                name = name.Text,
-                password = password.Password,
-                clientIP = PublicClass.localIP,
-            };
-            PublicClass.username = name.Text;
+                opercode = "7",
+                username = PublicClass.username,
+                oldpassword = oldpwd.Password,
+                newpassword = newpwd.Password    
+            }; 
             var json = JsonConvert.SerializeObject(o);
             str = json.ToString();
-            //str = "[" + str + "]";
             PublicClass.loginjson = str;
             var message = PublicClass.loginjson;
             var outputBuffer = Encoding.Unicode.GetBytes(message);

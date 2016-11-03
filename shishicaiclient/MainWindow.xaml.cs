@@ -81,22 +81,41 @@ namespace shishicaiclient
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-<<<<<<< HEAD
+            longhu_stack.Width = chat_stack.ActualWidth / 3d - 2;
+            daxiao_stack.Width = chat_stack.ActualWidth / 3d - 2;
+            danshuang_stack.Width = chat_stack.ActualWidth / 3d - 2;
+            Longhu longhu = new Longhu();
+            longhu.Width = 600;
+            longhu.Height = 200;
+            longhu.create_line();
+            longhu_scroll.Content = longhu;
+
+            Daxiao daxiao = new Daxiao();
+            daxiao.Width = 600;
+            daxiao.Height = 200;
+            daxiao.create_line();
+            daxiao_scroll.Content = daxiao;
+
+            Danshuang danshuang = new Danshuang();
+            danshuang.Width = 600;
+            danshuang.Height = 200;
+            danshuang.create_line();
+            danshuang_scroll.Content = danshuang;
+
+
+
+
+
             IPAddress ipAddr = Dns.Resolve(Dns.GetHostName()).AddressList[0];//获得当前IP地址
            PublicClass.localIP = ipAddr.ToString();
-=======
-            //获取内网IP
-            IPAddress ipaddr = Dns.Resolve(Dns.GetHostName()).AddressList[0];
-            
-            PublicClass.localIP = ipaddr.ToString();
->>>>>>> origin/master
-            //C1Window win = new C1Window();
-            //LiweiTest test = new LiweiTest();
-            //win.Content = test;
-            //win.Show();
+
+            C1Window win = new C1Window();
+            LiweiTest test = new LiweiTest();
+            win.Content = test;
+            win.Show();
 
             //连接到指定服务器的指定端口
-            PublicClass.socket.Connect("192.168.1.106", 4530);
+            //PublicClass.socket.Connect("192.168.1.110", 4530);
             if (!PublicClass.socket.Connected)
             {
                 MessageBox.Show("connect to the server");
@@ -107,11 +126,7 @@ namespace shishicaiclient
                 PublicClass.socket.BeginReceive(buffer, 0, buffer.Length, SocketFlags.None, new AsyncCallback(ReceiveMessage), PublicClass.socket);
             }
 
-<<<<<<< HEAD
-           
-=======
-     
->>>>>>> origin/master
+
            
         }
 
@@ -150,6 +165,7 @@ namespace shishicaiclient
                  ellreturn.Width = 24;
                  ellreturn.Height = 24;
                  stack.Children.Add(ellreturn);
+
              }
              else if (number1 < number4)
              {
@@ -226,10 +242,10 @@ namespace shishicaiclient
                 //MessageBox.Show(message);
                 histroyopen = message;
                 JToken jsonstr = JToken.Parse(histroyopen);
-<<<<<<< HEAD
+
              
-                if(jsonstr["opercode"].ToString()=="10")   //操作数为10是历史记录
-=======
+
+
                 string oper = jsonstr["opercode"].ToString();
                 
                 if (oper == "16")
@@ -268,7 +284,7 @@ namespace shishicaiclient
                 }
 
                 if(oper == "10")   //操作数为10是历史记录
->>>>>>> origin/master
+
                 {
                 JArray jsonstrs = JArray.Parse(jsonstr["data"].ToString());
               
@@ -301,12 +317,9 @@ namespace shishicaiclient
             }
         }
 
-<<<<<<< HEAD
-         
-        
-=======
+
      
->>>>>>> origin/master
+
 
 
 
@@ -343,8 +356,49 @@ namespace shishicaiclient
             login.Name = "closelogin";
            
         }
-        
-        
+
+
+
+
+
+        private void documentgroup_PropertyChanging(object sender, System.ComponentModel.PropertyChangingEventArgs e)
+        {
+         
+        }
+
+        private void longhu_scroll_MouseEnter(object sender, MouseEventArgs e)
+        {
+            longhu_scroll.HorizontalScrollBarVisibility = ScrollBarVisibility.Auto;
+        }
+
+        private void longhu_scroll_MouseLeave(object sender, MouseEventArgs e)
+        {
+            longhu_scroll.HorizontalScrollBarVisibility = ScrollBarVisibility.Disabled;
+        }
+
+
+
+        private void daxiao_scroll_MouseEnter(object sender, MouseEventArgs e)
+        {
+            daxiao_scroll.HorizontalScrollBarVisibility = ScrollBarVisibility.Auto;
+        }
+
+        private void daxiao_scroll_MouseLeave(object sender, MouseEventArgs e)
+        {
+            daxiao_scroll.HorizontalScrollBarVisibility = ScrollBarVisibility.Disabled;
+        }
+
+
+        private void  danshuang_scroll_MouseEnter(object sender, MouseEventArgs e)
+        {
+            danshuang_scroll.HorizontalScrollBarVisibility = ScrollBarVisibility.Auto;
+        }
+
+        private void danshuang_scroll_MouseLeave(object sender, MouseEventArgs e)
+        {
+            danshuang_scroll.HorizontalScrollBarVisibility = ScrollBarVisibility.Disabled;
+        }
+
 
        
     }

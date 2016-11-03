@@ -68,6 +68,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Danshuang.xaml.cs">
+      <DependentUpon>Danshuang.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Daxiao.xaml.cs">
+      <DependentUpon>Daxiao.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="elllab.xaml.cs">
+      <DependentUpon>elllab.xaml</DependentUpon>
+    </Compile>
     <Compile Include="LeftEll.xaml.cs">
       <DependentUpon>LeftEll.xaml</DependentUpon>
     </Compile>
@@ -77,6 +86,12 @@
     <Compile Include="login.xaml.cs">
       <DependentUpon>login.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Longhu.xaml.cs">
+      <DependentUpon>Longhu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="rectlab.xaml.cs">
+      <DependentUpon>rectlab.xaml</DependentUpon>
+    </Compile>
     <Compile Include="sub_sign.xaml.cs">
       <DependentUpon>sub_sign.xaml</DependentUpon>
     </Compile>
@@ -84,6 +99,18 @@
     <Compile Include="sign.xaml.cs">
       <DependentUpon>sign.xaml</DependentUpon>
     </Compile>
+    <Page Include="Danshuang.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Daxiao.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="elllab.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="LeftEll.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -93,6 +120,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="login.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Longhu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="rectlab.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

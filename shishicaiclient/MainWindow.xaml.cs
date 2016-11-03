@@ -29,6 +29,45 @@ namespace shishicaiclient
         {
             InitializeComponent();
         }
+
+        public static T FindChild<T>(DependencyObject parent, string childName)//查找控件
+           where T : DependencyObject
+        {
+            if (parent == null) return null;
+            T foundChild = null;
+            int childrenCount = VisualTreeHelper.GetChildrenCount(parent);
+            for (int i = 0; i < childrenCount; i++)
+            {
+                var child = VisualTreeHelper.GetChild(parent, i);
+                // 如果子控件不是需查找的控件类型 
+                T childType = child as T;
+                if (childType == null)
+                {
+                    // 在下一级控件中递归查找 
+                    foundChild = FindChild<T>(child, childName);
+                    // 找到控件就可以中断递归操作  
+                    if (foundChild != null) break;
+                }
+                else if (!string.IsNullOrEmpty(childName))
+                {
+                    var frameworkElement = child as FrameworkElement;
+                    // 如果控件名称符合参数条件 
+                    if (frameworkElement != null && frameworkElement.Name == childName)
+                    {
+                        foundChild = (T)child;
+                        break;
+                    }
+                }
+                else
+                {
+                    // 查找到了控件 
+                    foundChild = (T)child;
+                    break;
+                }
+            }
+            return foundChild;
+        }
+
     
         static byte[] buffer = new byte[1024*1024];
 
@@ -42,8 +81,15 @@ namespace shishicaiclient
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+<<<<<<< HEAD
             IPAddress ipAddr = Dns.Resolve(Dns.GetHostName()).AddressList[0];//获得当前IP地址
            PublicClass.localIP = ipAddr.ToString();
+=======
+            //获取内网IP
+            IPAddress ipaddr = Dns.Resolve(Dns.GetHostName()).AddressList[0];
+            
+            PublicClass.localIP = ipaddr.ToString();
+>>>>>>> origin/master
             //C1Window win = new C1Window();
             //LiweiTest test = new LiweiTest();
             //win.Content = test;
@@ -61,11 +107,15 @@ namespace shishicaiclient
                 PublicClass.socket.BeginReceive(buffer, 0, buffer.Length, SocketFlags.None, new AsyncCallback(ReceiveMessage), PublicClass.socket);
             }
 
+<<<<<<< HEAD
            
+=======
+     
+>>>>>>> origin/master
            
         }
 
-        //用页面
+        //调用页面显示中奖号码及结果
         private void show_leftopenjiang(string opencode, string expect)
         {
                Dispatcher.Invoke(new Action(delegate
@@ -73,10 +123,11 @@ namespace shishicaiclient
             StackPanel stack = new StackPanel(); //实例化
             stack.Orientation = Orientation.Horizontal;  //stackpanel横向调节
             Label lab = new Label();
-            lab.Content = expect;
+            lab.Content = expect; //显示期数号
             lab.Foreground = Brushes.Gray;  //  lab字体颜色
             stack.Children.Add(lab);  //把lab放在stack里
-            string[] sinopen = opencode.Split(',');   
+            string[] sinopen = opencode.Split(','); 
+                //开奖号码显示
             foreach (var sin in sinopen)
             {
                 LeftEll ell = new LeftEll();
@@ -86,11 +137,12 @@ namespace shishicaiclient
                 stack.Children.Add(ell);
             }
 
-            string [] kk = opencode.Split(',');
-             int number1 = int.Parse(kk[1]); //第二个数字
-             int number4 = int.Parse(kk[4]); //最后一个数字
-          
-            //判断龙虎和
+            //string [] kk = opencode.Split(',');
+             int number1 = int.Parse(sinopen[1]); //第二个数字
+             int number4 = int.Parse(sinopen[4]); //最后一个数字
+            
+       //开奖结果显示
+            //判断龙虎和结果
              if (number1 > number4)
              {
                  LeftEll ellreturn = new LeftEll();
@@ -137,7 +189,8 @@ namespace shishicaiclient
              }
 
 
-             int sum = number1 + int.Parse(kk[2]) + int.Parse(kk[3]) + number4;
+                //判断大小
+             int sum = number1 + int.Parse(sinopen[2]) + int.Parse(sinopen[3]) + number4;
              if (sum < 18)
              {
                  LeftEll ellreturn = new LeftEll();
@@ -170,11 +223,52 @@ namespace shishicaiclient
                 var length = socket.EndReceive(ar);
                 //读取出来消息内容
                 var message = Encoding.Unicode.GetString(buffer, 0, length);
-                MessageBox.Show(message);
+                //MessageBox.Show(message);
                 histroyopen = message;
                 JToken jsonstr = JToken.Parse(histroyopen);
+<<<<<<< HEAD
              
                 if(jsonstr["opercode"].ToString()=="10")   //操作数为10是历史记录
+=======
+                string oper = jsonstr["opercode"].ToString();
+                
+                if (oper == "16")
+                {
+                    if (jsonstr["status"].ToString() == "100")
+                    {
+                        MessageBox.Show("登录成功");
+                        C1.WPF.C1Window close1 = MainWindow.FindChild<C1.WPF.C1Window>(
+                            Application.Current.MainWindow, "closelogin");
+                        if (close1 != null)
+                        {
+                            close1.Close();
+                        }
+                    }
+                    else if (jsonstr["status"].ToString() == "200")
+                    {
+                        MessageBox.Show("用户名或密码错误");
+                    }
+                    else 
+                    {
+                        MessageBox.Show("用户禁用");
+                    }
+                }
+
+                if (oper == "15")
+                {
+                    if (jsonstr["status"].ToString() == "100")
+                    {
+                        MessageBox.Show("注册成功");
+  
+                    }
+                    else
+                    {
+                        MessageBox.Show("用户名重名");
+                    }
+                }
+
+                if(oper == "10")   //操作数为10是历史记录
+>>>>>>> origin/master
                 {
                 JArray jsonstrs = JArray.Parse(jsonstr["data"].ToString());
               
@@ -186,7 +280,7 @@ namespace shishicaiclient
                    
                 }
                 }
-
+                
                
               
                     
@@ -207,8 +301,12 @@ namespace shishicaiclient
             }
         }
 
+<<<<<<< HEAD
          
         
+=======
+     
+>>>>>>> origin/master
 
 
 
@@ -221,6 +319,7 @@ namespace shishicaiclient
             //用户注册窗口
             sub_sign login = new sub_sign();//用户注册窗口login
             C1Window win = new C1Window();//C1:win宽高
+            win.Name = "closesign";
             win.Width = 300;
             win.Height = 300;
             win.ShowMaximizeButton = false;//最大化隐藏
@@ -233,17 +332,16 @@ namespace shishicaiclient
             //SystemParameters.PrimaryScreenWidth;//屏幕宽度
             //SystemParameters.PrimaryScreenHeight;//屏幕高度
         }
+
+
+
         //发送用户登录信息
         private void login_Click(object sender, RoutedEventArgs e)
         {
-
-
-
-
             login login = new login();
-
-         
             login.Show();
+            login.Name = "closelogin";
+           
         }
         
         

@@ -40,10 +40,58 @@
                         </avalonDock:LayoutAnchorablePane>
 
                     </avalonDock:LayoutAnchorablePaneGroup>
-                    <avalonDock:LayoutDocumentPaneGroup>
+                    <avalonDock:LayoutDocumentPaneGroup x:Name="documentgroup" PropertyChanging="documentgroup_PropertyChanging">
                         <avalonDock:LayoutDocumentPane x:Name="avapane">
 
-                            <avalonDock:LayoutDocument></avalonDock:LayoutDocument>
+                            <avalonDock:LayoutDocument x:Name="maindocument" >
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="200" />
+                                        <RowDefinition Height="235" />
+                                        <RowDefinition />
+                                    </Grid.RowDefinitions>
+                                    <Label Grid.Row="0">这是开奖</Label>
+                                    <StackPanel Grid.Row="1" Orientation="Horizontal" x:Name="chat_stack" HorizontalAlignment="Stretch">
+                                        <StackPanel x:Name="longhu_stack">
+                                            
+                                            <TabControl Height="230" Margin="2,0,0,0">
+                                                <TabItem Header="龙虎">
+                                                    <ScrollViewer x:Name="longhu_scroll" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled" CanContentScroll="True" MouseEnter="longhu_scroll_MouseEnter" MouseLeave="longhu_scroll_MouseLeave">
+                                                        
+                                                    </ScrollViewer>
+                                                </TabItem>
+                                            </TabControl>
+                                        </StackPanel>
+                                        <StackPanel x:Name="daxiao_stack" Margin="2,0,0,0">
+                                            <TabControl Height="230">
+                                                <TabItem Header="大小">
+                                                    <ScrollViewer x:Name="daxiao_scroll" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled" CanContentScroll="True" MouseEnter="daxiao_scroll_MouseEnter" MouseLeave="daxiao_scroll_MouseLeave">
+
+                                                    </ScrollViewer>
+                                                </TabItem>
+                                                <TabItem Header="大小序列">
+                                                    
+                                                </TabItem>
+                                            </TabControl>
+                                        </StackPanel>
+                                        <StackPanel x:Name="danshuang_stack" Margin="2,0,0,0">
+                                            <TabControl Height="230">
+                                                <TabItem Header="单双">
+                                                    <ScrollViewer x:Name="danshuang_scroll" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled" CanContentScroll="True" MouseEnter="danshuang_scroll_MouseEnter" MouseLeave="danshuang_scroll_MouseLeave">
+
+                                                    </ScrollViewer>
+                                                </TabItem>
+                                                <TabItem Header="单双序列">
+                                                    
+                                                </TabItem>
+                                            </TabControl>
+                                        </StackPanel>
+                                    </StackPanel>
+                                    <StackPanel Grid.Row="2">
+                                        <Label >投注</Label>
+                                    </StackPanel>
+                                </Grid>
+                            </avalonDock:LayoutDocument>
                         </avalonDock:LayoutDocumentPane>
                     </avalonDock:LayoutDocumentPaneGroup>
                     <avalonDock:LayoutAnchorablePaneGroup DockWidth="400" Orientation="Vertical">

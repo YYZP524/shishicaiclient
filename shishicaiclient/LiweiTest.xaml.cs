@@ -26,22 +26,22 @@ namespace shishicaiclient
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            StackPanel stack = new StackPanel();
-            stack.Orientation = Orientation.Horizontal;
-            for (int i = 0; i < 5; i++)
+            //rectlab rect = new rectlab();
+            //rect.Width = 30;
+            //rect.Height = 30;
+            //rect.create_rect(2, "龙");
+            //maincanvas.Children.Add(rect);
+
+            elllab ell = new elllab();
+            ell.Width = 30;
+            ell.Height = 30;
+            ell.Margin = new Thickness(0, 0, 0, 0);
+            ell.create_ell(0, "");
+            if (maincanvas.Children.Count == 0)
             {
-                LeftEll ell = new LeftEll();
-                ell.Width = 24;
-                ell.Height = 24;
-                ell.create_lab(i.ToString(), 0);
-                stack.Children.Add(ell);
+                maincanvas.Children.Add(ell);
             }
-            LeftEll ell2 = new LeftEll();
-            ell2.Width = 24;
-            ell2.Height = 24;
-            ell2.create_lab("龙", 1);
-            stack.Children.Add(ell2);
-            listbox.Items.Add(stack);
+            
         }
     }
 }

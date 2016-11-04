@@ -86,17 +86,22 @@ namespace shishicaiclient
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+
+            IPAddress ipAddr = Dns.Resolve(Dns.GetHostName()).AddressList[0];//获得当前IP地址
+           PublicClass.localIP = ipAddr.ToString();
+
             //获取内网IP
             IPAddress ipaddr = Dns.Resolve(Dns.GetHostName()).AddressList[0];
 
             PublicClass.localIP = ipaddr.ToString();
+
             //C1Window win = new C1Window();
             //LiweiTest test = new LiweiTest();
             //win.Content = test;
             //win.Show();
 
             //连接到指定服务器的指定端口
-            PublicClass.socket.Connect("192.168.1.110", 4530);
+            //PublicClass.socket.Connect("192.168.1.110", 4530);
             if (!PublicClass.socket.Connected)
             {
                 MessageBox.Show("connect to the server");
@@ -106,7 +111,6 @@ namespace shishicaiclient
                 MessageBox.Show("welcome");
                 PublicClass.socket.BeginReceive(buffer, 0, buffer.Length, SocketFlags.None, new AsyncCallback(ReceiveMessage), PublicClass.socket);
             }
-
 
 
         }
@@ -213,6 +217,7 @@ namespace shishicaiclient
         //接收服务器消息
         public void ReceiveMessage(IAsyncResult ar)
         {
+            string oper = "";
             try
             {
                 var socket = ar.AsyncState as Socket;
@@ -222,7 +227,10 @@ namespace shishicaiclient
                 //MessageBox.Show(message);
                 histroyopen = message;
                 JToken jsonstr = JToken.Parse(histroyopen);
-                string oper = jsonstr["opercode"].ToString();
+
+             
+                if(jsonstr["opercode"].ToString()=="10")   //操作数为10是历史记录
+                 oper = jsonstr["opercode"].ToString();
 
                 if (oper == "16")
                 {
@@ -294,7 +302,11 @@ namespace shishicaiclient
                     }
                 }
 
+
                 if (oper == "17")
+
+                if(oper == "10")   //操作数为10是历史记录
+
                 {
                     MessageBox.Show("用户下线");
                      Dispatcher.Invoke(new Action(delegate         //线程加载
@@ -366,6 +378,7 @@ namespace shishicaiclient
                 MessageBox.Show(ex.Message);
             }
         }
+
         //发送消息
         private void sign_MouseDown(object sender, MouseButtonEventArgs e)
         {

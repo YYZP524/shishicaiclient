@@ -20,10 +20,9 @@
             <Label Content="修改密码" Height="29" Name="changepwd" FontSize="13" HorizontalContentAlignment="Center"  Width="63" MouseDown="changepwd_MouseDown" Visibility="Collapsed"></Label>
             <Label Content="注册" Height="29" FontSize="13" HorizontalContentAlignment="Center"  Name="sign"  Width="42" MouseDown="sign_MouseDown"></Label>
             <Label Content="登录" Height="29"  FontSize="13" HorizontalContentAlignment="Center"  Name="login" Width="42" MouseDown="login_MouseDown"></Label>
-            <Label Content="注销登录" Height="29" FontSize="13" HorizontalContentAlignment="Center" Name="exit" Width="61" MouseDown="exit_MouseDown"></Label>  
+            <Label Content="注销登录" Height="29" FontSize="13" HorizontalContentAlignment="Center" Name="exit" Width="61" MouseDown="exit_MouseDown"></Label>
         </Menu>
-        <ToolBar Grid.Row="1"/>
-       
+        <ToolBar Grid.Row="1"/>       
         <avalonDock:DockingManager x:Name="dockingManager" Grid.Row="2" >
             <avalonDock:DockingManager.Theme>
                 <avalonDock:AeroTheme/>

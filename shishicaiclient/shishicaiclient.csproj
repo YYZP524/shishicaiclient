@@ -71,6 +71,15 @@
     <Compile Include="chang.xaml.cs">
       <DependentUpon>chang.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Danshuang.xaml.cs">
+      <DependentUpon>Danshuang.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Daxiao.xaml.cs">
+      <DependentUpon>Daxiao.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="elllab.xaml.cs">
+      <DependentUpon>elllab.xaml</DependentUpon>
+    </Compile>
     <Compile Include="LeftEll.xaml.cs">
       <DependentUpon>LeftEll.xaml</DependentUpon>
     </Compile>
@@ -79,6 +88,12 @@
     </Compile>
     <Compile Include="login.xaml.cs">
       <DependentUpon>login.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Longhu.xaml.cs">
+      <DependentUpon>Longhu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="rectlab.xaml.cs">
+      <DependentUpon>rectlab.xaml</DependentUpon>
     </Compile>
     <Compile Include="sub_sign.xaml.cs">
       <DependentUpon>sub_sign.xaml</DependentUpon>
@@ -91,6 +106,18 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Danshuang.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Daxiao.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="elllab.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="LeftEll.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -102,6 +129,14 @@
     <Page Include="login.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Longhu.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="rectlab.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="sub_sign.xaml">
       <SubType>Designer</SubType>

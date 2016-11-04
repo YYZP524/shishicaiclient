@@ -40,7 +40,7 @@
                         </avalonDock:LayoutAnchorablePane>
 
                     </avalonDock:LayoutAnchorablePaneGroup>
-                    <avalonDock:LayoutDocumentPaneGroup x:Name="documentgroup" PropertyChanging="documentgroup_PropertyChanging">
+                    <avalonDock:LayoutDocumentPaneGroup x:Name="documentgroup">
                         <avalonDock:LayoutDocumentPane x:Name="avapane">
 
                             <avalonDock:LayoutDocument x:Name="maindocument" >

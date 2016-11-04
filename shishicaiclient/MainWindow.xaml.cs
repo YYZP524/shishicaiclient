@@ -87,21 +87,34 @@ namespace shishicaiclient
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
 
-            IPAddress ipAddr = Dns.Resolve(Dns.GetHostName()).AddressList[0];//获得当前IP地址
-           PublicClass.localIP = ipAddr.ToString();
 
             //获取内网IP
             IPAddress ipaddr = Dns.Resolve(Dns.GetHostName()).AddressList[0];
-
             PublicClass.localIP = ipaddr.ToString();
+            longhu_stack.Width = chat_stack.ActualWidth / 3d - 2;
+            daxiao_stack.Width = chat_stack.ActualWidth / 3d - 2;
+            danshuang_stack.Width = chat_stack.ActualWidth / 3d - 2;
+            Longhu longhu = new Longhu();
+            longhu.Width = 600;
+            longhu.Height = 200;
+            longhu.create_line();
+            longhu_scroll.Content = longhu;
 
-            //C1Window win = new C1Window();
-            //LiweiTest test = new LiweiTest();
-            //win.Content = test;
-            //win.Show();
+            Daxiao daxiao = new Daxiao();
+            daxiao.Width = 600;
+            daxiao.Height = 200;
+            daxiao.create_line();
+            daxiao_scroll.Content = daxiao;
+
+            Danshuang danshuang = new Danshuang();
+            danshuang.Width = 600;
+            danshuang.Height = 200;
+            danshuang.create_line();
+            danshuang_scroll.Content = danshuang;
+           
 
             //连接到指定服务器的指定端口
-            //PublicClass.socket.Connect("192.168.1.110", 4530);
+            PublicClass.socket.Connect("192.168.1.112", 4530);
             if (!PublicClass.socket.Connected)
             {
                 MessageBox.Show("connect to the server");
@@ -229,8 +242,8 @@ namespace shishicaiclient
                 JToken jsonstr = JToken.Parse(histroyopen);
 
              
-                if(jsonstr["opercode"].ToString()=="10")   //操作数为10是历史记录
-                 oper = jsonstr["opercode"].ToString();
+                //if(jsonstr["opercode"].ToString()=="10")   //操作数为10是历史记录
+                oper = jsonstr["opercode"].ToString();
 
                 if (oper == "16")
                 {
@@ -304,9 +317,6 @@ namespace shishicaiclient
 
 
                 if (oper == "17")
-
-                if(oper == "10")   //操作数为10是历史记录
-
                 {
                     MessageBox.Show("用户下线");
                      Dispatcher.Invoke(new Action(delegate         //线程加载
@@ -323,6 +333,8 @@ namespace shishicaiclient
          }));
                 }
 
+
+
                 if (oper == "10")   //操作数为10是历史记录
                 {
                     JArray jsonstrs = JArray.Parse(jsonstr["data"].ToString());
@@ -335,6 +347,9 @@ namespace shishicaiclient
 
                     }
                 }
+
+
+
 
                 if (oper == "8")
                 {
@@ -447,7 +462,39 @@ namespace shishicaiclient
             cg.Name = "change";
         }
 
-      
+        private void longhu_scroll_MouseEnter(object sender, MouseEventArgs e)
+        {
+            longhu_scroll.HorizontalScrollBarVisibility = ScrollBarVisibility.Auto;
+        }
+
+        private void longhu_scroll_MouseLeave(object sender, MouseEventArgs e)
+        {
+            longhu_scroll.HorizontalScrollBarVisibility = ScrollBarVisibility.Disabled;
+        }
+
+
+
+        private void daxiao_scroll_MouseEnter(object sender, MouseEventArgs e)
+        {
+            daxiao_scroll.HorizontalScrollBarVisibility = ScrollBarVisibility.Auto;
+        }
+
+        private void daxiao_scroll_MouseLeave(object sender, MouseEventArgs e)
+        {
+            daxiao_scroll.HorizontalScrollBarVisibility = ScrollBarVisibility.Disabled;
+        }
+
+
+        private void danshuang_scroll_MouseEnter(object sender, MouseEventArgs e)
+        {
+            danshuang_scroll.HorizontalScrollBarVisibility = ScrollBarVisibility.Auto;
+        }
+
+        private void danshuang_scroll_MouseLeave(object sender, MouseEventArgs e)
+        {
+            danshuang_scroll.HorizontalScrollBarVisibility = ScrollBarVisibility.Disabled;
+        }
+
 
 
 

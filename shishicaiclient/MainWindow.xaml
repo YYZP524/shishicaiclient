@@ -9,32 +9,47 @@
             <RowDefinition Height="26"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Menu Grid.Row="0" >
-            <Menu.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <DockPanel HorizontalAlignment="Right"/>
-                </ItemsPanelTemplate>
-            </Menu.ItemsPanel>
-            <Label  Height="29" Name="user" Foreground="Blue" FontSize="13" HorizontalContentAlignment="Center"  Width="100"></Label>
+
+        <Menu Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
+            <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+             <Label  Height="29" Name="user" Foreground="Blue" FontSize="13" HorizontalContentAlignment="Center"  Width="100"></Label>
             <Label  Height="29" Name="amount" Foreground="Red" FontSize="13" HorizontalContentAlignment="Center"  Width="100"></Label>
             <Label Content="修改密码" Height="29" Name="changepwd" FontSize="13" HorizontalContentAlignment="Center"  Width="63" MouseDown="changepwd_MouseDown" Visibility="Collapsed"></Label>
             <Label Content="注册" Height="29" FontSize="13" HorizontalContentAlignment="Center"  Name="sign"  Width="42" MouseDown="sign_MouseDown"></Label>
             <Label Content="登录" Height="29"  FontSize="13" HorizontalContentAlignment="Center"  Name="login" Width="42" MouseDown="login_MouseDown"></Label>
-            <Label Content="注销登录" Height="29" FontSize="13" HorizontalContentAlignment="Center" Name="exit" Width="61" MouseDown="exit_MouseDown"></Label>
+            <Label Content="注销登录" Height="29" FontSize="13" HorizontalContentAlignment="Right" VerticalAlignment="Center" Name="exit" Width="61" MouseDown="exit_MouseDown"></Label>
+            </StackPanel>
         </Menu>
-        <ToolBar Grid.Row="1"/>       
+        <ToolBar Grid.Row="1"/>
         <avalonDock:DockingManager x:Name="dockingManager" Grid.Row="2" >
             <avalonDock:DockingManager.Theme>
                 <avalonDock:AeroTheme/>
             </avalonDock:DockingManager.Theme>
-            
+
             <avalonDock:LayoutRoot>
                 <avalonDock:LayoutPanel Orientation="Horizontal">
                     <avalonDock:LayoutAnchorablePaneGroup DockWidth="300" Orientation="Vertical">
                         <avalonDock:LayoutAnchorablePane>
                             <avalonDock:LayoutAnchorable Title="开奖号码" CanClose="False" CanHide="False" x:Name="leftpanel" CanFloat="False" AutoHideMinWidth="300">
-                                <ListBox x:Name="left_opencode"/>
-                                
+                                <TabControl>
+                                    <TabItem Header="今天开奖">
+                                        <ScrollViewer x:Name="todayopen_scroll" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled" CanContentScroll="True">
+                                            <ListBox x:Name="left_opencode"/>
+                                        </ScrollViewer>
+                                    </TabItem>
+                                    <TabItem Header="昨天开奖">
+                                        <ScrollViewer x:Name="tomopen_scroll" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled" CanContentScroll="True">
+                                           
+                                        </ScrollViewer>
+                                    </TabItem>
+                                    <TabItem Header="前天开奖">
+                                        <ScrollViewer x:Name="yesopen_scroll" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled" CanContentScroll="True">
+                                            
+                                        </ScrollViewer>
+                                    </TabItem>
+                                </TabControl>
+                               
+
                             </avalonDock:LayoutAnchorable>
 
                         </avalonDock:LayoutAnchorablePane>
@@ -48,8 +63,9 @@
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="200" />
                                         <RowDefinition Height="235" />
-                                        <RowDefinition />
+                                        <RowDefinition  Height="350"/>
                                     </Grid.RowDefinitions>
+<<<<<<< HEAD
                                     
                                     
                                     
@@ -63,6 +79,27 @@
                                                     
                                                     <ScrollViewer x:Name="longhu_scroll" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Disabled" CanContentScroll="True" MouseEnter="longhu_scroll_MouseEnter" MouseLeave="longhu_scroll_MouseLeave">
                                                         
+=======
+                                    <StackPanel Grid.Row="0">
+                                        <StackPanel x:Name="expectlast" Width="300" Height="30" HorizontalAlignment="Center" Margin="0,80,0,0"></StackPanel>
+                                        <Grid>
+                                            <StackPanel Width="250" Height="50" HorizontalAlignment="Center" Margin="0,10,0,0" Orientation="Horizontal">
+                                                <Label Content="距"></Label>                                              
+                                                <Label x:Name="nextexpect" Width="90"  ></Label>
+                                                <Label Content="期还剩"></Label>
+                                                <Label x:Name="countdown" Width="50"></Label>
+                                            </StackPanel>
+                                        </Grid>
+                                       
+                                    </StackPanel>
+                                    <StackPanel Grid.Row="1" Orientation="Horizontal" x:Name="chat_stack" HorizontalAlignment="Stretch">
+                                        <StackPanel x:Name="longhu_stack">
+
+                                            <TabControl Height="230" Margin="2,0,0,0">
+                                                <TabItem Header="龙虎">
+                                                    <ScrollViewer x:Name="longhu_scroll" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled" CanContentScroll="True" MouseEnter="longhu_scroll_MouseEnter" MouseLeave="longhu_scroll_MouseLeave">
+
+>>>>>>> origin/master
                                                     </ScrollViewer>
                                                 </TabItem>
                                             </TabControl>
@@ -74,10 +111,15 @@
 
                                                     </ScrollViewer>
                                                 </TabItem>
+<<<<<<< HEAD
                                                 <TabItem Header="大小序列" x:Name="daxiao_tab" GotFocus="daxiao_tab_GotFocus">
                                                     <ScrollViewer x:Name="daxiaoxulie_scroll" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Disabled" CanContentScroll="True" MouseEnter="daxiaoxulie_scroll_MouseEnter" MouseLeave="daxiaoxulie_scroll_MouseLeave">
 
                                                     </ScrollViewer>
+=======
+                                                <TabItem Header="大小序列">
+
+>>>>>>> origin/master
                                                 </TabItem>
                                             </TabControl>
                                         </StackPanel>
@@ -88,17 +130,87 @@
 
                                                     </ScrollViewer>
                                                 </TabItem>
+<<<<<<< HEAD
                                                 <TabItem Header="单双序列" x:Name="danshuang_tab" GotFocus="danshuang_tab_GotFocus">
                                                     <ScrollViewer x:Name="danshuangxulie_scroll" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Disabled" CanContentScroll="True" MouseEnter="danshuangxulie_scroll_MouseEnter" MouseLeave="danshuangxulie_scroll_MouseLeave">
 
                                                     </ScrollViewer>
+=======
+                                                <TabItem Header="单双序列">
+
+>>>>>>> origin/master
                                                 </TabItem>
                                             </TabControl>
                                         </StackPanel>
                                     </StackPanel>
-                                    <StackPanel Grid.Row="2">
+                                    <StackPanel Grid.Row="2" Background="White">
                                         <Label >投注</Label>
-                                    </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="龙" Width="50" Height="30" HorizontalAlignment="Left" Margin="100,0,0,0"></TextBlock>
+                                            <TextBlock Text="虎"  Width="50" Height="30" HorizontalAlignment="Left" Margin="150,0,0,0"></TextBlock>
+                                            <TextBlock Text="和"  Width="50" Height="30" HorizontalAlignment="Left" Margin="150,0,0,0"></TextBlock>
+                                        </StackPanel>
+
+                                        <StackPanel Orientation="Horizontal" Name="touzhulonghu_stack">
+                                            <StackPanel x:Name="touzhulong_stack" Width="160" Height="40" Orientation="Horizontal" HorizontalAlignment="Left" Margin="40,0,0,0" >
+                                                <Button Name="jianlong" Content="-" Height="30" Width="30" Margin="10,0,0,0" Click="jianlong_Click"></Button>
+                                                <Label Name="resultlong" Content="0" VerticalContentAlignment="Center" IsEnabled="False" Background="#FFF5E5E5" Height="30" Width="60" Margin="10,0,0,0"></Label>
+                                                <Button Name="jialong" Content="+" Height="30" Width="30" Click="jialong_Click"></Button>
+                                            </StackPanel>
+
+
+                                            <StackPanel x:Name="touzhuhu_stack" Width="160" Height="40" Orientation="Horizontal" HorizontalAlignment="Left" Margin="40,0,0,0" >
+                                                <Button Name="jianhu" Content="-" Height="30" Width="30" Margin="10,0,0,0" Click="jianhu_Click"></Button>
+                                                <Label Name="resulthu" Content="0" VerticalContentAlignment="Center" IsEnabled="False" Background="#FFF5E5E5" Height="30" Width="60" Margin="10,0,0,0"></Label>
+                                                <Button Name="jiahu" Content="+" Height="30" Width="30" Click="jiahu_Click"></Button>
+                                            </StackPanel>
+
+                                            <StackPanel x:Name="touzhuhe_stack" Width="160" Height="40" Orientation="Horizontal" HorizontalAlignment="Left" Margin="40,0,0,0" >
+                                                <Button Name="jianhe" Content="-" Height="30" Width="30" Margin="10,0,0,0" Click="jianhe_Click"></Button>
+                                                <Label Name="resulthe" Content="0" VerticalContentAlignment="Center" IsEnabled="False" Background="#FFF5E5E5" Height="30" Width="60" Margin="10,0,0,0"></Label>
+                                                <Button Name="jiahe" Content="+" Height="30" Width="30" Click="jiahe_Click"></Button>
+                                            </StackPanel>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal" Margin="0,30,0,0">
+                                            <TextBlock Text="单"  Width="50" Height="30" HorizontalAlignment="Left" Margin="100,0,0,0"></TextBlock>
+                                            <TextBlock Text="双"  Width="50" Height="30" HorizontalAlignment="Left" Margin="150,0,0,0"></TextBlock>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal" Name="touzhudanshaung_stack">
+                                            <StackPanel x:Name="touzhudan_stack" Width="160" Height="40" Orientation="Horizontal" HorizontalAlignment="Left" Margin="40,0,0,0" >
+                                                <Button Name="jiandan" Content="-" Height="30" Width="30" Margin="10,0,0,0" Click="jiandan_Click"></Button>
+                                                <Label Name="resultdan" Content="0" VerticalContentAlignment="Center" IsEnabled="False" Background="#FFF5E5E5" Height="30" Width="60" Margin="10,0,0,0"></Label>
+                                                <Button Name="jiadan" Content="+" Height="30" Width="30" Click="jiadan_Click"></Button>
+                                            </StackPanel>
+
+                                            <StackPanel x:Name="touzhushuang_stack" Width="160" Height="40" Orientation="Horizontal" HorizontalAlignment="Left" Margin="40,0,0,0" >
+                                                <Button Name="jianshuang" Content="-" Height="30" Width="30" Margin="10,0,0,0" Click="jianshuang_Click"></Button>
+                                                <Label Name="resultshuang" Content="0" VerticalContentAlignment="Center" IsEnabled="False" Background="#FFF5E5E5" Height="30" Width="60" Margin="10,0,0,0"></Label>
+                                                <Button Name="jiashuang" Content="+" Height="30" Width="30" Click="jiashuang_Click"></Button>
+                                            </StackPanel>
+                                        </StackPanel>
+                                        
+                                        
+                                        <StackPanel Orientation="Horizontal" Margin="0,30,0,0">
+                                        <TextBlock Text="大"  Width="50" Height="30" HorizontalAlignment="Left" Margin="100,0,0,0"></TextBlock>
+                                            <TextBlock Text="小"  Width="50" Height="30" HorizontalAlignment="Left" Margin="150,0,0,0"></TextBlock>
+                                        </StackPanel>
+
+                                        <StackPanel Orientation="Horizontal" Name="touzhudaxiao_stack">
+                                            <StackPanel x:Name="touzhuda_stack" Width="160" Height="40" Orientation="Horizontal" HorizontalAlignment="Left" Margin="40,0,0,0" >
+                                                <Button Name="jianda" Content="-" Height="30" Width="30" Margin="10,0,0,0" Click="jianda_Click"></Button> 
+                                                <Label Name="resultda" Content="0" VerticalContentAlignment="Center" IsEnabled="False" Background="#FFF5E5E5" Height="30" Width="60" Margin="10,0,0,0"></Label>
+                                                <Button Name="jiada" Content="+" Height="30" Width="30" Click="jiada_Click"></Button>
+                                            </StackPanel>
+
+                                            <StackPanel x:Name="touzhuxiao_stack" Width="160" Height="40" Orientation="Horizontal" HorizontalAlignment="Left" Margin="40,0,0,0" >
+                                                <Button Name="jianxiao" Content="-" Height="30" Width="30" Margin="10,0,0,0" Click="jianxiao_Click"></Button>
+                                                <Label Name="resultxiao" Content="0" VerticalContentAlignment="Center" IsEnabled="False" Background="#FFF5E5E5" Height="30" Width="60" Margin="10,0,0,0"></Label>
+                                                <Button Name="jiaxiao" Content="+" Height="30" Width="30" Click="jiaxiao_Click"></Button>
+                                            </StackPanel>
+                                        </StackPanel>
+                                        <Button Name="sure" HorizontalAlignment="Left" Width="60" Height="30" Margin="40,20,0,0" Click="sure_Click">投注</Button>
+                                        </StackPanel>
+                                    
                                 </Grid>
                             </avalonDock:LayoutDocument>
                         </avalonDock:LayoutDocumentPane>
@@ -106,7 +218,81 @@
                     <avalonDock:LayoutAnchorablePaneGroup DockWidth="400" Orientation="Vertical">
                         <avalonDock:LayoutAnchorablePane >
                             <avalonDock:LayoutAnchorable Title="Tool 1" x:Name="rightpanel" CanFloat="False" CanHide="False" AutoHideMinWidth="400">
-                                <StackPanel x:Name="rightstack"></StackPanel>
+                                <StackPanel x:Name="rightstack">
+                                    <TabControl Height="300">
+                                        <TabItem Header="投注记录">
+                                            <ScrollViewer x:Name="slect_scroll" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled" CanContentScroll="True">
+
+                                            </ScrollViewer>
+                                        </TabItem>
+                                        <TabItem Header="历史记录">
+                                            <TabControl Height="280">
+                                                <TabItem Header="龙虎">
+                                                    <ScrollViewer  x:Name="slectlonghu_scroll" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled" CanContentScroll="True">
+                                                        <Grid>
+                                                            <StackPanel Height="40" VerticalAlignment="Top"  Orientation="Horizontal">
+
+                                                                <Label Content="起始日期 : " ></Label>
+                                                                <DatePicker Name="startimelonghu"></DatePicker>
+
+
+
+                                                                <Label Content="结束日期 : "></Label>
+                                                                <DatePicker Name="stoptimelonghu"></DatePicker>
+
+
+                                                                <Button Name="selecthistroylonghu" Content=" 查询 " Height="30" ></Button>
+
+                                                            </StackPanel>
+                                                        </Grid>
+                                                    </ScrollViewer>
+                                                </TabItem>
+                                                <TabItem Header="单双">
+                                                    <ScrollViewer  x:Name="slectdanshuang_scroll" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled" CanContentScroll="True">
+                                                        <Grid>
+                                                            <StackPanel Height="40" VerticalAlignment="Top"  Orientation="Horizontal">
+
+                                                                <Label Content="起始日期 : " ></Label>
+                                                                <DatePicker Name="startimedanshuang"></DatePicker>
+
+
+
+
+                                                                <Label Content="结束日期 : "></Label>
+                                                                <DatePicker Name="stoptimedanshuang"></DatePicker>
+
+
+                                                                <Button Name="selecthistroydanshuang" Content=" 查询 " Height="30" ></Button>
+                                                            </StackPanel>
+                                                        </Grid>
+                                                    </ScrollViewer>
+                                                </TabItem>
+                                                <TabItem Header="大小">
+                                                    <ScrollViewer  x:Name="slectdaxiao_scroll" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled" CanContentScroll="True">
+                                                        <Grid>
+                                                            <StackPanel Height="40" VerticalAlignment="Top"  Orientation="Horizontal">
+
+                                                                <Label Content="起始日期 : " ></Label>
+                                                                <DatePicker Name="startimedaxiao"></DatePicker>
+
+
+
+
+                                                                <Label Content="结束日期 : "></Label>
+                                                                <DatePicker Name="stoptimedaxiao"></DatePicker>
+
+
+                                                                <Button Name="selecthistroydaxiao" Content=" 查询 " Height="30" ></Button>
+                                                            </StackPanel>
+                                                        </Grid>
+                                                    </ScrollViewer>
+                                                </TabItem>
+                                            </TabControl>
+
+
+                                        </TabItem>
+                                    </TabControl>
+                                </StackPanel>
                             </avalonDock:LayoutAnchorable>
                         </avalonDock:LayoutAnchorablePane>
                     </avalonDock:LayoutAnchorablePaneGroup>
@@ -114,5 +300,5 @@
 
             </avalonDock:LayoutRoot>
         </avalonDock:DockingManager>
-    </Grid>  
+    </Grid>
 </Window>

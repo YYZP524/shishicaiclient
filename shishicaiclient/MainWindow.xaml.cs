@@ -75,6 +75,10 @@ namespace shishicaiclient
 
         string histroyopen = "";
 
+        string timecount;
+        string expect;
+        string last;
+
         //存储json
         public class jsonclass
         {
@@ -460,9 +464,13 @@ namespace shishicaiclient
 
         }
 
+<<<<<<< HEAD
 
 
         //调用页面显示中奖号码及结果
+=======
+        //左边历史开奖记录显示
+>>>>>>> origin/master
         private void show_leftopenjiang(string opencode, string expect)
         {
             Dispatcher.Invoke(new Action(delegate
@@ -473,7 +481,7 @@ namespace shishicaiclient
              lab.Content = expect; //显示期数号
              lab.Foreground = Brushes.Gray;  //  lab字体颜色
              stack.Children.Add(lab);  //把lab放在stack里
-             string[] sinopen = opencode.Split(',');
+             string[] sinopen = opencode.Split(',');  //把字符串的各个字符分开
              //开奖号码显示
              foreach (var sin in sinopen)
              {
@@ -484,7 +492,7 @@ namespace shishicaiclient
                  stack.Children.Add(ell);
              }
 
-             //string [] kk = opencode.Split(',');
+            
              int number1 = int.Parse(sinopen[1]); //第二个数字
              int number4 = int.Parse(sinopen[4]); //最后一个数字
 
@@ -516,9 +524,14 @@ namespace shishicaiclient
              }
 
 
-             //判断单双
+             //判断单双结果
              int last = number4;
+<<<<<<< HEAD
              if (last % 2 == 0)//奇偶
+=======
+             int sum = number1 + int.Parse(sinopen[2]) + int.Parse(sinopen[3]) + number4;
+             if (sum % 2 == 0)
+>>>>>>> origin/master
              {
                  LeftEll ellreturn = new LeftEll();
                  ellreturn.create_lab("双", 1);
@@ -526,7 +539,7 @@ namespace shishicaiclient
                  ellreturn.Height = 24;
                  stack.Children.Add(ellreturn);
              }
-             else
+             else if (sum % 2 !=0)
              {
                  LeftEll ellreturn = new LeftEll();
                  ellreturn.create_lab("单", 1);
@@ -536,9 +549,9 @@ namespace shishicaiclient
              }
 
 
-             //判断大小
-             int sum = number1 + int.Parse(sinopen[2]) + int.Parse(sinopen[3]) + number4;
-             if (sum < 18)
+             //判断大小结果
+             
+              if (sum < 18)
              {
                  LeftEll ellreturn = new LeftEll();
                  ellreturn.create_lab("小", 1);
@@ -546,7 +559,7 @@ namespace shishicaiclient
                  ellreturn.Height = 24;
                  stack.Children.Add(ellreturn);
              }
-             else
+             else if(sum >18)
              {
                  LeftEll ellreturn = new LeftEll();
                  ellreturn.create_lab("大", 1);
@@ -554,23 +567,60 @@ namespace shishicaiclient
                  ellreturn.Height = 24;
                  stack.Children.Add(ellreturn);
              }
-
-
-
-             left_opencode.Items.Add(stack);
+             
+             left_opencode.Items.Add(stack);  //显示在页面的left_opencode的listbox里
          }));
         }
+
+
+
+
+
+        private void lastopencode()
+        {
+       
+            // select * from pulic.json where expect = '212012' 
+            var lastexpect = from c in PublicClass.Code_json where c["expect"].ToString() == expect select c;   //查询Code_json的最后一条数据
+            if (lastexpect.Count() > 0)
+            {
+                last = lastexpect.First()["opencode"].ToString();
+            }
+           
+            StackPanel stack = new StackPanel(); //实例化
+            stack.Orientation = Orientation.Horizontal;  //stackpanel横向调节
+            Label lab = new Label();
+            lab.Content = expect; //显示期数号
+            lab.Foreground = Brushes.Gray;  //  lab字体颜色
+            stack.Children.Add(lab);  //把lab放在stack里
+            string[] la = last.Split(',');
+            for (int aa = 0; aa < la.Count(); aa++)
+            {
+                Label number = new Label();
+                stack.Children.Add(number);
+                elllab bigell = new elllab();
+                string num = la[aa];
+                bigell.create_ell(0, num);
+                bigell.Width = 30;
+                bigell.Height = 30;
+                stack.Children.Add(bigell);
+            } 
+            
+            expectlast.Children.Add(stack);
+
+        }
+
 
         //接收服务器消息
         public void ReceiveMessage(IAsyncResult ar)
         {
-            string oper = "";
+            
             try
             {
                 var socket = ar.AsyncState as Socket;
                 var length = socket.EndReceive(ar);
                 //读取出来消息内容
                 var message = Encoding.Unicode.GetString(buffer, 0, length);
+<<<<<<< HEAD
                 //MessageBox.Show(message);
                 string[] messages = message.Split('+');
                 histroyopen = messages[0];
@@ -581,145 +631,174 @@ namespace shishicaiclient
                 oper = jsonstr["opercode"].ToString();
 
                 if (oper == "16")
+=======
+                string[] messages = message.Split('+');
+                int mess_count = messages.Count();
+                if(mess_count>1)
+>>>>>>> origin/master
                 {
-                    if (jsonstr["status"].ToString() == "100")
-                    {
-                         
-                         MessageBoxResult dr=  MessageBox.Show("登录成功","提示",MessageBoxButton.OK);
-                         if (dr == MessageBoxResult.OK)
-
-                         {
-                            Dispatcher.Invoke(new Action(delegate
-         {
-                             user.Content = PublicClass.username ;
-                             PublicClass.balance = jsonstr["amount"].ToString();
-                            amount.Content= "账户余额：" + PublicClass.balance.ToString();
-                             if (user.Visibility == Visibility.Hidden || amount.Visibility == Visibility.Hidden)
-                             {
-                                 user.Visibility = Visibility.Visible;
-                                 amount.Visibility = Visibility.Visible;
-                             }
-                             login.Visibility = System.Windows.Visibility.Collapsed;
-                             changepwd.Visibility = System.Windows.Visibility.Visible;
-                             //关闭登录窗口
-                             C1.WPF.C1Window close1 = MainWindow.FindChild<C1.WPF.C1Window>(
-                                 Application.Current.MainWindow, "closelogin");
-                             if (close1 != null)
-                             {
-                                 close1.Close();
-                             }
-                             
-         }));
-                         }
-        
-                    }
-                    else if (jsonstr["status"].ToString() == "200")
-                    {
-                        MessageBox.Show("用户名或密码错误");
-                    }
-                    else
-                    {
-                        MessageBox.Show("用户禁用");
-                    }
+                    mess_count--;
                 }
-
-                if (oper == "15")
+                for (int a = 0; a < mess_count; a++)
                 {
-                    if (jsonstr["status"].ToString() == "100")
+                    histroyopen = messages[a];
+                    JToken jsonstr = JToken.Parse(histroyopen);
+                    string oper = jsonstr["opercode"].ToString();
+
+                    //服务端返回密码修改信息
+                    if (oper == "1")
                     {
-                        MessageBoxResult dr =  MessageBox.Show("注册成功","提示",MessageBoxButton.OK);
-                        if (dr == MessageBoxResult.OK)
+                                    Dispatcher.Invoke(new Action(delegate
+            {
+                        timecount = jsonstr["countdown"].ToString();
+                        expect = jsonstr["expect"].ToString();
+                        countdown.Content = timecount;
+                        nextexpect.Content = jsonstr["nextissuse"].ToString();
+                        lastopencode();
+            }));
+                    }
+
+
+                    if (oper == "4")
+                    {
+
+
+                    }
+                    else if (oper == "8")
+                    {
+                        if (jsonstr["status"].ToString() == "1")
                         {
-                             Dispatcher.Invoke(new Action(delegate         //线程加载
-         {
-
-                            //关闭注册窗口
-                            C1.WPF.C1Window close2 = MainWindow.FindChild<C1.WPF.C1Window>(
-                              Application.Current.MainWindow, "closesign");
-                            if (close2 != null)
+                            MessageBox.Show("密码修改成功");
+                            Dispatcher.Invoke(new Action(delegate         //线程加载
                             {
-                                close2.Close();
-                            }
-         }));
+
+                                //关闭注册窗口
+                                C1.WPF.C1Window close3 = MainWindow.FindChild<C1.WPF.C1Window>(
+                                  Application.Current.MainWindow, "change");
+                                if (close3 != null)
+                                {
+                                    close3.Close();
+                                }
+                            }));
                         }
-                        
+                        else if (jsonstr["status"].ToString() == "0")
+                        {
+                            MessageBox.Show("旧密码输入错误");
+                        }
                     }
-                    else
+
+
+                   //服务端返回当天历史开奖记录
+                    else if (oper == "10")   //操作数为10是历史记录
                     {
-                        MessageBox.Show("用户名重名");
+                        JArray jsonstrs = JArray.Parse(jsonstr["data"].ToString());
+
+                        for (int i = 0; i < jsonstrs.Count; i++)
+                        {
+                            PublicClass.Code_json.Add(jsonstrs[i]);
+                            string ccc = jsonstrs[i]["opencode"].ToString();
+                            show_leftopenjiang(jsonstrs[i]["opencode"].ToString(), jsonstrs[i]["expect"].ToString());
+
+                        }
                     }
-                }
 
 
-                if (oper == "17")
-                {
-                    MessageBox.Show("用户下线");
-                     Dispatcher.Invoke(new Action(delegate         //线程加载
-         {
-                    login.Visibility = System.Windows.Visibility.Visible;
-                    user.Visibility = System.Windows.Visibility.Hidden;
-                    amount.Visibility = System.Windows.Visibility.Hidden;
-                    PublicClass.username = "";
-                    PublicClass.balance = "";
-                    if (changepwd.Visibility == Visibility.Visible)
+                    //服务端返回注册信息
+                    else if (oper == "15")
                     {
-                        changepwd.Visibility = Visibility.Hidden;
+                        if (jsonstr["status"].ToString() == "100")
+                        {
+                            MessageBoxResult dr = MessageBox.Show("注册成功", "提示", MessageBoxButton.OK);
+                            if (dr == MessageBoxResult.OK)
+                            {
+                                Dispatcher.Invoke(new Action(delegate         //线程加载
+                                {
+
+                                    //关闭注册窗口
+                                    C1.WPF.C1Window close2 = MainWindow.FindChild<C1.WPF.C1Window>(
+                                      Application.Current.MainWindow, "closesign");
+                                    if (close2 != null)
+                                    {
+                                        close2.Close();
+                                    }
+                                }));
+                            }
+
+                        }
+                        else
+                        {
+                            MessageBox.Show("用户名重名");
+                        }
                     }
-         }));
-                }
-
-
-
-                if (oper == "10")   //操作数为10是历史记录
-                {
-                    JArray jsonstrs = JArray.Parse(jsonstr["data"].ToString());
-
-                    for (int i = 0; i < jsonstrs.Count; i++)
-                    {
-                        PublicClass.Code_json.Add(jsonstrs[i]);
-                        string ccc = jsonstrs[i]["opencode"].ToString();
-                        show_leftopenjiang(jsonstrs[i]["opencode"].ToString(), jsonstrs[i]["expect"].ToString());
-
-                    }
+<<<<<<< HEAD
                     create_lab("all");
                 }
+=======
+>>>>>>> origin/master
 
-
-
-
-                if (oper == "8")
-                {
-                    if (jsonstr["status"].ToString() == "1")
+                    //服务端返回登录信息
+                    else if (oper == "16")
                     {
-                        MessageBox.Show("密码修改成功");
-                        Dispatcher.Invoke(new Action(delegate         //线程加载
+                        if (jsonstr["status"].ToString() == "100")
                         {
 
-                            //关闭注册窗口
-                            C1.WPF.C1Window close3 = MainWindow.FindChild<C1.WPF.C1Window>(
-                              Application.Current.MainWindow, "change");
-                            if (close3 != null)
+                            MessageBoxResult dr = MessageBox.Show("登录成功", "提示", MessageBoxButton.OK);
+                            if (dr == MessageBoxResult.OK)
                             {
-                                close3.Close();
+                                Dispatcher.Invoke(new Action(delegate
+                                {
+                                    user.Content = PublicClass.username;
+                                    PublicClass.balance = jsonstr["amount"].ToString();
+                                    amount.Content = "账户余额：" + PublicClass.balance.ToString();
+                                    if (user.Visibility == Visibility.Hidden || amount.Visibility == Visibility.Hidden)
+                                    {
+                                        user.Visibility = Visibility.Visible;
+                                        amount.Visibility = Visibility.Visible;
+                                    }
+                                    login.Visibility = System.Windows.Visibility.Collapsed;
+                                    changepwd.Visibility = System.Windows.Visibility.Visible;
+                                    //关闭登录窗口
+                                    C1.WPF.C1Window close1 = MainWindow.FindChild<C1.WPF.C1Window>(
+                                        Application.Current.MainWindow, "closelogin");
+                                    if (close1 != null)
+                                    {
+                                        close1.Close();
+                                    }
+
+                                }));
+                            }
+
+                        }
+                        else if (jsonstr["status"].ToString() == "200")
+                        {
+                            MessageBox.Show("用户名或密码错误");
+                        }
+                        else
+                        {
+                            MessageBox.Show("用户禁用");
+                        }
+                    }
+
+
+
+                    //服务端返回下线通知
+                    else if (oper == "17")
+                    {
+                        MessageBox.Show("用户下线");
+                        Dispatcher.Invoke(new Action(delegate         //线程加载
+                        {
+                            login.Visibility = System.Windows.Visibility.Visible;
+                            user.Visibility = System.Windows.Visibility.Hidden;
+                            amount.Visibility = System.Windows.Visibility.Hidden;
+                            PublicClass.username = "";
+                            PublicClass.balance = "";
+                            if (changepwd.Visibility == Visibility.Visible)
+                            {
+                                changepwd.Visibility = Visibility.Hidden;
                             }
                         }));
                     }
-                    else if (jsonstr["status"].ToString() == "0")
-                    {
-                        MessageBox.Show("旧密码输入错误");
-                    }
                 }
-
-
-
-
-
-
-
-                //显示消息
-                //MessageBox.Show(message);
-
-
                 //接收下一个消息(因为这是一个递归的调用，所以这样就可以一直接收消息了）
 
                 socket.BeginReceive(buffer, 0, buffer.Length, SocketFlags.None, new AsyncCallback(ReceiveMessage), socket);
@@ -730,11 +809,12 @@ namespace shishicaiclient
             }
         }
 
-        //发送消息
+
+        //用户注册窗口弹窗
         private void sign_MouseDown(object sender, MouseButtonEventArgs e)
         {
             
-            //用户注册窗口
+           
             sub_sign login = new sub_sign();//用户注册窗口login
             C1Window win = new C1Window();//C1:win宽高
             win.Name = "closesign";
@@ -748,7 +828,7 @@ namespace shishicaiclient
             win.Show();
             
         }
-        //登录
+        //登录窗口弹窗
         private void login_MouseDown(object sender, MouseButtonEventArgs e)
         {
             login sign = new login();
@@ -765,7 +845,24 @@ namespace shishicaiclient
             lo.Name = "closelogin";
 
         }
-        //注销登录
+
+        //密码修改窗口弹窗
+        private void changepwd_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            chang change = new chang();
+            C1Window cg = new C1Window();
+            cg.Width = 300;
+            cg.Height = 300;
+            cg.ShowMaximizeButton = false;
+            cg.ShowMinimizeButton = false;
+            cg.IsResizable = false;
+            cg.Margin = new Thickness((SystemParameters.WorkArea.Width - cg.Width) / 2, (SystemParameters.WorkArea.Height - cg.Height) / 2, 0, 0);
+            cg.Content = change;
+            cg.Show();
+            cg.Name = "change";
+        }
+
+        //注销登录向服务端发送申请数据
         private void exit_MouseDown(object sender, MouseButtonEventArgs e)
         {
             string str = "";
@@ -783,6 +880,7 @@ namespace shishicaiclient
             PublicClass.socket.BeginSend(outputBuffer, 0, outputBuffer.Length, SocketFlags.None, null, null);
         }
 
+<<<<<<< HEAD
         private void changepwd_MouseDown(object sender, MouseButtonEventArgs e)
         {
             chang change = new chang();
@@ -799,6 +897,11 @@ namespace shishicaiclient
         }
         //滚动条效果：龙虎
         private void longhu_scroll_MouseEnter(object sender, MouseEventArgs e)//鼠标放上出现（MouseEnter）
+=======
+
+
+        private void longhu_scroll_MouseEnter(object sender, MouseEventArgs e)
+>>>>>>> origin/master
         {
             longhu_scroll.HorizontalScrollBarVisibility = ScrollBarVisibility.Auto;
         }
@@ -845,6 +948,252 @@ namespace shishicaiclient
         {
             danshuang_scroll.HorizontalScrollBarVisibility = ScrollBarVisibility.Hidden;
         }
+
+        //投注龙
+        private void jialong_Click(object sender, RoutedEventArgs e)
+        {
+          
+                resultlong.Content = (Convert.ToDouble(resultlong.Content) + Convert.ToDouble(100)).ToString();
+            
+        }
+
+        private void jianlong_Click(object sender, RoutedEventArgs e)
+        {
+            if (int.Parse((resultlong.Content).ToString()) > 0)
+            {
+                resultlong.Content = (Convert.ToDouble(resultlong.Content) - Convert.ToDouble(100)).ToString();
+            }
+            else
+            {
+                resultlong.Content = "0";
+            }
+        }
+        //投注虎
+        private void jiahu_Click(object sender, RoutedEventArgs e)
+        {
+           
+                resulthu.Content = (Convert.ToDouble(resulthu.Content) + Convert.ToDouble(100)).ToString();
+           
+        }
+
+        private void jianhu_Click(object sender, RoutedEventArgs e)
+        {
+            if (int.Parse((resulthu.Content).ToString()) > 0)
+            {
+                resulthu.Content = (Convert.ToDouble(resulthu.Content) - Convert.ToDouble(100)).ToString();
+            }
+            else
+            {
+                resulthu.Content = "0";
+            }
+               
+        }
+        //投注和
+        private void jiahe_Click(object sender, RoutedEventArgs e)
+        {
+
+            resulthe.Content = (Convert.ToDouble(resulthe.Content) + Convert.ToDouble(100)).ToString();
+
+        }
+
+        private void jianhe_Click(object sender, RoutedEventArgs e)
+        {
+            if (int.Parse((resulthe.Content).ToString()) > 0)
+            {
+                resulthe.Content = (Convert.ToDouble(resulthe.Content) - Convert.ToDouble(100)).ToString();
+            }
+            else
+            {
+                resulthe.Content = "0";
+            }
+        }
+
+        //投注单
+        private void jiadan_Click(object sender, RoutedEventArgs e)
+        {
+
+            resultdan.Content = (Convert.ToDouble(resultdan.Content) + Convert.ToDouble(100)).ToString();
+
+        }
+
+        private void jiandan_Click(object sender, RoutedEventArgs e)
+        {
+            if (int.Parse((resultdan.Content).ToString()) > 0)
+            {
+                resultdan.Content = (Convert.ToDouble(resultdan.Content) - Convert.ToDouble(100)).ToString();
+            }
+            else
+            {
+                resultdan.Content = "0";
+            }
+            
+
+        }
+
+        //投注双
+        private void jiashuang_Click(object sender, RoutedEventArgs e)
+        {
+
+            resultshuang.Content = (Convert.ToDouble(resultshuang.Content) + Convert.ToDouble(100)).ToString();
+
+        }
+
+        private void jianshuang_Click(object sender, RoutedEventArgs e)
+        {
+            if (int.Parse((resultshuang.Content).ToString()) > 0)
+            {
+                resultshuang.Content = (Convert.ToDouble(resultshuang.Content) - Convert.ToDouble(100)).ToString();
+            }
+            else
+            {
+                resultshuang.Content = "0";
+            }
+        }
+
+        //投注大
+        private void jiada_Click(object sender, RoutedEventArgs e)
+        {
+            resultda.Content = (Convert.ToDouble(resultda.Content) + Convert.ToDouble(100)).ToString();
+        }
+
+        private void jianda_Click(object sender, RoutedEventArgs e)
+        {
+            if (int.Parse((resultda.Content).ToString()) > 0)
+            {
+                resultda.Content = (Convert.ToDouble(resultda.Content) - Convert.ToDouble(100)).ToString();
+            }
+            else
+            {
+                resultda.Content = "0";
+            }
+        }
+
+
+        //投注小
+        private void jiaxiao_Click(object sender, RoutedEventArgs e)
+        {
+            resultxiao.Content = (Convert.ToDouble(resultxiao.Content) + Convert.ToDouble(100)).ToString();
+        }
+
+        private void jianxiao_Click(object sender, RoutedEventArgs e)
+        {
+            if (int.Parse((resultxiao.Content).ToString()) > 0)
+            {
+                resultxiao.Content = (Convert.ToDouble(resultxiao.Content) + Convert.ToDouble(100)).ToString();
+            }
+            else
+            {
+                resultxiao.Content = "0";
+            }
+        }
+
+        class touzhu_head
+        {
+            public string opercode;
+            public string username;
+            public List<touzhu_data> data = new List<touzhu_data>();
+        }
+        class touzhu_data
+        {
+            public string type;
+            public string amount;
+        }
+
+
+        //提交投注结果
+        private void sure_Click(object sender, RoutedEventArgs e)
+        {
+            touzhu_head touzhu = new touzhu_head();
+            if (PublicClass.username != "/")
+            {
+                
+                touzhu.opercode = "2";
+                touzhu.username = PublicClass.username;
+               
+                if (resultlong.Content.ToString() != "0")
+                {
+                    touzhu_data data = new touzhu_data();
+                    data.type = "long";
+                    data.amount = resultlong.Content.ToString();
+                    touzhu.data.Add(data);
+                    
+                }
+                if (resulthu.Content.ToString() != "0")
+                {
+                    touzhu_data data = new touzhu_data();
+                    data.type = "hu";
+                    data.amount = resulthu.Content.ToString();
+                    touzhu.data.Add(data);
+                }
+                if (resulthe.Content.ToString() != "0")
+                {
+                    touzhu_data data = new touzhu_data();
+                    data.type = "he";
+                    data.amount = resulthe.Content.ToString();
+                    touzhu.data.Add(data);
+                }
+                if (resultdan.Content.ToString() != "0")
+                {
+                    touzhu_data data = new touzhu_data();
+                    data.type = "dan";
+                    data.amount = resultdan.Content.ToString();
+                    touzhu.data.Add(data);
+                }
+                if (resultshuang.Content.ToString() != "0")
+                {
+                    touzhu_data data = new touzhu_data();
+                    data.type = "shuang";
+                    data.amount = resultshuang.Content.ToString();
+                    touzhu.data.Add(data);
+                }
+                if (resultda.Content.ToString() != "0")
+                {
+                    touzhu_data data = new touzhu_data();
+                    data.type = "da";
+                    data.amount = resultda.Content.ToString();
+                    touzhu.data.Add(data);
+                }
+                if (resultxiao.Content.ToString() != "0")
+                {
+                    touzhu_data data = new touzhu_data();
+                    data.type = "xiao";
+                    data.amount = resultxiao.Content.ToString();
+                    touzhu.data.Add(data);
+                }
+
+                   JToken touzhuJSON = JsonConvert.SerializeObject(touzhu);
+                    PublicClass.zhucejson = touzhuJSON.ToString();
+                    var message = PublicClass.zhucejson;
+                    var outputBuffer = Encoding.Unicode.GetBytes(message);
+                    PublicClass.socket.BeginSend(outputBuffer, 0, outputBuffer.Length, SocketFlags.None, null, null);
+   
+            }
+        }
+        //查询历史投注消息
+        private void selecthistroylonghu_Click(object sender, RoutedEventArgs e)
+        {
+            if ((startimelonghu.SelectedDate).ToString() != "" && (stoptimelonghu.SelectedDate).ToString() != "")
+            {
+                var o = new
+                {
+                    opercode = "11",
+                    username = PublicClass.username,
+                    type = "longhu",
+                    begindate = (startimelonghu.SelectedDate).ToString(),
+                    enddate = (stoptimelonghu.SelectedDate).ToString()
+                };
+                var json = JsonConvert.SerializeObject(o);
+            }
+
+        }
+
+       
+
+      
+      
+
+       
+
 
 
         //滚动条：单双序列

@@ -24,7 +24,9 @@ namespace shishicaiclient
         {
             InitializeComponent();
         }
-        string str = "";
+ 
+
+        //向服务端发送登录申请数据
         private void loginbtn_Click(object sender, RoutedEventArgs e)
         {
            
@@ -37,8 +39,7 @@ namespace shishicaiclient
             };
             PublicClass.username = name.Text;
             var json = JsonConvert.SerializeObject(o);
-            str = json.ToString();
-            //str = "[" + str + "]";
+            string str = json.ToString();
             PublicClass.loginjson = str;
             var message = PublicClass.loginjson;
             var outputBuffer = Encoding.Unicode.GetBytes(message);

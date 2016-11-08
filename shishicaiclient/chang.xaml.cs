@@ -25,7 +25,9 @@ namespace shishicaiclient
         {
             InitializeComponent();
         }
-        string str = "";
+
+
+        //向服务端发送密码修改申请数据
         private void reg_Click(object sender, RoutedEventArgs e)
         {
             var o = new
@@ -36,7 +38,7 @@ namespace shishicaiclient
                 newpassword = newpwd.Password    
             }; 
             var json = JsonConvert.SerializeObject(o);
-            str = json.ToString();
+            string str = json.ToString();
             PublicClass.loginjson = str;
             var message = PublicClass.loginjson;
             var outputBuffer = Encoding.Unicode.GetBytes(message);

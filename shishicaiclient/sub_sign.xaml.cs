@@ -25,7 +25,8 @@ namespace shishicaiclient
         {
             InitializeComponent();
         }
-
+        
+        //向服务端发送注册申请数据
         private void reg_Click(object sender, RoutedEventArgs e)//注册单击事件
         {
             //先判断用户名是否为空

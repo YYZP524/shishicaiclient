@@ -82,7 +82,311 @@ namespace shishicaiclient
             public string opencode { get; set; }
         }
 
+        private void create_lab( string createtype)//createtype longhu daxiao daxiaoxulie danshuang danshuangxulie
+        {
+            Dispatcher.Invoke(new Action(delegate
+            {
+                Longhu longhu = MainWindow.FindChild<Longhu>(Application.Current.MainWindow, "longhu");
+                if (longhu != null && (createtype == "longhu" || createtype == "all"))
+                {
+                    for (int i = 0; i < PublicClass.Code_json.Count; i++)
+                    {
+                        string[] opencodes = PublicClass.Code_json[i]["opencode"].ToString().Split(',');
+                        rectlab rect = new rectlab();
+                        rect.Width = 30;
+                        rect.Height = 30;
+                        if (int.Parse(opencodes[1]) > int.Parse(opencodes[4]))
+                        {
+                            rect.create_rect(0, "龙");
+                        }
+                        else if (int.Parse(opencodes[1]) == int.Parse(opencodes[4]))
+                        {
+                            rect.create_rect(2, "和");
+                        }
+                        else 
+                        {
+                            rect.create_rect(1, "虎");
+                        }
+                        rect.Margin = new Thickness(i / 6 * 30, i % 6 * 30, 0, 0);
+                        longhu.maincanvas.Children.Add(rect);
+                    }
+                }
 
+                Longhu daxiao = MainWindow.FindChild<Longhu>(Application.Current.MainWindow, "daxiao");
+                if (daxiao != null && (createtype == "daxiao" || createtype == "all"))
+                {
+                    for (int i = 0; i < PublicClass.Code_json.Count; i++)
+                    {
+                        string[] opencodes = PublicClass.Code_json[i]["opencode"].ToString().Split(',');
+                        rectlab rect = new rectlab();
+                        rect.Width = 30;
+                        rect.Height = 30;
+
+                        int daxiaocount = int.Parse(opencodes[1]) + int.Parse(opencodes[2]) + int.Parse(opencodes[3]) + int.Parse(opencodes[4]);
+                        if (daxiaocount > 17)
+                        {
+                            rect.create_rect(0, "大");
+                        }
+                        else
+                        {
+                            rect.create_rect(1, "小");
+                        }
+                        rect.Margin = new Thickness(i / 6 * 30, i % 6 * 30, 0, 0);
+                        daxiao.maincanvas.Children.Add(rect);
+                    }
+                }
+
+                Longhu danshuang = MainWindow.FindChild<Longhu>(Application.Current.MainWindow, "danshuang");
+                if (danshuang != null && (createtype == "danshuang" || createtype == "all"))
+                {
+                    for (int i = 0; i < PublicClass.Code_json.Count; i++)
+                    {
+                        string[] opencodes = PublicClass.Code_json[i]["opencode"].ToString().Split(',');
+                        rectlab rect = new rectlab();
+                        rect.Width = 30;
+                        rect.Height = 30;
+
+                        int daxiaocount = int.Parse(opencodes[1]) + int.Parse(opencodes[2]) + int.Parse(opencodes[3]) + int.Parse(opencodes[4]);
+                        if (daxiaocount %2==0)
+                        {
+                            rect.create_rect(1, "双");
+                        }
+                        else
+                        {
+                            rect.create_rect(0, "单");
+                        }
+                        rect.Margin = new Thickness(i / 6 * 30, i % 6 * 30, 0, 0);
+                        danshuang.maincanvas.Children.Add(rect);
+                    }
+                }
+
+                Daxiaoxulie daxiaoxulie = MainWindow.FindChild<Daxiaoxulie>(Application.Current.MainWindow, "daxiaoxulie");
+                if (daxiaoxulie != null && (createtype == "daxiaoxulie" || createtype == "all"))
+                {
+                    Point next_d = new Point(0, 0);
+                    Point next_s = new Point(0, 0);
+                    Point cur = new Point(0, 0);
+                    int[,] fill_lianxu = new int[121, 7];
+                    for (int i = 0; i < PublicClass.Code_json.Count; i++)
+                    {
+                        string opencode = PublicClass.Code_json[i]["opencode"].ToString();
+                        string[] sopencode = opencode.Split(',');
+                        int mod = int.Parse(sopencode[1]) + int.Parse(sopencode[2]) + int.Parse(sopencode[3]) + int.Parse(sopencode[4]);
+                        //mod = mod % 2;
+                        if (mod > 17)
+                        {
+                            mod = 0;
+                        }
+                        else
+                        {
+                            mod = 1;
+                        }
+                        if (i == 0)
+                        {
+                            if (mod == 0)
+                            {
+                                fill_lianxu[0, 0] = 20 + mod;
+                                next_d = new Point(1, 0);
+                                next_s = new Point(0, 1);
+                            }
+                            else
+                            {
+                                fill_lianxu[0, 0] = 10 + mod;
+                                next_d = new Point(0, 1);
+                                next_s = new Point(1, 0);
+                            }
+                        }
+                        else if (mod == 0)
+                        {
+                            fill_lianxu[(int)next_s.X, (int)next_s.Y] = 20 + mod;
+                            next_d = new Point(next_s.X + 1, 0);
+                            if (fill_lianxu[(int)next_s.X, (int)next_s.Y + 1] == 0)
+                            {
+                                if (next_s.Y + 1 == 6 || fill_lianxu[(int)next_s.X, (int)next_s.Y + 1] == 1)
+                                {
+                                    next_s = new Point(next_s.X + 1, next_s.Y);
+                                    for (int b = (int)next_d.X; b > 0; b--)
+                                    {
+                                        if (fill_lianxu[b, 0] == 0)
+                                        {
+                                            next_d = new Point(b, 0);
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    next_s = new Point(next_s.X, next_s.Y + 1);
+                                }
+                            }
+                            else
+                            {
+                                next_s = new Point(next_s.X, next_s.Y + 1);
+                            }
+                        }
+                        else
+                        {
+                            fill_lianxu[(int)next_d.X, (int)next_d.Y] = 10 + mod;
+                            next_s = new Point(next_d.X + 1, 0);
+                            if (fill_lianxu[(int)next_d.X, (int)next_d.Y + 1] == 0)
+                            {
+                                if (next_d.Y + 1 == 6 || fill_lianxu[(int)next_d.X, (int)next_d.Y + 1] == 2)
+                                {
+                                    next_d = new Point(next_d.X + 1, next_d.Y);
+                                    for (int b = (int)next_s.X; b > 0; b--)
+                                    {
+                                        if (fill_lianxu[b, 0] == 0)
+                                        {
+                                            next_s = new Point(b, 0);
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    next_d = new Point(next_d.X, next_d.Y + 1);
+                                }
+                            }
+                            else
+                            {
+                                next_d = new Point(next_d.X, next_d.Y + 1);
+                            }
+                        }
+                    }
+
+                    for (int i = 0; i < 120; i++)
+                    {
+                        for (int j = 0; j < 6; j++)
+                        {
+                            if (fill_lianxu[i, j] !=0)
+                            {
+                                int type = 1;
+                                if (fill_lianxu[i, j] == 20)
+                                {
+                                    type = 0;
+                                }
+                                elllab ell = new elllab();
+                                ell.Width = 30;
+                                ell.Height = 30;
+                                ell.create_ell(type, "");
+                                ell.Margin = new Thickness(i * 30, j * 30, 0, 0);
+                                daxiaoxulie.maincanvas.Children.Add(ell);
+                            }
+                        }
+                    }
+                }
+
+
+
+                Daxiaoxulie danshuangxulie = MainWindow.FindChild<Daxiaoxulie>(Application.Current.MainWindow, "danshuangxulie");
+                if (danshuangxulie != null && (createtype == "danshuangxulie" || createtype == "all"))
+                {
+                    Point next_d = new Point(0, 0);
+                    Point next_s = new Point(0, 0);
+                    Point cur = new Point(0, 0);
+                    int[,] fill_lianxu = new int[121, 7];
+                    for (int i = 0; i < PublicClass.Code_json.Count; i++)
+                    {
+                        string opencode = PublicClass.Code_json[i]["opencode"].ToString();
+                        string[] sopencode = opencode.Split(',');
+                        int mod = int.Parse(sopencode[1]) + int.Parse(sopencode[2]) + int.Parse(sopencode[3]) + int.Parse(sopencode[4]);
+                        mod = mod % 2;
+
+                        if (i == 0)
+                        {
+                            if (mod == 0)
+                            {
+                                fill_lianxu[0, 0] = 20 + mod;
+                                next_d = new Point(1, 0);
+                                next_s = new Point(0, 1);
+                            }
+                            else
+                            {
+                                fill_lianxu[0, 0] = 10 + mod;
+                                next_d = new Point(0, 1);
+                                next_s = new Point(1, 0);
+                            }
+                        }
+                        else if (mod == 0)
+                        {
+                            fill_lianxu[(int)next_s.X, (int)next_s.Y] = 20 + mod;
+                            next_d = new Point(next_s.X + 1, 0);
+                            if (fill_lianxu[(int)next_s.X, (int)next_s.Y + 1] == 0)
+                            {
+                                if (next_s.Y + 1 == 6 || fill_lianxu[(int)next_s.X, (int)next_s.Y + 1] == 1)
+                                {
+                                    next_s = new Point(next_s.X + 1, next_s.Y);
+                                    for (int b = (int)next_d.X; b > 0; b--)
+                                    {
+                                        if (fill_lianxu[b, 0] == 0)
+                                        {
+                                            next_d = new Point(b, 0);
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    next_s = new Point(next_s.X, next_s.Y + 1);
+                                }
+                            }
+                            else
+                            {
+                                next_s = new Point(next_s.X, next_s.Y + 1);
+                            }
+                        }
+                        else
+                        {
+                            fill_lianxu[(int)next_d.X, (int)next_d.Y] = 10 + mod;
+                            next_s = new Point(next_d.X + 1, 0);
+                            if (fill_lianxu[(int)next_d.X, (int)next_d.Y + 1] == 0)
+                            {
+                                if (next_d.Y + 1 == 6 || fill_lianxu[(int)next_d.X, (int)next_d.Y + 1] == 2)
+                                {
+                                    next_d = new Point(next_d.X + 1, next_d.Y);
+                                    for (int b = (int)next_s.X; b > 0; b--)
+                                    {
+                                        if (fill_lianxu[b, 0] == 0)
+                                        {
+                                            next_s = new Point(b, 0);
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    next_d = new Point(next_d.X, next_d.Y + 1);
+                                }
+                            }
+                            else
+                            {
+                                next_d = new Point(next_d.X, next_d.Y + 1);
+                            }
+                        }
+                    }
+
+                    for (int i = 0; i < 120; i++)
+                    {
+                        for (int j = 0; j < 6; j++)
+                        {
+                            if (fill_lianxu[i, j] != 0)
+                            {
+                                int type = 0;
+                                if (fill_lianxu[i, j] == 20)
+                                {
+                                    type = 1;
+                                }
+                                elllab ell = new elllab();
+                                ell.Width = 30;
+                                ell.Height = 30;
+                                ell.create_ell(type, "");
+                                ell.Margin = new Thickness(i * 30, j * 30, 0, 0);
+                                danshuangxulie.maincanvas.Children.Add(ell);
+                            }
+                        }
+                    }
+                }
+
+
+            }));
+
+        }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
@@ -91,30 +395,58 @@ namespace shishicaiclient
             //获取内网IP
             IPAddress ipaddr = Dns.Resolve(Dns.GetHostName()).AddressList[0];
             PublicClass.localIP = ipaddr.ToString();
+
+
             longhu_stack.Width = chat_stack.ActualWidth / 3d - 2;
             daxiao_stack.Width = chat_stack.ActualWidth / 3d - 2;
+
             danshuang_stack.Width = chat_stack.ActualWidth / 3d - 2;
-            Longhu longhu = new Longhu();
+            //龙虎划线
+            Longhu longhu = new Longhu();//龙虎
+            longhu.Name = "longhu";
             longhu.Width = 600;
             longhu.Height = 200;
             longhu.create_line();
             longhu_scroll.Content = longhu;
 
-            Daxiao daxiao = new Daxiao();
+            Longhu daxiao = new Longhu();//大小
+            daxiao.Name = "daxiao";
             daxiao.Width = 600;
             daxiao.Height = 200;
             daxiao.create_line();
             daxiao_scroll.Content = daxiao;
 
-            Danshuang danshuang = new Danshuang();
+            //序列划线（大小序列）
+            Daxiaoxulie daxiaoxulie = new Daxiaoxulie();
+            daxiaoxulie.Name = "daxiaoxulie";
+            daxiaoxulie.Width = 3600;
+            daxiaoxulie.Height = 200;
+            daxiaoxulie.create_line();
+            daxiaoxulie_scroll.Content = daxiaoxulie;
+
+            Longhu danshuang = new Longhu();//单双
+            danshuang.Name = "danshuang";
             danshuang.Width = 600;
             danshuang.Height = 200;
             danshuang.create_line();
             danshuang_scroll.Content = danshuang;
+
+            //序列划线（单双序列）
+            Daxiaoxulie danshuangxulie = new Daxiaoxulie();
+            danshuangxulie.Name = "danshuangxulie";
+            danshuangxulie.Width = 3600;
+            danshuangxulie.Height = 200;
+            danshuangxulie.create_line();
+            danshuangxulie_scroll.Content = danshuangxulie;
+
+
+
+
+
            
 
             //连接到指定服务器的指定端口
-            PublicClass.socket.Connect("192.168.1.112", 4530);
+            PublicClass.socket.Connect("192.168.1.109", 4530);
             if (!PublicClass.socket.Connected)
             {
                 MessageBox.Show("connect to the server");
@@ -124,9 +456,11 @@ namespace shishicaiclient
                 MessageBox.Show("welcome");
                 PublicClass.socket.BeginReceive(buffer, 0, buffer.Length, SocketFlags.None, new AsyncCallback(ReceiveMessage), PublicClass.socket);
             }
-
+           
 
         }
+
+
 
         //调用页面显示中奖号码及结果
         private void show_leftopenjiang(string opencode, string expect)
@@ -184,7 +518,7 @@ namespace shishicaiclient
 
              //判断单双
              int last = number4;
-             if (last % 2 == 0)
+             if (last % 2 == 0)//奇偶
              {
                  LeftEll ellreturn = new LeftEll();
                  ellreturn.create_lab("双", 1);
@@ -238,7 +572,8 @@ namespace shishicaiclient
                 //读取出来消息内容
                 var message = Encoding.Unicode.GetString(buffer, 0, length);
                 //MessageBox.Show(message);
-                histroyopen = message;
+                string[] messages = message.Split('+');
+                histroyopen = messages[0];
                 JToken jsonstr = JToken.Parse(histroyopen);
 
              
@@ -346,6 +681,7 @@ namespace shishicaiclient
                         show_leftopenjiang(jsonstrs[i]["opencode"].ToString(), jsonstrs[i]["expect"].ToString());
 
                     }
+                    create_lab("all");
                 }
 
 
@@ -390,7 +726,7 @@ namespace shishicaiclient
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                //MessageBox.Show(ex.Message);
             }
         }
 
@@ -461,19 +797,19 @@ namespace shishicaiclient
             cg.Show();
             cg.Name = "change";
         }
-
-        private void longhu_scroll_MouseEnter(object sender, MouseEventArgs e)
+        //滚动条效果：龙虎
+        private void longhu_scroll_MouseEnter(object sender, MouseEventArgs e)//鼠标放上出现（MouseEnter）
         {
             longhu_scroll.HorizontalScrollBarVisibility = ScrollBarVisibility.Auto;
         }
 
         private void longhu_scroll_MouseLeave(object sender, MouseEventArgs e)
         {
-            longhu_scroll.HorizontalScrollBarVisibility = ScrollBarVisibility.Disabled;
+            longhu_scroll.HorizontalScrollBarVisibility = ScrollBarVisibility.Hidden;//鼠标移开消失（MouseLeave）
         }
 
 
-
+        //滚动条：大小
         private void daxiao_scroll_MouseEnter(object sender, MouseEventArgs e)
         {
             daxiao_scroll.HorizontalScrollBarVisibility = ScrollBarVisibility.Auto;
@@ -481,10 +817,25 @@ namespace shishicaiclient
 
         private void daxiao_scroll_MouseLeave(object sender, MouseEventArgs e)
         {
-            daxiao_scroll.HorizontalScrollBarVisibility = ScrollBarVisibility.Disabled;
+            daxiao_scroll.HorizontalScrollBarVisibility = ScrollBarVisibility.Hidden;
         }
 
 
+        //滚动条：大小序列
+        private void daxiaoxulie_scroll_MouseEnter(object sender, MouseEventArgs e)
+        {
+            daxiaoxulie_scroll.HorizontalScrollBarVisibility = ScrollBarVisibility.Auto;
+        }
+
+        private void daxiaoxulie_scroll_MouseLeave(object sender, MouseEventArgs e)
+        {
+            daxiaoxulie_scroll.HorizontalScrollBarVisibility = ScrollBarVisibility.Hidden;
+
+        }
+
+
+
+        //滚动条：单双
         private void danshuang_scroll_MouseEnter(object sender, MouseEventArgs e)
         {
             danshuang_scroll.HorizontalScrollBarVisibility = ScrollBarVisibility.Auto;
@@ -492,10 +843,44 @@ namespace shishicaiclient
 
         private void danshuang_scroll_MouseLeave(object sender, MouseEventArgs e)
         {
-            danshuang_scroll.HorizontalScrollBarVisibility = ScrollBarVisibility.Disabled;
+            danshuang_scroll.HorizontalScrollBarVisibility = ScrollBarVisibility.Hidden;
         }
 
 
+        //滚动条：单双序列
+        private void danshuangxulie_scroll_MouseEnter(object sender, MouseEventArgs e)
+        {
+            danshuangxulie_scroll.HorizontalScrollBarVisibility = ScrollBarVisibility.Auto;
+        }
+
+        private void danshuangxulie_scroll_MouseLeave(object sender, MouseEventArgs e)
+        {
+            danshuangxulie_scroll.HorizontalScrollBarVisibility = ScrollBarVisibility.Hidden;
+        }
+
+
+
+
+
+
+
+        private void daxiao_tab_GotFocus(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                create_lab("daxiaoxulie");
+            }
+            catch { };
+        }
+
+        private void danshuang_tab_GotFocus(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                create_lab("danshuangxulie");
+            }
+            catch { };
+        }
 
 
 

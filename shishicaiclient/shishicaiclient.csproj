@@ -74,8 +74,14 @@
     <Compile Include="Danshuang.xaml.cs">
       <DependentUpon>Danshuang.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Danshuangxulie.xaml.cs">
+      <DependentUpon>Danshuangxulie.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Daxiao.xaml.cs">
       <DependentUpon>Daxiao.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Daxiaoxulie.xaml.cs">
+      <DependentUpon>Daxiaoxulie.xaml</DependentUpon>
     </Compile>
     <Compile Include="elllab.xaml.cs">
       <DependentUpon>elllab.xaml</DependentUpon>
@@ -110,9 +116,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Danshuangxulie.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Daxiao.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Daxiaoxulie.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="elllab.xaml">
       <Generator>MSBuild:Compile</Generator>

@@ -50,13 +50,18 @@
                                         <RowDefinition Height="235" />
                                         <RowDefinition />
                                     </Grid.RowDefinitions>
+                                    
+                                    
+                                    
                                     <Label Grid.Row="0">这是开奖</Label>
+                                    
                                     <StackPanel Grid.Row="1" Orientation="Horizontal" x:Name="chat_stack" HorizontalAlignment="Stretch">
                                         <StackPanel x:Name="longhu_stack">
-                                            
+                                           
                                             <TabControl Height="230" Margin="2,0,0,0">
                                                 <TabItem Header="龙虎">
-                                                    <ScrollViewer x:Name="longhu_scroll" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled" CanContentScroll="True" MouseEnter="longhu_scroll_MouseEnter" MouseLeave="longhu_scroll_MouseLeave">
+                                                    
+                                                    <ScrollViewer x:Name="longhu_scroll" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Disabled" CanContentScroll="True" MouseEnter="longhu_scroll_MouseEnter" MouseLeave="longhu_scroll_MouseLeave">
                                                         
                                                     </ScrollViewer>
                                                 </TabItem>
@@ -65,24 +70,28 @@
                                         <StackPanel x:Name="daxiao_stack" Margin="2,0,0,0">
                                             <TabControl Height="230">
                                                 <TabItem Header="大小">
-                                                    <ScrollViewer x:Name="daxiao_scroll" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled" CanContentScroll="True" MouseEnter="daxiao_scroll_MouseEnter" MouseLeave="daxiao_scroll_MouseLeave">
+                                                    <ScrollViewer x:Name="daxiao_scroll" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Disabled" CanContentScroll="True" MouseEnter="daxiao_scroll_MouseEnter" MouseLeave="daxiao_scroll_MouseLeave">
 
                                                     </ScrollViewer>
                                                 </TabItem>
-                                                <TabItem Header="大小序列">
-                                                    
+                                                <TabItem Header="大小序列" x:Name="daxiao_tab" GotFocus="daxiao_tab_GotFocus">
+                                                    <ScrollViewer x:Name="daxiaoxulie_scroll" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Disabled" CanContentScroll="True" MouseEnter="daxiaoxulie_scroll_MouseEnter" MouseLeave="daxiaoxulie_scroll_MouseLeave">
+
+                                                    </ScrollViewer>
                                                 </TabItem>
                                             </TabControl>
                                         </StackPanel>
                                         <StackPanel x:Name="danshuang_stack" Margin="2,0,0,0">
                                             <TabControl Height="230">
                                                 <TabItem Header="单双">
-                                                    <ScrollViewer x:Name="danshuang_scroll" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled" CanContentScroll="True" MouseEnter="danshuang_scroll_MouseEnter" MouseLeave="danshuang_scroll_MouseLeave">
+                                                    <ScrollViewer x:Name="danshuang_scroll" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Disabled" CanContentScroll="True" MouseEnter="danshuang_scroll_MouseEnter" MouseLeave="danshuang_scroll_MouseLeave">
 
                                                     </ScrollViewer>
                                                 </TabItem>
-                                                <TabItem Header="单双序列">
-                                                    
+                                                <TabItem Header="单双序列" x:Name="danshuang_tab" GotFocus="danshuang_tab_GotFocus">
+                                                    <ScrollViewer x:Name="danshuangxulie_scroll" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Disabled" CanContentScroll="True" MouseEnter="danshuangxulie_scroll_MouseEnter" MouseLeave="danshuangxulie_scroll_MouseLeave">
+
+                                                    </ScrollViewer>
                                                 </TabItem>
                                             </TabControl>
                                         </StackPanel>

@@ -26,8 +26,8 @@ namespace shishicaiclient
         public void create_rect(int colortype,string content)//创建方框 colortype 0 红 1蓝 2绿
         {
             Rectangle rect = new Rectangle();
-            rect.Width = 26;
-            rect.Height = 26;
+            rect.Width = 28;
+            rect.Height = 28;
             if (colortype == 0)
             {
                 rect.Fill = Brushes.OrangeRed;
@@ -43,7 +43,7 @@ namespace shishicaiclient
 
 
 
-
+            rect.Margin = new Thickness(1, 1, 0, 0);
             Label lab = new Label();
             lab.Content = content;
             lab.FontSize = 16;

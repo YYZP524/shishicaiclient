@@ -464,13 +464,13 @@ namespace shishicaiclient
 
         }
 
-<<<<<<< HEAD
+
 
 
         //调用页面显示中奖号码及结果
-=======
+
         //左边历史开奖记录显示
->>>>>>> origin/master
+
         private void show_leftopenjiang(string opencode, string expect)
         {
             Dispatcher.Invoke(new Action(delegate
@@ -526,12 +526,10 @@ namespace shishicaiclient
 
              //判断单双结果
              int last = number4;
-<<<<<<< HEAD
-             if (last % 2 == 0)//奇偶
-=======
+
              int sum = number1 + int.Parse(sinopen[2]) + int.Parse(sinopen[3]) + number4;
              if (sum % 2 == 0)
->>>>>>> origin/master
+
              {
                  LeftEll ellreturn = new LeftEll();
                  ellreturn.create_lab("双", 1);
@@ -620,22 +618,11 @@ namespace shishicaiclient
                 var length = socket.EndReceive(ar);
                 //读取出来消息内容
                 var message = Encoding.Unicode.GetString(buffer, 0, length);
-<<<<<<< HEAD
-                //MessageBox.Show(message);
-                string[] messages = message.Split('+');
-                histroyopen = messages[0];
-                JToken jsonstr = JToken.Parse(histroyopen);
 
-             
-                //if(jsonstr["opercode"].ToString()=="10")   //操作数为10是历史记录
-                oper = jsonstr["opercode"].ToString();
-
-                if (oper == "16")
-=======
                 string[] messages = message.Split('+');
                 int mess_count = messages.Count();
                 if(mess_count>1)
->>>>>>> origin/master
+
                 {
                     mess_count--;
                 }
@@ -730,11 +717,10 @@ namespace shishicaiclient
                             MessageBox.Show("用户名重名");
                         }
                     }
-<<<<<<< HEAD
-                    create_lab("all");
-                }
-=======
->>>>>>> origin/master
+
+//                    create_lab("all");
+                
+
 
                     //服务端返回登录信息
                     else if (oper == "16")
@@ -880,28 +866,10 @@ namespace shishicaiclient
             PublicClass.socket.BeginSend(outputBuffer, 0, outputBuffer.Length, SocketFlags.None, null, null);
         }
 
-<<<<<<< HEAD
-        private void changepwd_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            chang change = new chang();
-            C1Window cg = new C1Window();
-            cg.Width = 300;
-            cg.Height = 300;
-            cg.ShowMaximizeButton = false;
-            cg.ShowMinimizeButton = false;
-            cg.IsResizable = false;
-            cg.Margin = new Thickness((SystemParameters.WorkArea.Width - cg.Width) / 2, (SystemParameters.WorkArea.Height - cg.Height) / 2, 0, 0);
-            cg.Content = change;
-            cg.Show();
-            cg.Name = "change";
-        }
+
         //滚动条效果：龙虎
         private void longhu_scroll_MouseEnter(object sender, MouseEventArgs e)//鼠标放上出现（MouseEnter）
-=======
 
-
-        private void longhu_scroll_MouseEnter(object sender, MouseEventArgs e)
->>>>>>> origin/master
         {
             longhu_scroll.HorizontalScrollBarVisibility = ScrollBarVisibility.Auto;
         }

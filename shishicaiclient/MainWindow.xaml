@@ -65,21 +65,7 @@
                                         <RowDefinition Height="235" />
                                         <RowDefinition  Height="350"/>
                                     </Grid.RowDefinitions>
-<<<<<<< HEAD
-                                    
-                                    
-                                    
-                                    <Label Grid.Row="0">这是开奖</Label>
-                                    
-                                    <StackPanel Grid.Row="1" Orientation="Horizontal" x:Name="chat_stack" HorizontalAlignment="Stretch">
-                                        <StackPanel x:Name="longhu_stack">
-                                           
-                                            <TabControl Height="230" Margin="2,0,0,0">
-                                                <TabItem Header="龙虎">
-                                                    
-                                                    <ScrollViewer x:Name="longhu_scroll" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Disabled" CanContentScroll="True" MouseEnter="longhu_scroll_MouseEnter" MouseLeave="longhu_scroll_MouseLeave">
-                                                        
-=======
+
                                     <StackPanel Grid.Row="0">
                                         <StackPanel x:Name="expectlast" Width="300" Height="30" HorizontalAlignment="Center" Margin="0,80,0,0"></StackPanel>
                                         <Grid>
@@ -99,7 +85,7 @@
                                                 <TabItem Header="龙虎">
                                                     <ScrollViewer x:Name="longhu_scroll" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled" CanContentScroll="True" MouseEnter="longhu_scroll_MouseEnter" MouseLeave="longhu_scroll_MouseLeave">
 
->>>>>>> origin/master
+
                                                     </ScrollViewer>
                                                 </TabItem>
                                             </TabControl>
@@ -111,15 +97,12 @@
 
                                                     </ScrollViewer>
                                                 </TabItem>
-<<<<<<< HEAD
+
                                                 <TabItem Header="大小序列" x:Name="daxiao_tab" GotFocus="daxiao_tab_GotFocus">
                                                     <ScrollViewer x:Name="daxiaoxulie_scroll" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Disabled" CanContentScroll="True" MouseEnter="daxiaoxulie_scroll_MouseEnter" MouseLeave="daxiaoxulie_scroll_MouseLeave">
 
                                                     </ScrollViewer>
-=======
-                                                <TabItem Header="大小序列">
 
->>>>>>> origin/master
                                                 </TabItem>
                                             </TabControl>
                                         </StackPanel>
@@ -130,15 +113,12 @@
 
                                                     </ScrollViewer>
                                                 </TabItem>
-<<<<<<< HEAD
+
                                                 <TabItem Header="单双序列" x:Name="danshuang_tab" GotFocus="danshuang_tab_GotFocus">
                                                     <ScrollViewer x:Name="danshuangxulie_scroll" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Disabled" CanContentScroll="True" MouseEnter="danshuangxulie_scroll_MouseEnter" MouseLeave="danshuangxulie_scroll_MouseLeave">
 
                                                     </ScrollViewer>
-=======
-                                                <TabItem Header="单双序列">
 
->>>>>>> origin/master
                                                 </TabItem>
                                             </TabControl>
                                         </StackPanel>

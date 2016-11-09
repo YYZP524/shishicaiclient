@@ -593,11 +593,11 @@ namespace shishicaiclient
             {
                 Label number = new Label();
                 stack.Children.Add(number);
-                elllab bigell = new elllab();
+                Kaijiangell bigell = new Kaijiangell();
                 string num = la[aa];
-                bigell.create_ell(0, num);
-                bigell.Width = 50;
-                bigell.Height = 50;
+                bigell.create_kaijiang(num,0);
+                bigell.Width = 40;
+                bigell.Height = 40;
                 stack.Children.Add(bigell);
             } 
             

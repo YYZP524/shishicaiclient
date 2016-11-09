@@ -12,8 +12,8 @@
 
         <Menu Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
             <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
-             <Label  Height="29" Name="user" Foreground="Blue" FontSize="13" HorizontalContentAlignment="Center"  Width="100"></Label>
-            <Label  Height="29" Name="amount" Foreground="Red" FontSize="13" HorizontalContentAlignment="Center"  Width="100"></Label>
+             <Label  Height="29" Name="user" Foreground="Blue" FontSize="13" HorizontalContentAlignment="Center"  Width="100" MouseDown="user_MouseDown"></Label>
+            <Label  Height="29" Name="amount" Foreground="Red" FontSize="13" HorizontalContentAlignment="Center"  Width="100" ></Label>
             <Label Content="修改密码" Height="29" Name="changepwd" FontSize="13" HorizontalContentAlignment="Center"  Width="63" MouseDown="changepwd_MouseDown" Visibility="Collapsed"></Label>
             <Label Content="注册" Height="29" FontSize="13" HorizontalContentAlignment="Center"  Name="sign"  Width="42" MouseDown="sign_MouseDown"></Label>
             <Label Content="登录" Height="29"  FontSize="13" HorizontalContentAlignment="Center"  Name="login" Width="42" MouseDown="login_MouseDown"></Label>
@@ -38,15 +38,30 @@
                                         </ScrollViewer>
                                     </TabItem>
                                     <TabItem Header="昨天开奖">
-                                        <ScrollViewer x:Name="tomopen_scroll" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled" CanContentScroll="True">
-                                           
+                                        <ScrollViewer x:Name="yesopen_scroll" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled" CanContentScroll="True">
+                                            <ListBox x:Name="yesopen_opencode"/>
                                         </ScrollViewer>
                                     </TabItem>
                                     <TabItem Header="前天开奖">
-                                        <ScrollViewer x:Name="yesopen_scroll" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled" CanContentScroll="True">
-                                            
+                                        <ScrollViewer x:Name="toyesopen_scroll" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled" CanContentScroll="True">
+                                            <ListBox x:Name="toyesopen_opencode"/>
                                         </ScrollViewer>
                                     </TabItem>
+                                    <TabItem Header="历史开奖">
+                                        <ScrollViewer x:Name="selectopen_scroll" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled" CanContentScroll="True">
+                                            <Grid>
+                                                <StackPanel  VerticalAlignment="Top"  Orientation="Horizontal" Height="25">
+                                                    <Label Content="选择日期 : "></Label>
+                                                    <DatePicker Name="selectopendate"></DatePicker>
+                                                    <Button Name="opendate" Content=" 查询 " Click="opendate_Click"></Button>
+                                                </StackPanel>
+                                                <StackPanel Margin="0,25,0,0">
+                                                    <ListBox x:Name="histroy_opencode"/>
+                                                </StackPanel>
+                                            </Grid>
+                                        </ScrollViewer>
+                                       
+    </TabItem>
                                 </TabControl>
                                
 
@@ -197,81 +212,58 @@
                     </avalonDock:LayoutDocumentPaneGroup>
                     <avalonDock:LayoutAnchorablePaneGroup DockWidth="400" Orientation="Vertical">
                         <avalonDock:LayoutAnchorablePane >
-                            <avalonDock:LayoutAnchorable Title="Tool 1" x:Name="rightpanel" CanFloat="False" CanHide="False" AutoHideMinWidth="400">
+                            <avalonDock:LayoutAnchorable Title="投注" x:Name="rightpanel" CanFloat="False" CanHide="False" AutoHideMinWidth="400">
                                 <StackPanel x:Name="rightstack">
-                                    <TabControl Height="300">
-                                        <TabItem Header="投注记录">
-                                            <ScrollViewer x:Name="slect_scroll" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled" CanContentScroll="True">
+                                    
+                                    
+                                    <Grid>
+                                        <StackPanel>
+                                            <TabControl Height="500">
 
-                                            </ScrollViewer>
-                                        </TabItem>
-                                        <TabItem Header="历史记录">
-                                            <TabControl Height="280">
-                                                <TabItem Header="龙虎">
-                                                    <ScrollViewer  x:Name="slectlonghu_scroll" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled" CanContentScroll="True">
+                                                <TabItem Header="今日投注记录">
+                                                    <ScrollViewer x:Name="slect_scroll" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled" CanContentScroll="True">
+                                                        <ListBox x:Name="today_touzhu"/>
+                                                    </ScrollViewer>
+                                                </TabItem>
+                                                
+                                                                                              
+                                                    <TabItem Header="历史投注记录">
+                                                            <ScrollViewer x:Name="slecthis_scroll" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled" CanContentScroll="True">
                                                         <Grid>
-                                                            <StackPanel Height="40" VerticalAlignment="Top"  Orientation="Horizontal">
-
+                                                            <StackPanel  VerticalAlignment="Top"  Orientation="Horizontal" Height="25">
                                                                 <Label Content="起始日期 : " ></Label>
-                                                                <DatePicker Name="startimelonghu"></DatePicker>
-
-
-
+                                                                <DatePicker Name="startime"></DatePicker>
                                                                 <Label Content="结束日期 : "></Label>
-                                                                <DatePicker Name="stoptimelonghu"></DatePicker>
+                                                                <DatePicker Name="endtime"></DatePicker>
+                                                                <Button Name="selecthistroy" Content=" 查询 " Click="selecthistroy_Click"></Button>
+                                                            </StackPanel>
+                                                            <StackPanel Margin="0,25,0,0">
+                                                                <TabControl>
+                                                                    <TabItem Header="龙虎">
+                                                                        <ScrollViewer x:Name="longhuhistroy_scroll" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled" CanContentScroll="True">
 
+                                                                        </ScrollViewer>
+                                                                    </TabItem>
 
-                                                                <Button Name="selecthistroylonghu" Content=" 查询 " Height="30" ></Button>
+                                                                    <TabItem Header="单双">
+                                                                        <ScrollViewer x:Name="danshuanghistroy_scroll" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled" CanContentScroll="True">
 
+                                                                        </ScrollViewer>
+                                                                    </TabItem>
+
+                                                                    <TabItem Header="大小">
+                                                                        <ScrollViewer x:Name="daxiaohistroy_scroll" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled" CanContentScroll="True">
+
+                                                                        </ScrollViewer>
+                                                                    </TabItem>
+                                                                </TabControl>
                                                             </StackPanel>
                                                         </Grid>
                                                     </ScrollViewer>
-                                                </TabItem>
-                                                <TabItem Header="单双">
-                                                    <ScrollViewer  x:Name="slectdanshuang_scroll" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled" CanContentScroll="True">
-                                                        <Grid>
-                                                            <StackPanel Height="40" VerticalAlignment="Top"  Orientation="Horizontal">
-
-                                                                <Label Content="起始日期 : " ></Label>
-                                                                <DatePicker Name="startimedanshuang"></DatePicker>
-
-
-
-
-                                                                <Label Content="结束日期 : "></Label>
-                                                                <DatePicker Name="stoptimedanshuang"></DatePicker>
-
-
-                                                                <Button Name="selecthistroydanshuang" Content=" 查询 " Height="30" ></Button>
-                                                            </StackPanel>
-                                                        </Grid>
-                                                    </ScrollViewer>
-                                                </TabItem>
-                                                <TabItem Header="大小">
-                                                    <ScrollViewer  x:Name="slectdaxiao_scroll" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled" CanContentScroll="True">
-                                                        <Grid>
-                                                            <StackPanel Height="40" VerticalAlignment="Top"  Orientation="Horizontal">
-
-                                                                <Label Content="起始日期 : " ></Label>
-                                                                <DatePicker Name="startimedaxiao"></DatePicker>
-
-
-
-
-                                                                <Label Content="结束日期 : "></Label>
-                                                                <DatePicker Name="stoptimedaxiao"></DatePicker>
-
-
-                                                                <Button Name="selecthistroydaxiao" Content=" 查询 " Height="30" ></Button>
-                                                            </StackPanel>
-                                                        </Grid>
-                                                    </ScrollViewer>
-                                                </TabItem>
+                                                    </TabItem>                                                  
                                             </TabControl>
-
-
-                                        </TabItem>
-                                    </TabControl>
+                                        </StackPanel>
+                                    </Grid>
                                 </StackPanel>
                             </avalonDock:LayoutAnchorable>
                         </avalonDock:LayoutAnchorablePane>

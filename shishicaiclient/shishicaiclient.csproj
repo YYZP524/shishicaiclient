@@ -108,6 +108,9 @@
     <Compile Include="sign.xaml.cs">
       <DependentUpon>sign.xaml</DependentUpon>
     </Compile>
+    <Compile Include="user.xaml.cs">
+      <DependentUpon>user.xaml</DependentUpon>
+    </Compile>
     <Page Include="chang.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -169,6 +172,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="sign.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="user.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

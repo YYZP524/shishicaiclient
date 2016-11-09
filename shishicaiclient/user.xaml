@@ -1,0 +1,35 @@
+﻿<UserControl x:Class="shishicaiclient.User"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="290" d:DesignWidth="450">
+    <Grid>
+        <StackPanel Orientation="Horizontal" Height="30" VerticalAlignment="Top" HorizontalAlignment="Center" Width="200" Margin="0,30,0,0">
+            <Label Content="用户名 : " Width="60"></Label>
+            <TextBlock Text="" Width="140" Height="26"></TextBlock>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" Height="30" VerticalAlignment="Top" HorizontalAlignment="Left" Width="340" Margin="60,80,0,0">
+            <Label Content="金额 : " Width="70"></Label>
+            <TextBlock Name= "amount" Width="90" Height="26"></TextBlock>
+            <Label Content="投注基数 : " Width="70" Margin="20,0,0,0" ></Label>
+            <TextBlock Name= "base" Width="90" Height="26"></TextBlock>
+        </StackPanel>
+        
+        <StackPanel Orientation="Horizontal" Height="30" VerticalAlignment="Top" Margin="0,130,0,0" HorizontalAlignment="Center" Width="340" >
+            <Label Content="龙虎封顶 : " Width="70"></Label>
+            <TextBlock Name= "longhucapping" Width="90" Height="26"></TextBlock>
+            <Label Content="单双封顶 : " Width="70" Margin="20,0,0,0"></Label>
+            <Label Name= "danshuangcapping" Width="90"></Label>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Height="30" VerticalAlignment="Top" Margin="0,180,0,0" HorizontalAlignment="Center" Width="340" >
+            <Label Content="大小封顶 : " Width="70"></Label>
+            <Label Name= "daxiaocapping" Width="90"></Label>
+            <Label Content="和封顶 : " Width="70" Margin="20,0,0,0"></Label>
+            <Label Name= "hecapping" Width="90"></Label>
+        </StackPanel>
+        
+    </Grid>
+</UserControl>

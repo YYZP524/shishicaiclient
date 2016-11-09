@@ -78,6 +78,7 @@ namespace shishicaiclient
         string timecount;
         string expect;
         string last;
+        
 
         //存储json
         public class jsonclass
@@ -450,7 +451,7 @@ namespace shishicaiclient
            
 
             //连接到指定服务器的指定端口
-            PublicClass.socket.Connect("192.168.1.109", 4530);
+            PublicClass.socket.Connect("192.168.1.104", 4530);
             if (!PublicClass.socket.Connected)
             {
                 MessageBox.Show("connect to the server");
@@ -467,9 +468,7 @@ namespace shishicaiclient
 
 
 
-        //调用页面显示中奖号码及结果
-
-        //左边历史开奖记录显示
+        //调用页面显示当日开奖号码及结果 opercode=10调用方法
 
         private void show_leftopenjiang(string opencode, string expect)
         {
@@ -557,7 +556,7 @@ namespace shishicaiclient
                  ellreturn.Height = 24;
                  stack.Children.Add(ellreturn);
              }
-             else if(sum >18)
+             else 
              {
                  LeftEll ellreturn = new LeftEll();
                  ellreturn.create_lab("大", 1);
@@ -565,15 +564,15 @@ namespace shishicaiclient
                  ellreturn.Height = 24;
                  stack.Children.Add(ellreturn);
              }
-             
-             left_opencode.Items.Add(stack);  //显示在页面的left_opencode的listbox里
-         }));
+            left_opencode.Items.Add(stack);  //显示在页面的left_opencode的listbox里
+              }));
         }
+   
 
 
 
 
-
+        //显示开奖上一期的结果，opercode = 1调用方法
         private void lastopencode()
         {
        
@@ -687,9 +686,15 @@ namespace shishicaiclient
                             show_leftopenjiang(jsonstrs[i]["opencode"].ToString(), jsonstrs[i]["expect"].ToString());
 
                         }
+                        create_lab("all");
                     }
 
 
+                    else if (oper == "12") //服务端回应投注历史
+                    {
+                        JArray jsonstrs = JArray.Parse(jsonstr["data"].ToString());
+
+                    }
                     //服务端返回注册信息
                     else if (oper == "15")
                     {
@@ -848,6 +853,24 @@ namespace shishicaiclient
             cg.Name = "change";
         }
 
+        private void user_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if ((user.Content).ToString() == PublicClass.username)
+            {
+                User usermessage = new User();
+                C1Window um = new C1Window();
+                um.Width = 450;
+                um.Height = 290;
+                um.ShowMaximizeButton = false;
+                um.ShowMinimizeButton = false;
+                um.IsResizable = false;
+                um.Margin = new Thickness((SystemParameters.WorkArea.Width - um.Width) / 2, (SystemParameters.WorkArea.Height - um.Height) / 2, 0, 0);
+                um.Content = usermessage;
+                um.Show();
+            }
+        }
+
+
         //注销登录向服务端发送申请数据
         private void exit_MouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -922,6 +945,7 @@ namespace shishicaiclient
         {
           
                 resultlong.Content = (Convert.ToDouble(resultlong.Content) + Convert.ToDouble(100)).ToString();
+               
             
         }
 
@@ -930,6 +954,7 @@ namespace shishicaiclient
             if (int.Parse((resultlong.Content).ToString()) > 0)
             {
                 resultlong.Content = (Convert.ToDouble(resultlong.Content) - Convert.ToDouble(100)).ToString();
+                
             }
             else
             {
@@ -941,6 +966,7 @@ namespace shishicaiclient
         {
            
                 resulthu.Content = (Convert.ToDouble(resulthu.Content) + Convert.ToDouble(100)).ToString();
+                
            
         }
 
@@ -949,6 +975,7 @@ namespace shishicaiclient
             if (int.Parse((resulthu.Content).ToString()) > 0)
             {
                 resulthu.Content = (Convert.ToDouble(resulthu.Content) - Convert.ToDouble(100)).ToString();
+                
             }
             else
             {
@@ -961,6 +988,7 @@ namespace shishicaiclient
         {
 
             resulthe.Content = (Convert.ToDouble(resulthe.Content) + Convert.ToDouble(100)).ToString();
+            
 
         }
 
@@ -969,6 +997,7 @@ namespace shishicaiclient
             if (int.Parse((resulthe.Content).ToString()) > 0)
             {
                 resulthe.Content = (Convert.ToDouble(resulthe.Content) - Convert.ToDouble(100)).ToString();
+               
             }
             else
             {
@@ -1134,30 +1163,57 @@ namespace shishicaiclient
                     var message = PublicClass.zhucejson;
                     var outputBuffer = Encoding.Unicode.GetBytes(message);
                     PublicClass.socket.BeginSend(outputBuffer, 0, outputBuffer.Length, SocketFlags.None, null, null);
-   
+                    resultlong.Content = "0";
+                    resulthu.Content = "0";
+                    resulthe.Content = "0";
+                    resultdan.Content = "0";
+                    resultshuang.Content = "0";
+                    resultda.Content = "0";
+                    resultxiao.Content = "0";
             }
         }
+
+        
         //查询历史投注消息
-        private void selecthistroylonghu_Click(object sender, RoutedEventArgs e)
+        private void selecthistroy_Click(object sender, RoutedEventArgs e)
         {
-            if ((startimelonghu.SelectedDate).ToString() != "" && (stoptimelonghu.SelectedDate).ToString() != "")
+            if ((startime.SelectedDate).ToString() != "" && (endtime.SelectedDate).ToString() != "")
             {
+              
                 var o = new
                 {
                     opercode = "11",
                     username = PublicClass.username,
-                    type = "longhu",
-                    begindate = (startimelonghu.SelectedDate).ToString(),
-                    enddate = (stoptimelonghu.SelectedDate).ToString()
-                };
+                    begindate = startime.SelectedDate.Value.ToString("yyyy/MM/dd") ,
+                    enddate = endtime.SelectedDate.Value.ToString("yyyy/MM/dd")
+                }; 
                 var json = JsonConvert.SerializeObject(o);
-            }
+                var outputBuffer = Encoding.Unicode.GetBytes(json);
+                PublicClass.socket.BeginSend(outputBuffer, 0, outputBuffer.Length, SocketFlags.None, null, null);
+               
 
+            }
+            else
+            {
+                MessageBox.Show("请选择日期");
+            }
         }
 
-       
-
-      
+        //查询某天开奖情况
+        private void opendate_Click(object sender, RoutedEventArgs e)
+        {
+            if ((selectopendate.SelectedDate).ToString() != "")
+            {
+                var o = new
+                {
+                    opercode = "9",
+                    date = selectopendate.SelectedDate.Value.ToString("yyyy/MM/dd")
+                };
+                var json = JsonConvert.SerializeObject(o);
+                var outputBuffer = Encoding.Unicode.GetBytes(json);
+                PublicClass.socket.BeginSend(outputBuffer, 0, outputBuffer.Length, SocketFlags.None, null, null);
+            }
+        }
       
 
        
@@ -1198,6 +1254,14 @@ namespace shishicaiclient
             }
             catch { };
         }
+
+      
+
+      
+       
+
+       
+       
 
 
 

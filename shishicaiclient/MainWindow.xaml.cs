@@ -596,8 +596,8 @@ namespace shishicaiclient
                 elllab bigell = new elllab();
                 string num = la[aa];
                 bigell.create_ell(0, num);
-                bigell.Width = 30;
-                bigell.Height = 30;
+                bigell.Width = 50;
+                bigell.Height = 50;
                 stack.Children.Add(bigell);
             } 
             

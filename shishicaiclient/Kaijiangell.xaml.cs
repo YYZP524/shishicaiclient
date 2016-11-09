@@ -49,6 +49,7 @@ namespace shishicaiclient
             {
 
                 kaiell.Fill = Brushes.OrangeRed;
+                kailab.Foreground = Brushes.White;
                 kailab.Margin = new Thickness(0, -2, 0, 0);
 
             }

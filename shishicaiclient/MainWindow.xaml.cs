@@ -636,19 +636,19 @@ namespace shishicaiclient
                  ellreturn.Height = 24;
                  stack.Children.Add(ellreturn);
              }
-             if(openday == "today" )
+             if(left_tabcontrol.SelectedIndex==0 )
              {
             left_opencode.Items.Add(stack);  //显示在页面的left_opencode的listbox里
              }
-             else if (openday == "yesterday")
+             else if (left_tabcontrol.SelectedIndex == 1)
              {
                  yesopen_opencode.Items.Add(stack);
              }
-             else if (openday == "beforeyesterday")
+             else if (left_tabcontrol.SelectedIndex == 2)
              {
                  toyesopen_opencode.Items.Add(stack);
              }
-             else if (openday == "histroy")
+             else if (left_tabcontrol.SelectedIndex == 3)
              {
                  histroy_opencode.Items.Add(stack);
              }
@@ -769,9 +769,10 @@ namespace shishicaiclient
                    //服务端返回当天历史开奖记录
                     else if (oper == "10")   //操作数为10是历史记录
                     {
+
                         openday = "today";
                         update_code_json();
-
+                        create_analyze_chat();
                     }
 
 
@@ -875,7 +876,8 @@ namespace shishicaiclient
                         }));
                     }
 
-                   
+
+       
                         // 服务端回应客户端历史开奖历史请求
                     else if (oper == "21")
                     {
@@ -1380,10 +1382,10 @@ namespace shishicaiclient
         {
             if (left_tabcontrol.SelectedIndex == 0)
             {
-                update_code_json();
+                //update_code_json();
                 create_lab("all");
             }
-            create_analyze_chat();
+            //create_analyze_chat();
         }
         //接收开奖记录的json方法
         private void update_code_json()
@@ -1408,7 +1410,7 @@ namespace shishicaiclient
             //}
                         Dispatcher.Invoke(new Action(delegate
          {
-            left_opencode.Items.Clear();
+            //left_opencode.Items.Clear();
          }));
             for (int i = 0; i < jsonstrs.Count; i++)
             {
@@ -1421,60 +1423,65 @@ namespace shishicaiclient
         //开奖今天、昨天、前天显示的改变
         private void left_tabcontrol_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            try
+            if (left_tabcontrol.IsLoaded)
             {
-                if (left_tabcontrol.SelectedIndex == 0)
+                try
                 {
-                    var o = new
+                    if (left_tabcontrol.SelectedIndex == 0)
                     {
-                        opercode = "22",
-                        clientIP = PublicClass.localIP
-                    };
-                    var json = JsonConvert.SerializeObject(o);
-                    string str = json.ToString();
-                    PublicClass.loginjson = str;
-                    var message = PublicClass.loginjson;
-                    var outputBuffer = Encoding.Unicode.GetBytes(message);
-                    PublicClass.socket.BeginSend(outputBuffer, 0, outputBuffer.Length, SocketFlags.None, null, null);
-                }
+                        var o = new
+                        {
+                            opercode = "22",
+                            clientIP = PublicClass.localIP
+                        };
+                        var json = JsonConvert.SerializeObject(o);
+                        string str = json.ToString();
+                        PublicClass.loginjson = str;
+                        var message = PublicClass.loginjson;
+                        var outputBuffer = Encoding.Unicode.GetBytes(message);
+                        PublicClass.socket.BeginSend(outputBuffer, 0, outputBuffer.Length, SocketFlags.None, null, null);
+                        left_opencode.Items.Clear();
+                        //create_analyze_chat();
+                    }
 
-                else if (left_tabcontrol.SelectedIndex == 1)
-                {
-                    var o = new
+                    else if (left_tabcontrol.SelectedIndex == 1)
                     {
-                        opercode = "23",
-                        clientIP = PublicClass.localIP
-                    };
-                    var json = JsonConvert.SerializeObject(o);
-                    string str = json.ToString();
-                    PublicClass.loginjson = str;
-                    var message = PublicClass.loginjson;
-                    var outputBuffer = Encoding.Unicode.GetBytes(message);
-                    PublicClass.socket.BeginSend(outputBuffer, 0, outputBuffer.Length, SocketFlags.None, null, null);
-                }
+                        var o = new
+                        {
+                            opercode = "23",
+                            clientIP = PublicClass.localIP
+                        };
+                        var json = JsonConvert.SerializeObject(o);
+                        string str = json.ToString();
+                        PublicClass.loginjson = str;
+                        var message = PublicClass.loginjson;
+                        var outputBuffer = Encoding.Unicode.GetBytes(message);
+                        PublicClass.socket.BeginSend(outputBuffer, 0, outputBuffer.Length, SocketFlags.None, null, null);
+                        yesopen_opencode.Items.Clear();
+                    }
 
-                else if (left_tabcontrol.SelectedIndex == 2)
-                {
-                    var o = new
+                    else if (left_tabcontrol.SelectedIndex == 2)
                     {
-                        opercode = "24",
-                        clientIP = PublicClass.localIP
-                    };
-                    var json = JsonConvert.SerializeObject(o);
-                    string str = json.ToString();
-                    PublicClass.loginjson = str;
-                    var message = PublicClass.loginjson;
-                    var outputBuffer = Encoding.Unicode.GetBytes(message);
-                    PublicClass.socket.BeginSend(outputBuffer, 0, outputBuffer.Length, SocketFlags.None, null, null);
+                        var o = new
+                        {
+                            opercode = "24",
+                            clientIP = PublicClass.localIP
+                        };
+                        var json = JsonConvert.SerializeObject(o);
+                        string str = json.ToString();
+                        PublicClass.loginjson = str;
+                        var message = PublicClass.loginjson;
+                        var outputBuffer = Encoding.Unicode.GetBytes(message);
+                        PublicClass.socket.BeginSend(outputBuffer, 0, outputBuffer.Length, SocketFlags.None, null, null);
+                        toyesopen_opencode.Items.Clear();
+
+                    }
                 }
+                catch { }
             }
-            catch { }
         }
 
-        private void left_tabcontrol_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            
-        }
+
 
 
         private void create_analyze_chat()
@@ -1482,6 +1489,12 @@ namespace shishicaiclient
             int dragon_element = 0;
             int hu_element = 0;
             int he_element = 0;
+
+            int da_element = 0;
+            int xiao_element = 0;
+
+            int dan_element = 0;
+            int shuang_element = 0;
             
             foreach (var myelement in PublicClass.Code_json)
             {
@@ -1498,12 +1511,93 @@ namespace shishicaiclient
                 {
                     he_element++;
                 }
+
+                int daxiao_sum = int.Parse(opencodes[0].ToString()) + int.Parse(opencodes[1].ToString()) + int.Parse(opencodes[2].ToString()) + int.Parse(opencodes[3].ToString()) + int.Parse(opencodes[4].ToString());
+                if (daxiao_sum < 23)
+                {
+                    xiao_element++;
+                }
+                else
+                {
+                    da_element++;
+                }
+
+                if (daxiao_sum % 2 == 0)
+                {
+                    shuang_element++;
+                }
+                else
+                {
+                    dan_element++;
+                }
+
+
             }
+            Dispatcher.Invoke(new Action(delegate
+                {
+
+
+                    for (int i = 0; i < analyze_panel.Children.Count; i++)
+                    {
+                        Progress del = analyze_panel.Children[i] as Progress;
+                        if (del != null)
+                        {
+                            analyze_panel.Children.Remove(del);
+                            i--;
+                        }
+                    }
+
+
 
             Progress dragon = new Progress();
-            dragon.create_progress(0, dragon_element, PublicClass.Code_json.Count, "龙");
+            dragon.Margin = new Thickness(0, 20, 0, 0);
+            dragon.Width = 390;
+            dragon.Height = 30;
 
+            dragon.create_progress(0, dragon_element, PublicClass.Code_json.Count, "龙");
             analyze_panel.Children.Add(dragon);
+
+            Progress hu = new Progress();
+            hu.Width = 390;
+            hu.Height = 30;
+            hu.create_progress(1, hu_element, PublicClass.Code_json.Count, "虎");
+            analyze_panel.Children.Add(hu);
+
+
+            Progress he = new Progress();
+            he.Width = 390;
+            he.Height = 30;
+            he.create_progress(2, he_element, PublicClass.Code_json.Count, "和");
+            analyze_panel.Children.Add(he);
+
+
+            Progress da = new Progress();
+            da.Margin = new Thickness(0, 10, 0, 0);
+            da.Width = 390;
+            da.Height = 30;
+            da.create_progress(0, da_element, PublicClass.Code_json.Count, "大");
+            analyze_panel.Children.Add(da);
+
+            Progress xiao = new Progress();
+            xiao.Width = 390;
+            xiao.Height = 30;
+            xiao.create_progress(1, xiao_element, PublicClass.Code_json.Count, "小");
+            analyze_panel.Children.Add(xiao);
+
+            Progress dan = new Progress();
+            dan.Margin = new Thickness(0, 10, 0, 0);
+            dan.Width = 390;
+            dan.Height = 30;
+            dan.create_progress(0, dan_element, PublicClass.Code_json.Count, "单");
+            analyze_panel.Children.Add(dan);
+
+            Progress shuang = new Progress();
+            shuang.Width = 390;
+            shuang.Height = 30;
+            shuang.create_progress(1, shuang_element, PublicClass.Code_json.Count, "双");
+            analyze_panel.Children.Add(shuang);
+
+                }));
 
         }
 

@@ -311,7 +311,8 @@
                         </avalonDock:LayoutAnchorablePane>
                         <avalonDock:LayoutAnchorablePane >
                             <avalonDock:LayoutAnchorable>
-                                <StackPanel x:Name="analyze_panel" Orientation="Horizontal"></StackPanel>
+                                <StackPanel x:Name="analyze_panel">
+                                </StackPanel>
                             </avalonDock:LayoutAnchorable>
                         </avalonDock:LayoutAnchorablePane>
                     </avalonDock:LayoutAnchorablePaneGroup>

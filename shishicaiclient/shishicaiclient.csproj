@@ -104,6 +104,9 @@
     <Compile Include="rectlab.xaml.cs">
       <DependentUpon>rectlab.xaml</DependentUpon>
     </Compile>
+    <Compile Include="right_label.xaml.cs">
+      <DependentUpon>right_label.xaml</DependentUpon>
+    </Compile>
     <Compile Include="sub_sign.xaml.cs">
       <DependentUpon>sub_sign.xaml</DependentUpon>
     </Compile>
@@ -161,6 +164,10 @@
     <Page Include="rectlab.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="right_label.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="sub_sign.xaml">
       <SubType>Designer</SubType>

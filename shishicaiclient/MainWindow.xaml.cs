@@ -74,8 +74,11 @@ namespace shishicaiclient
         static byte[] buffer = new byte[1024 * 1024];
         string histroyopen = "";
         string timecount;
-        string expect;
-        string last;
+        string expect;    //开奖期数
+        string excepthis;  //历史期数
+        string histouzhu; //投注历史
+        string last;  //上一期开奖
+        string openday;  //开奖历史
         
 
         //存储json
@@ -449,7 +452,7 @@ namespace shishicaiclient
            
 
             //连接到指定服务器的指定端口
-            PublicClass.socket.Connect("192.168.1.104", 4530);
+            PublicClass.socket.Connect("192.168.1.105", 4530);
             if (!PublicClass.socket.Connected)
             {
                 MessageBox.Show("connect to the server");
@@ -464,7 +467,28 @@ namespace shishicaiclient
         }
 
 
-
+        private void show_righthistroy(string expect, string touzhutype, string amount, string opentype, string income)
+        {
+            StackPanel stack = new StackPanel();
+            stack.Orientation = Orientation.Horizontal;
+            Label rightexpect = new Label();
+            rightexpect.Content = expect;
+            rightexpect.Foreground = Brushes.Gray;
+            stack.Children.Add(rightexpect);
+            right_label righttouzgu = new right_label ();
+            righttouzgu.Content = "投注类型"+ touzhutype;
+            stack.Children.Add(righttouzgu);
+            right_label  rightamount = new right_label ();
+            rightamount.Content = "投注金额" + amount;
+            stack.Children.Add(rightamount);
+            right_label rightopentype = new right_label();
+            rightopentype.Content = "开奖类型" + opentype;
+            stack.Children.Add(rightopentype);
+            right_label rightincome = new right_label();
+            rightincome.Content = "输赢金额" + income;
+            stack.Children.Add(rightincome );
+            
+        }
 
         //调用页面显示当日开奖号码及结果 opercode=10调用方法
 
@@ -563,7 +587,22 @@ namespace shishicaiclient
                  ellreturn.Height = 24;
                  stack.Children.Add(ellreturn);
              }
+             if(openday == "today" )
+             {
             left_opencode.Items.Add(stack);  //显示在页面的left_opencode的listbox里
+             }
+             else if (openday == "yesterday")
+             {
+                 yesopen_opencode.Items.Add(stack);
+             }
+             else if (openday == "beforeyesterday")
+             {
+                 toyesopen_opencode.Items.Add(stack);
+             }
+             else if (openday == "histroy")
+             {
+                 histroy_opencode.Items.Add(stack);
+             }
               }));
         }
    
@@ -618,13 +657,13 @@ namespace shishicaiclient
                 var message = Encoding.Unicode.GetString(buffer, 0, length);
 
                 string[] messages = message.Split('+');
-                int mess_count = messages.Count();
-                if(mess_count>1)
+                //int mess_count = messages.Count();
+                //if(mess_count>1)
 
-                {
-                    mess_count--;
-                }
-                for (int a = 0; a < mess_count; a++)
+                //{
+                //    mess_count--;
+                //}
+                for (int a = 0; a < messages.Count()-1; a++)
                 {
                     histroyopen = messages[a];
                     JToken jsonstr = JToken.Parse(histroyopen);
@@ -676,6 +715,7 @@ namespace shishicaiclient
                    //服务端返回当天历史开奖记录
                     else if (oper == "10")   //操作数为10是历史记录
                     {
+                        openday = "today";
                         JArray jsonstrs = JArray.Parse(jsonstr["data"].ToString());
 
                         for (int i = 0; i < jsonstrs.Count; i++)
@@ -789,6 +829,64 @@ namespace shishicaiclient
                                 changepwd.Visibility = Visibility.Hidden;
                             }
                         }));
+                    }
+
+                    //服务端回应客户端昨天开奖历史请求
+                    else if (oper == "19")
+                    {
+                        openday = "yesterday";
+                        JArray jsonstrs = JArray.Parse(jsonstr["data"].ToString());
+
+                        for (int i = 0; i < jsonstrs.Count; i++)
+                        {
+                            PublicClass.Code_json.Add(jsonstrs[i]);
+                            string ccc = jsonstrs[i]["opencode"].ToString();
+                            show_leftopenjiang(jsonstrs[i]["opencode"].ToString(), jsonstrs[i]["expect"].ToString());
+
+                        }
+
+                        create_lab("all");
+                    }
+
+                        // 服务端回应客户端前天开奖历史请求
+                    else if (oper == "20")
+                    {
+                        openday = "beforeyesterday";
+                        JArray jsonstrs = JArray.Parse(jsonstr["data"].ToString());
+
+                        for (int i = 0; i < jsonstrs.Count; i++)
+                        {
+                            PublicClass.Code_json.Add(jsonstrs[i]);
+                            string ccc = jsonstrs[i]["opencode"].ToString();
+                            show_leftopenjiang(jsonstrs[i]["opencode"].ToString(), jsonstrs[i]["expect"].ToString());
+
+                        }
+
+                        create_lab("all"); 
+                    }
+                        // 服务端回应客户端历史开奖历史请求
+                    else if (oper == "21")
+                    {
+                        openday = "histroy";
+                        JArray jsonstrs = JArray.Parse(jsonstr["data"].ToString());
+
+                        for (int i = 0; i < jsonstrs.Count; i++)
+                        {
+                            PublicClass.Code_json.Add(jsonstrs[i]);
+                            string ccc = jsonstrs[i]["opencode"].ToString();
+                            show_leftopenjiang(jsonstrs[i]["opencode"].ToString(), jsonstrs[i]["expect"].ToString());
+
+                        }
+
+                        create_lab("all"); 
+
+                    }
+
+                    //服务端回应客户端今日投注消息
+                    else if(oper == "22")
+                    {
+                        histouzhu = "todaytouzhu";
+
                     }
                 }
                 //接收下一个消息(因为这是一个递归的调用，所以这样就可以一直接收消息了）

@@ -8,7 +8,7 @@
     <Grid>
         <StackPanel Orientation="Horizontal" Height="30" VerticalAlignment="Top" HorizontalAlignment="Center" Width="200" Margin="0,30,0,0">
             <Label Content="用户名 : " Width="60"></Label>
-            <TextBlock Text="" Width="140" Height="26"></TextBlock>
+            <TextBlock Name="UserName" Width="140" Height="26"></TextBlock>
         </StackPanel>
 
         <StackPanel Orientation="Horizontal" Height="30" VerticalAlignment="Top" HorizontalAlignment="Left" Width="340" Margin="60,80,0,0">

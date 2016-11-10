@@ -11,14 +11,19 @@
         </Grid.RowDefinitions>
 
         <Menu Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
-            <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+            <Grid Width="300" Margin="300,0,0,0">
+            <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" Width="200">
              <Label  Height="29" Name="user" Foreground="Blue" FontSize="13" HorizontalContentAlignment="Center"  Width="100" MouseDown="user_MouseDown"></Label>
             <Label  Height="29" Name="amount" Foreground="Red" FontSize="13" HorizontalContentAlignment="Center"  Width="100" ></Label>
+            </StackPanel>
+            <MenuItem Header="用户">
             <Label Content="修改密码" Height="29" Name="changepwd" FontSize="13" HorizontalContentAlignment="Center"  Width="63" MouseDown="changepwd_MouseDown" Visibility="Collapsed"></Label>
             <Label Content="注册" Height="29" FontSize="13" HorizontalContentAlignment="Center"  Name="sign"  Width="42" MouseDown="sign_MouseDown"></Label>
             <Label Content="登录" Height="29"  FontSize="13" HorizontalContentAlignment="Center"  Name="login" Width="42" MouseDown="login_MouseDown"></Label>
             <Label Content="注销登录" Height="29" FontSize="13" HorizontalContentAlignment="Right" VerticalAlignment="Center" Name="exit" Width="61" MouseDown="exit_MouseDown"></Label>
-            </StackPanel>
+            </MenuItem>
+            </Grid>
+
         </Menu>
         <ToolBar Grid.Row="1"/>
         <avalonDock:DockingManager x:Name="dockingManager" Grid.Row="2" >
@@ -222,7 +227,8 @@
 
                                                 <TabItem Header="今日投注记录">
                                                     <ScrollViewer x:Name="slect_scroll" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled" CanContentScroll="True">
-                                                        <ListBox x:Name="today_touzhu"/>
+                                                       
+
                                                     </ScrollViewer>
                                                 </TabItem>
                                                 

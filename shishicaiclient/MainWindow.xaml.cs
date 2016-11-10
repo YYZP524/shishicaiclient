@@ -1482,10 +1482,7 @@ namespace shishicaiclient
             catch { }
         }
 
-        private void left_tabcontrol_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            
-        }
+      
 
 
         private void create_analyze_chat()

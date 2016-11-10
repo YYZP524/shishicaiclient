@@ -1394,12 +1394,33 @@ namespace shishicaiclient
                 update_code_json();
                 create_lab("all");
             }
+            create_analyze_chat();
         }
         //接收开奖记录的json方法
         private void update_code_json()
         {
             JArray jsonstrs = JArray.Parse(jsonstr["data"].ToString());
             PublicClass.Code_json.Clear();
+            //if (openday == "today")
+            //{
+            //    left_opencode.Items.Add(stack);  //显示在页面的left_opencode的listbox里
+            //}
+            //else if (openday == "yesterday")
+            //{
+            //    yesopen_opencode.Items.Add(stack);
+            //}
+            //else if (openday == "beforeyesterday")
+            //{
+            //    toyesopen_opencode.Items.Add(stack);
+            //}
+            //else if (openday == "histroy")
+            //{
+            //    histroy_opencode.Items.Add(stack);
+            //}
+                        Dispatcher.Invoke(new Action(delegate
+         {
+            left_opencode.Items.Clear();
+         }));
             for (int i = 0; i < jsonstrs.Count; i++)
             {
                 PublicClass.Code_json.Add(jsonstrs[i]);
@@ -1459,6 +1480,42 @@ namespace shishicaiclient
                 }
             }
             catch { }
+        }
+
+        private void left_tabcontrol_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            
+        }
+
+
+        private void create_analyze_chat()
+        {
+            int dragon_element = 0;
+            int hu_element = 0;
+            int he_element = 0;
+            
+            foreach (var myelement in PublicClass.Code_json)
+            {
+                string[] opencodes = myelement["opencode"].ToString().Split(',');
+                if (int.Parse(opencodes[0]) > int.Parse(opencodes[4]))
+                {
+                    dragon_element++;
+                }
+                else if (int.Parse(opencodes[0]) < int.Parse(opencodes[4]))
+                {
+                    hu_element++;
+                }
+                else
+                {
+                    he_element++;
+                }
+            }
+
+            Progress dragon = new Progress();
+            dragon.create_progress(0, dragon_element, PublicClass.Code_json.Count, "龙");
+
+            analyze_panel.Children.Add(dragon);
+
         }
 
       

@@ -26,8 +26,8 @@ namespace shishicaiclient
         public void creat_label(string comment)
         {
             Rectangle label = new Rectangle();
-            label.Width = 28;
-            label.Height = 47;
+            label.Width = 80;
+            label.Height = 25;
             label.Margin = new Thickness(1, 1, 0, 0);
             Label lab = new Label();
             lab.Content = comment;

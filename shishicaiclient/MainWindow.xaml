@@ -36,13 +36,13 @@
                     <avalonDock:LayoutAnchorablePaneGroup DockWidth="300" Orientation="Vertical">
                         <avalonDock:LayoutAnchorablePane>
                             <avalonDock:LayoutAnchorable Title="开奖号码" CanClose="False" CanHide="False" x:Name="leftpanel" CanFloat="False" AutoHideMinWidth="300">
-                                <TabControl x:Name="left_tabcontrol">
-                                    <TabItem Header="今天开奖" x:Name="left_tab">
+                                <TabControl x:Name="left_tabcontrol" SelectionChanged="left_tabcontrol_SelectionChanged">
+                                    <TabItem Header="今天开奖" x:Name="left_tab" >
                                         <ScrollViewer x:Name="todayopen_scroll" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled" CanContentScroll="True">
                                             <ListBox x:Name="left_opencode"/>
                                         </ScrollViewer>
                                     </TabItem>
-                                    <TabItem Header="昨天开奖">
+                                    <TabItem Header="昨天开奖" >
                                         <ScrollViewer x:Name="yesopen_scroll" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled" CanContentScroll="True">
                                             <ListBox x:Name="yesopen_opencode"/>
                                         </ScrollViewer>
@@ -227,10 +227,16 @@
                                             <TabControl Height="500">
 
                                                 <TabItem Header="今日投注记录">
-                                                    <ScrollViewer x:Name="slect_scroll" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled" CanContentScroll="True">
-                                                       
-
-                                                    </ScrollViewer>
+                                                    <Grid>
+                                                        <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Height="25" Background="LightGray">
+                                                            <Label Content="开奖期数" Width="80"></Label>
+                                                            <Label Content="投注类型" Width="80"></Label>
+                                                            <Label Content="投注金额" Width="80"></Label>
+                                                            <Label Content="开奖类型" Width="80"></Label>
+                                                            <Label Content="输赢" Width="80"></Label>
+                                                        </StackPanel>
+                                                        <ListBox Margin="0,25,0,0" x:Name="right_today"></ListBox>
+                                                    </Grid>
                                                 </TabItem>
                                                 
                                                                                               
@@ -248,19 +254,46 @@
                                                                 <TabControl>
                                                                     <TabItem Header="龙虎">
                                                                         <ScrollViewer x:Name="longhuhistroy_scroll" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled" CanContentScroll="True">
-
+                                                                            <Grid>
+                                                                                <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Height="25" Background="LightGray">
+                                                                                    <Label Content="开奖期数" Width="80"></Label>
+                                                                                    <Label Content="投注类型" Width="80"></Label>
+                                                                                    <Label Content="投注金额" Width="80"></Label>
+                                                                                    <Label Content="开奖类型" Width="80"></Label>
+                                                                                    <Label Content="输赢" Width="80"></Label>
+                                                                                </StackPanel>
+                                                                                <ListBox Margin="0,25,0,0" x:Name="right_longhu"></ListBox>
+                                                                            </Grid>
                                                                         </ScrollViewer>
                                                                     </TabItem>
 
                                                                     <TabItem Header="单双">
                                                                         <ScrollViewer x:Name="danshuanghistroy_scroll" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled" CanContentScroll="True">
-
+                                                                            <Grid>
+                                                                                <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Height="25" Background="LightGray">
+                                                                                    <Label Content="开奖期数" Width="80"></Label>
+                                                                                    <Label Content="投注类型" Width="80"></Label>
+                                                                                    <Label Content="投注金额" Width="80"></Label>
+                                                                                    <Label Content="开奖类型" Width="80"></Label>
+                                                                                    <Label Content="输赢" Width="80"></Label>
+                                                                                </StackPanel>
+                                                                                <ListBox Margin="0,25,0,0" x:Name="right_danshuang"></ListBox>
+                                                                            </Grid>
                                                                         </ScrollViewer>
                                                                     </TabItem>
 
                                                                     <TabItem Header="大小">
                                                                         <ScrollViewer x:Name="daxiaohistroy_scroll" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled" CanContentScroll="True">
-
+                                                                            <Grid>
+                                                                                <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Height="25" Background="LightGray">
+                                                                                    <Label Content="开奖期数" Width="80"></Label>
+                                                                                    <Label Content="投注类型" Width="80"></Label>
+                                                                                    <Label Content="投注金额" Width="80"></Label>
+                                                                                    <Label Content="开奖类型" Width="80"></Label>
+                                                                                    <Label Content="输赢" Width="80"></Label>
+                                                                                </StackPanel>
+                                                                                <ListBox Margin="0,25,0,0" x:Name="right_daxiao"></ListBox>
+                                                                            </Grid>
                                                                         </ScrollViewer>
                                                                     </TabItem>
                                                                 </TabControl>

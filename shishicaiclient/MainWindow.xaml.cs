@@ -875,19 +875,7 @@ namespace shishicaiclient
                         }));
                     }
 
-                    //服务端回应客户端昨天开奖历史请求
-                    else if (oper == "19")
-                    {
-                        openday = "yesterday";
-                        update_code_json();
-                    }
-
-                        // 服务端回应客户端前天开奖历史请求
-                    else if (oper == "20")
-                    {
-                        openday = "beforeyesterday";
-                        update_code_json();
-                    }
+                   
                         // 服务端回应客户端历史开奖历史请求
                     else if (oper == "21")
                     {
@@ -1307,7 +1295,8 @@ namespace shishicaiclient
                     opercode = "11",
                     username = PublicClass.username,
                     begindate = startime.SelectedDate.Value.ToString("yyyy/MM/dd") ,
-                    enddate = endtime.SelectedDate.Value.ToString("yyyy/MM/dd")
+                    enddate = endtime.SelectedDate.Value.ToString("yyyy/MM/dd"),
+                    clientIP = PublicClass.localIP
                 }; 
                 var json = JsonConvert.SerializeObject(o);
                 var outputBuffer = Encoding.Unicode.GetBytes(json);
@@ -1482,7 +1471,10 @@ namespace shishicaiclient
             catch { }
         }
 
-      
+        private void left_tabcontrol_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            
+        }
 
 
         private void create_analyze_chat()

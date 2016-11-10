@@ -76,7 +76,7 @@ namespace shishicaiclient
         string timecount;
         string expect;
         string last;
-        
+        JToken jsonstr;
 
         //存储json
         public class jsonclass
@@ -92,32 +92,51 @@ namespace shishicaiclient
                 Longhu longhu = MainWindow.FindChild<Longhu>(Application.Current.MainWindow, "longhu");//龙虎开奖历史
                 if (longhu != null && (createtype == "longhu" || createtype == "all"))
                 {
-                    for (int i = 0; i < PublicClass.Code_json.Count; i++)
+                    for (int i = 0; i < longhu.maincanvas.Children.Count; i++)
                     {
-                        string[] opencodes = PublicClass.Code_json[i]["opencode"].ToString().Split(',');
-                        rectlab rect = new rectlab();
-                        rect.Width = 30;
-                        rect.Height = 30;
-                        if (int.Parse(opencodes[1]) > int.Parse(opencodes[4]))//第二位大于第五位为龙
+                        rectlab del = longhu.maincanvas.Children[i] as rectlab;
+                        if (del != null)
                         {
-                            rect.create_rect(0, "龙");
+                            longhu.maincanvas.Children.Remove(del);
+                            i--;
                         }
-                        else if (int.Parse(opencodes[1]) == int.Parse(opencodes[4]))//第二位等于第五位
-                        {
-                            rect.create_rect(2, "和");
-                        }
-                        else 
-                        {
-                            rect.create_rect(1, "虎");
-                        }
-                        rect.Margin = new Thickness(i / 6 * 30, i % 6 * 30, 0, 0);//“龙”“虎”“和”显示位置与规律
-                        longhu.maincanvas.Children.Add(rect);
                     }
+
+                        for (int i = 0; i < PublicClass.Code_json.Count; i++)
+                        {
+                            string[] opencodes = PublicClass.Code_json[i]["opencode"].ToString().Split(',');
+                            rectlab rect = new rectlab();
+                            rect.Width = 30;
+                            rect.Height = 30;
+                            if (int.Parse(opencodes[1]) > int.Parse(opencodes[4]))//第二位大于第五位为龙
+                            {
+                                rect.create_rect(0, "龙");
+                            }
+                            else if (int.Parse(opencodes[1]) == int.Parse(opencodes[4]))//第二位等于第五位
+                            {
+                                rect.create_rect(2, "和");
+                            }
+                            else
+                            {
+                                rect.create_rect(1, "虎");
+                            }
+                            rect.Margin = new Thickness(i / 6 * 30, i % 6 * 30, 0, 0);//“龙”“虎”“和”显示位置与规律
+                            longhu.maincanvas.Children.Add(rect);
+                        }
                 }
 
                 Longhu daxiao = MainWindow.FindChild<Longhu>(Application.Current.MainWindow, "daxiao");//大小
                 if (daxiao != null && (createtype == "daxiao" || createtype == "all"))//判断大小不能为空
                 {
+                    for (int i = 0; i < daxiao.maincanvas.Children.Count; i++)
+                    {
+                        rectlab del = daxiao.maincanvas.Children[i] as rectlab;
+                        if (del != null)
+                        {
+                            daxiao.maincanvas.Children.Remove(del);
+                            i--;
+                        }
+                    }
                     for (int i = 0; i < PublicClass.Code_json.Count; i++)//条件
                     {
                         string[] opencodes = PublicClass.Code_json[i]["opencode"].ToString().Split(',');
@@ -142,6 +161,15 @@ namespace shishicaiclient
                 Longhu danshuang = MainWindow.FindChild<Longhu>(Application.Current.MainWindow, "danshuang");//单双
                 if (danshuang != null && (createtype == "danshuang" || createtype == "all"))
                 {
+                    for (int i = 0; i < danshuang.maincanvas.Children.Count; i++)
+                    {
+                        rectlab del = danshuang.maincanvas.Children[i] as rectlab;
+                        if (del != null)
+                        {
+                            danshuang.maincanvas.Children.Remove(del);
+                            i--;
+                        }
+                    }
                     for (int i = 0; i < PublicClass.Code_json.Count; i++)
                     {
                         string[] opencodes = PublicClass.Code_json[i]["opencode"].ToString().Split(',');
@@ -166,6 +194,15 @@ namespace shishicaiclient
                 Daxiaoxulie daxiaoxulie = MainWindow.FindChild<Daxiaoxulie>(Application.Current.MainWindow, "daxiaoxulie");//大小序列
                 if (daxiaoxulie != null && (createtype == "daxiaoxulie" || createtype == "all"))
                 {
+                    for (int i = 0; i < daxiaoxulie.maincanvas.Children.Count; i++)
+                    {
+                        elllab del = daxiaoxulie.maincanvas.Children[i] as elllab;
+                        if (del != null)
+                        {
+                            daxiaoxulie.maincanvas.Children.Remove(del);
+                            i--;
+                        }
+                    }
                     Point next_d = new Point(0, 0);//next_d:X轴
                     Point next_s = new Point(0, 0);//next_s:Y轴
                     Point cur = new Point(0, 0);
@@ -282,6 +319,15 @@ namespace shishicaiclient
                 Daxiaoxulie danshuangxulie = MainWindow.FindChild<Daxiaoxulie>(Application.Current.MainWindow, "danshuangxulie");
                 if (danshuangxulie != null && (createtype == "danshuangxulie" || createtype == "all"))
                 {
+                    for (int i = 0; i < danshuangxulie.maincanvas.Children.Count; i++)
+                    {
+                        elllab del = danshuangxulie.maincanvas.Children[i] as elllab;
+                        if (del != null)
+                        {
+                            danshuangxulie.maincanvas.Children.Remove(del);
+                            i--;
+                        }
+                    }
                     Point next_d = new Point(0, 0);
                     Point next_s = new Point(0, 0);
                     Point cur = new Point(0, 0);
@@ -449,7 +495,7 @@ namespace shishicaiclient
            
 
             //连接到指定服务器的指定端口
-            PublicClass.socket.Connect("192.168.1.104", 4530);
+            PublicClass.socket.Connect("192.168.1.105", 4530);
             if (!PublicClass.socket.Connected)
             {
                 MessageBox.Show("connect to the server");
@@ -580,28 +626,29 @@ namespace shishicaiclient
             if (lastexpect.Count() > 0)
             {
                 last = lastexpect.First()["opencode"].ToString();
+
+
+                StackPanel stack = new StackPanel(); //实例化
+                stack.Orientation = Orientation.Horizontal;  //stackpanel横向调节
+                Label lab = new Label();
+                lab.Content = expect; //显示期数号
+                lab.Foreground = Brushes.Gray;  //  lab字体颜色
+                stack.Children.Add(lab);  //把lab放在stack里
+                string[] la = last.Split(',');
+                for (int aa = 0; aa < la.Count(); aa++)
+                {
+                    Label number = new Label();
+                    stack.Children.Add(number);
+                    Kaijiangell bigell = new Kaijiangell();
+                    string num = la[aa];
+                    bigell.create_kaijiang(num, 0);
+                    bigell.Width = 40;
+                    bigell.Height = 40;
+                    stack.Children.Add(bigell);
+                }
+
+                expectlast.Children.Add(stack);
             }
-           
-            StackPanel stack = new StackPanel(); //实例化
-            stack.Orientation = Orientation.Horizontal;  //stackpanel横向调节
-            Label lab = new Label();
-            lab.Content = expect; //显示期数号
-            lab.Foreground = Brushes.Gray;  //  lab字体颜色
-            stack.Children.Add(lab);  //把lab放在stack里
-            string[] la = last.Split(',');
-            for (int aa = 0; aa < la.Count(); aa++)
-            {
-                Label number = new Label();
-                stack.Children.Add(number);
-                Kaijiangell bigell = new Kaijiangell();
-                string num = la[aa];
-                bigell.create_kaijiang(num,0);
-                bigell.Width = 40;
-                bigell.Height = 40;
-                stack.Children.Add(bigell);
-            } 
-            
-            expectlast.Children.Add(stack);
 
         }
 
@@ -627,7 +674,7 @@ namespace shishicaiclient
                 for (int a = 0; a < mess_count; a++)
                 {
                     histroyopen = messages[a];
-                    JToken jsonstr = JToken.Parse(histroyopen);
+                    jsonstr = JToken.Parse(histroyopen);
                     string oper = jsonstr["opercode"].ToString();
 
                     //服务端返回密码修改信息
@@ -639,6 +686,10 @@ namespace shishicaiclient
                         expect = jsonstr["expect"].ToString();
                         countdown.Content = timecount;
                         nextexpect.Content = jsonstr["nextissuse"].ToString();
+                        if (nextexpect.Content.ToString() != hidden_nextexpect.Text)
+                        {
+                            hidden_nextexpect.Text = nextexpect.Content.ToString();
+                        }
                         lastopencode();
             }));
                     }
@@ -676,18 +727,7 @@ namespace shishicaiclient
                    //服务端返回当天历史开奖记录
                     else if (oper == "10")   //操作数为10是历史记录
                     {
-                        JArray jsonstrs = JArray.Parse(jsonstr["data"].ToString());
-
-                        for (int i = 0; i < jsonstrs.Count; i++)
-                        {
-                            PublicClass.Code_json.Add(jsonstrs[i]);
-                            string ccc = jsonstrs[i]["opencode"].ToString();
-                            show_leftopenjiang(jsonstrs[i]["opencode"].ToString(), jsonstrs[i]["expect"].ToString());
-
-                        }
-
-                        create_lab("all");
-
+                        update_code_json();
                     }
 
 
@@ -881,7 +921,7 @@ namespace shishicaiclient
                 opercode = "18",
                 name = PublicClass.username,
                 clientIP = PublicClass.localIP,
-            };
+            };   
             var json = JsonConvert.SerializeObject(o);
             str = json.ToString();
             PublicClass.loginjson = str;
@@ -1268,6 +1308,27 @@ namespace shishicaiclient
                 create_lab("danshuangxulie");
             }
             catch { };
+        }
+
+        private void hidden_nextexpect_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (left_tabcontrol.SelectedIndex == 0)
+            {
+                update_code_json();
+                create_lab("all");
+            }
+        }
+
+        private void update_code_json()
+        {
+            JArray jsonstrs = JArray.Parse(jsonstr["data"].ToString());
+            PublicClass.Code_json.Clear();
+            for (int i = 0; i < jsonstrs.Count; i++)
+            {
+                PublicClass.Code_json.Add(jsonstrs[i]);
+                string ccc = jsonstrs[i]["opencode"].ToString();
+                show_leftopenjiang(jsonstrs[i]["opencode"].ToString(), jsonstrs[i]["expect"].ToString());
+            }
         }
 
       

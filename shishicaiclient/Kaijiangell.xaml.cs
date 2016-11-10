@@ -42,7 +42,8 @@ namespace shishicaiclient
             {
                 kaiell.Fill = Brushes.OrangeRed;
                 kailab.Foreground = Brushes.White;
-                kailab.Margin = new Thickness(2, -2, 0, 0);
+                kailab.FontSize = 26;
+                kailab.Margin = new Thickness(5, -5, 0, 0);
             }
 
             else
@@ -50,7 +51,8 @@ namespace shishicaiclient
 
                 kaiell.Fill = Brushes.OrangeRed;
                 kailab.Foreground = Brushes.White;
-                kailab.Margin = new Thickness(0, -2, 0, 0);
+                kailab.FontSize = 26;
+                kailab.Margin = new Thickness(5, -5, 0, 0);
 
             }
 

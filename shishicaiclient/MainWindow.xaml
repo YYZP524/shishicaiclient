@@ -36,8 +36,8 @@
                     <avalonDock:LayoutAnchorablePaneGroup DockWidth="300" Orientation="Vertical">
                         <avalonDock:LayoutAnchorablePane>
                             <avalonDock:LayoutAnchorable Title="开奖号码" CanClose="False" CanHide="False" x:Name="leftpanel" CanFloat="False" AutoHideMinWidth="300">
-                                <TabControl>
-                                    <TabItem Header="今天开奖">
+                                <TabControl x:Name="left_tabcontrol">
+                                    <TabItem Header="今天开奖" x:Name="left_tab">
                                         <ScrollViewer x:Name="todayopen_scroll" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled" CanContentScroll="True">
                                             <ListBox x:Name="left_opencode"/>
                                         </ScrollViewer>
@@ -92,6 +92,7 @@
                                             <StackPanel Width="250" Height="50" HorizontalAlignment="Center" Margin="0,10,0,0" Orientation="Horizontal">
                                                 <Label Content="距"></Label>                                              
                                                 <Label x:Name="nextexpect" Width="90"></Label>
+                                                <TextBox x:Name="hidden_nextexpect" TextChanged="hidden_nextexpect_TextChanged" />
                                                 <Label Content="期还剩"></Label>
                                                 <Label x:Name="countdown" Width="50"></Label>
                                             </StackPanel>

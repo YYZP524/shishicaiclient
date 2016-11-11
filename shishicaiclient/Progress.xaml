@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              d:DesignHeight="30" d:DesignWidth="390">
+    <!--进度条分析-->
     <Grid>
         <Canvas x:Name="maincanvas">
             <!--<Rectangle Width="300" Height="20" Stroke="OrangeRed" StrokeThickness="1" Canvas.Top="5" Canvas.Left="45" SnapsToDevicePixels="True"></Rectangle>

@@ -17,12 +17,14 @@
             <Label  Height="29" Name="amount" Foreground="Red" FontSize="13" HorizontalContentAlignment="Center"  Width="100" ></Label>
             </StackPanel>
             <MenuItem Header="用户">
-                    
              <Label Content="修改密码" Height="29" Name="changepwd" FontSize="13" HorizontalContentAlignment="Center"  Width="63" MouseDown="changepwd_MouseDown" Visibility="Collapsed"></Label>
             <Label Content="注册" Height="29" FontSize="13" HorizontalContentAlignment="Center"  Name="sign"  Width="42" MouseDown="sign_MouseDown"></Label>
             <Label Content="登录" Height="29"  FontSize="13" HorizontalContentAlignment="Center"  Name="login" Width="42" MouseDown="login_MouseDown"></Label>
             <Label Content="注销登录" Height="29" FontSize="13" HorizontalContentAlignment="Right" VerticalAlignment="Center" Name="exit" Width="61" MouseDown="exit_MouseDown"></Label>
            </MenuItem>
+            <MenuItem Header="退出" FontSize="13" Name="close" HorizontalAlignment="Right" Click="close_Click">
+
+            </MenuItem>
                 
           
         </Menu>

@@ -441,9 +441,24 @@ namespace shishicaiclient
             }));
 
         }
+        public bool aaa()
+        {
+            return true; }
+    public bool ccc()
+{
+    return true;
+}
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+
+
+
+
+           
+
+
+
 
 
             //获取内网IP
@@ -500,7 +515,7 @@ namespace shishicaiclient
            
 
             //连接到指定服务器的指定端口
-            PublicClass.socket.Connect("192.168.1.108", 4530);
+           // PublicClass.socket.Connect("192.168.1.108", 4530);
             if (!PublicClass.socket.Connected)
             {
                 MessageBox.Show("connect to the server");
@@ -1005,6 +1020,8 @@ namespace shishicaiclient
             var outputBuffer = Encoding.Unicode.GetBytes(message);
             PublicClass.socket.BeginSend(outputBuffer, 0, outputBuffer.Length, SocketFlags.None, null, null);
         }
+
+
 
 
         //滚动条效果：龙虎
@@ -1614,7 +1631,12 @@ namespace shishicaiclient
 
         }
 
-      
+        private void close_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+       
 
       
        

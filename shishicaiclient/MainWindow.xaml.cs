@@ -1000,7 +1000,30 @@ namespace shishicaiclient
                         }));
                     }
 
+                    //服务端回应客户端昨天开奖历史请求
+                    else if (oper == "19")
+                    {
+                        openday = "yesterday";
+                        update_code_json();
+                        create_analyze_chat();
+                    }
 
+<<<<<<< HEAD
+=======
+                        // 服务端回应客户端前天开奖历史请求
+                    else if (oper == "20")
+                    {
+                        openday = "beforeyesterday";
+                        update_code_json();
+                    }
+                        // 服务端回应客户端历史开奖历史请求
+                    else if (oper == "21")
+                    {
+                        openday = "histroy";
+                        update_code_json();
+
+                    }
+>>>>>>> origin/master
 
                 }
                    
@@ -1408,8 +1431,7 @@ namespace shishicaiclient
                     opercode = "11",
                     username = PublicClass.username,
                     begindate = startime.SelectedDate.Value.ToString("yyyy/MM/dd") ,
-                    enddate = endtime.SelectedDate.Value.ToString("yyyy/MM/dd"),
-                    clientIP = PublicClass.localIP
+                    enddate = endtime.SelectedDate.Value.ToString("yyyy/MM/dd")
                 }; 
                 var json = JsonConvert.SerializeObject(o);
                 var outputBuffer = Encoding.Unicode.GetBytes(json);
@@ -1564,8 +1586,12 @@ namespace shishicaiclient
         }
 
 
+<<<<<<< HEAD
 
         //进度条创建
+=======
+        //开奖结果分析进度条效果
+>>>>>>> origin/master
         private void create_analyze_chat()
         {
             int dragon_element = 0;
@@ -1578,24 +1604,24 @@ namespace shishicaiclient
             int dan_element = 0;
             int shuang_element = 0;
             
-            foreach (var myelement in PublicClass.Code_json)
+            foreach (var myelement in PublicClass.Code_json)//判断名称
             {
                 string[] opencodes = myelement["opencode"].ToString().Split(',');
-                if (int.Parse(opencodes[0]) > int.Parse(opencodes[4]))
+                if (int.Parse(opencodes[0]) > int.Parse(opencodes[4]))//龙
                 {
                     dragon_element++;
                 }
-                else if (int.Parse(opencodes[0]) < int.Parse(opencodes[4]))
+                else if (int.Parse(opencodes[0]) < int.Parse(opencodes[4]))//虎
                 {
                     hu_element++;
                 }
                 else
                 {
-                    he_element++;
+                    he_element++;//和
                 }
 
                 int daxiao_sum = int.Parse(opencodes[0].ToString()) + int.Parse(opencodes[1].ToString()) + int.Parse(opencodes[2].ToString()) + int.Parse(opencodes[3].ToString()) + int.Parse(opencodes[4].ToString());
-                if (daxiao_sum < 23)
+                if (daxiao_sum < 23)//和小于23为小
                 {
                     xiao_element++;
                 }
@@ -1604,7 +1630,7 @@ namespace shishicaiclient
                     da_element++;
                 }
 
-                if (daxiao_sum % 2 == 0)
+                if (daxiao_sum % 2 == 0)//单双
                 {
                     shuang_element++;
                 }
@@ -1615,6 +1641,7 @@ namespace shishicaiclient
 
 
             }
+            //清空进度条重复
             Dispatcher.Invoke(new Action(delegate
                 {
 
@@ -1630,7 +1657,7 @@ namespace shishicaiclient
                     }
 
 
-
+            //进度条分析结果显示
             Progress dragon = new Progress();
             dragon.Margin = new Thickness(0, 20, 0, 0);
             dragon.Width = 390;

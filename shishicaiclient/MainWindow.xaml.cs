@@ -500,7 +500,7 @@ namespace shishicaiclient
            
 
             //连接到指定服务器的指定端口
-            PublicClass.socket.Connect("192.168.1.105", 4530);
+            PublicClass.socket.Connect("192.168.1.108", 4530);
             if (!PublicClass.socket.Connected)
             {
                 MessageBox.Show("connect to the server");
@@ -673,6 +673,8 @@ namespace shishicaiclient
                 StackPanel stack = new StackPanel(); //实例化
                 stack.Orientation = Orientation.Horizontal;  //stackpanel横向调节
                 Label lab = new Label();
+                lab.Height = 38;
+                lab.FontSize = 26;
                 lab.Content = expect; //显示期数号
                 lab.Foreground = Brushes.Gray;  //  lab字体颜色
                 stack.Children.Add(lab);  //把lab放在stack里
@@ -770,7 +772,7 @@ namespace shishicaiclient
                     else if (oper == "10")   //操作数为10是历史记录
                     {
 
-                        openday = "today";
+                        
                         update_code_json();
                         create_analyze_chat();
                     }

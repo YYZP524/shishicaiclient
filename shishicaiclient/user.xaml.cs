@@ -24,6 +24,12 @@ namespace shishicaiclient
             InitializeComponent();
         }
 
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            UserName.Text = PublicClass.username;
+            amount.Text = PublicClass.balance;
+        }
+
         
     }
 }

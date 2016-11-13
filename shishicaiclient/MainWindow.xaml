@@ -16,7 +16,10 @@
              <Label  Height="29" Name="user" Foreground="Blue" FontSize="13" HorizontalContentAlignment="Center"  Width="100" MouseDown="user_MouseDown"></Label>
             <Label  Height="29" Name="amount" Foreground="Red" FontSize="13" HorizontalContentAlignment="Center"  Width="100" ></Label>
             </StackPanel>
-            <MenuItem Header="用户">
+
+
+            <MenuItem Header="用户">       
+
              <Label Content="修改密码" Height="29" Name="changepwd" FontSize="13" HorizontalContentAlignment="Center"  Width="63" MouseDown="changepwd_MouseDown" Visibility="Collapsed"></Label>
             <Label Content="注册" Height="29" FontSize="13" HorizontalContentAlignment="Center"  Name="sign"  Width="42" MouseDown="sign_MouseDown"></Label>
             <Label Content="登录" Height="29"  FontSize="13" HorizontalContentAlignment="Center"  Name="login" Width="42" MouseDown="login_MouseDown"></Label>
@@ -233,7 +236,7 @@
                                     
                                     <Grid>
                                         <StackPanel>
-                                            <TabControl Height="500">
+                                            <TabControl Height="500" x:Name="right_tabcontrol" SelectionChanged="right_tabcontrol_SelectionChanged">
 
                                                 <TabItem Header="今日投注记录">
                                                     <Grid>

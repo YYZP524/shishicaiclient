@@ -4,10 +4,10 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="290" d:DesignWidth="450">
+             d:DesignHeight="290" d:DesignWidth="450" Loaded="UserControl_Loaded">
     <Grid>
         <StackPanel Orientation="Horizontal" Height="30" VerticalAlignment="Top" HorizontalAlignment="Center" Width="200" Margin="0,30,0,0">
-            <Label Content="用户名 : " Width="60"></Label>
+            <Label Content="用户名 : " Width="60" ></Label>
             <TextBlock Name="UserName" Width="140" Height="26"></TextBlock>
         </StackPanel>
 

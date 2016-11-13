@@ -236,13 +236,14 @@
                                                     <Grid>
                                                         <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Height="25" Background="LightGray">
                                                             <Label Content="开奖期数" Width="80"></Label>
-                                                            <Label Content="开奖类型" Width="80"></Label>
-                                                            <Label Content="投注类型" Width="80"></Label>
+                                                            <Label Content="开奖类型" Width="60"></Label>
+                                                            <Label Content="投注类型" Width="60"></Label>
                                                             <Label Content="投注时间" Width="80"></Label>
-                                                            <Label Content="投注金额" Width="80"></Label>
-                                                            <Label Content="赔率" Width="80"></Label>
-                                                            <Label Content="输赢" Width="80"></Label>
+                                                            <Label Content="投注金额" Width="50"></Label>
+                                                            <Label Content="赔率" Width="50"></Label>
+                                                            <Label Content="输赢" Width="50"></Label>
                                                         </StackPanel>
+                                                        
                                                         <ListBox Margin="0,25,0,0" x:Name="right_today"></ListBox>
                                                     </Grid>
                                                 </TabItem>

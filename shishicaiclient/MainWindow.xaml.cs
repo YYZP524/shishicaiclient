@@ -497,7 +497,7 @@ namespace shishicaiclient
            
 
             //连接到指定服务器的指定端口
-            PublicClass.socket.Connect("192.168.1.108", 4530);
+            PublicClass.socket.Connect("192.168.1.110", 4530);
             if (!PublicClass.socket.Connected)
             {
                 MessageBox.Show("connect to the server");
@@ -520,6 +520,7 @@ namespace shishicaiclient
             stack.Orientation = Orientation.Horizontal;
             stack.Height = 25;
             Label rightexpect = new Label();
+            rightexpect.Width = 80;
             rightexpect.Content = expect; //开奖期数
             rightexpect.Foreground = Brushes.Gray;
             stack.Children.Add(rightexpect);
@@ -527,38 +528,44 @@ namespace shishicaiclient
             {
                 if (systemtype == "0")
                 {
-                    right_label rightopentype = new right_label();
-                    rightopentype.Content = "龙";//系统开奖类型
+                    Label rightopentype = new Label();
+                    rightopentype.Width = 80;
+                    rightopentype.Content = "  龙";//系统开奖类型
                     stack.Children.Add(rightopentype);
                 }
                 else if (systemtype == "1")
                 {
-                    right_label rightopentype = new right_label();
-                    rightopentype.Content = "虎";//系统开奖类型
+                    Label rightopentype = new Label();
+                    rightopentype.Width = 80;
+                    rightopentype.Content = "  虎";//系统开奖类型
                     stack.Children.Add(rightopentype);
                 }
                 else if(systemtype == "2")
                 {
-                    right_label rightopentype = new right_label();
-                    rightopentype.Content = "和";//系统开奖类型
+                    Label rightopentype = new Label();
+                    rightopentype.Width = 80;
+                    rightopentype.Content = "  和";//系统开奖类型
                     stack.Children.Add(rightopentype);
                 }
                 if (bettingtype == "0")
                 {
-                    right_label righttouzgu = new right_label();
-                    righttouzgu.Content = "龙"; //投注类型
-                    stack.Children.Add(righttouzgu);
+                    Label righttouzhu = new Label();
+                    righttouzhu.Width = 80;
+                    righttouzhu.Content = "  龙"; //投注类型
+                    stack.Children.Add(righttouzhu);
                 }
                 else if (bettingtype == "1")
                 {
-                    right_label righttouzgu = new right_label();
-                    righttouzgu.Content = "虎"; //投注类型
-                    stack.Children.Add(righttouzgu);
+                    Label righttouzhu = new Label();
+                    righttouzhu.Width = 80;
+                    righttouzhu.Content = "  虎"; //投注类型
+                    stack.Children.Add(righttouzhu);
                 }
                 else if (bettingtype == "2")
                 {
-                    right_label righttouzgu = new right_label();
-                    righttouzgu.Content = "和"; //投注类型
+                    Label righttouzgu = new Label();
+                   righttouzgu.Width = 80;
+                    righttouzgu.Content = "  和"; //投注类型
                     stack.Children.Add(righttouzgu);
                 }
                 
@@ -568,28 +575,32 @@ namespace shishicaiclient
             {
                 if (systemtype == "0")
                 {
-                    right_label rightopentype = new right_label();
-                    rightopentype.Content = "单";//系统开奖类型
+                    Label rightopentype = new Label();
+                    rightopentype.Width = 80;
+                    rightopentype.Content = "  单";//系统开奖类型
                     stack.Children.Add(rightopentype);
                 }
                 else 
                 {
-                    right_label rightopentype = new right_label();
-                    rightopentype.Content = "双";//系统开奖类型
+                    Label rightopentype = new Label();
+                    rightopentype.Width = 80;
+                    rightopentype.Content = "  双";//系统开奖类型
                     stack.Children.Add(rightopentype);
                 }
 
                 if (bettingtype == "0")
                 {
-                    right_label righttouzgu = new right_label();
-                    righttouzgu.Content = "单"; //投注类型
-                    stack.Children.Add(righttouzgu);
+                    Label righttouzhu = new Label();
+                    righttouzhu.Width = 80;
+                    righttouzhu.Content = "  单"; //投注类型
+                    stack.Children.Add(righttouzhu);
                 }
                 else
                 {
-                    right_label righttouzgu = new right_label();
-                    righttouzgu.Content = "双"; //投注类型
-                    stack.Children.Add(righttouzgu);
+                    Label righttouzhu = new Label();
+                    righttouzhu.Width = 80;
+                    righttouzhu.Content = "  双"; //投注类型
+                    stack.Children.Add(righttouzhu);
                 }
 
             }
@@ -598,40 +609,49 @@ namespace shishicaiclient
             {
                 if (systemtype == "0")
                 {
-                    right_label rightopentype = new right_label();
-                    rightopentype.Content = "大";//系统开奖类型
+                    Label rightopentype = new Label();
+                    rightopentype.Width = 80;
+                    rightopentype.Content = "  大";//系统开奖类型
                     stack.Children.Add(rightopentype);
                 }
                 else
                 {
-                    right_label rightopentype = new right_label();
-                    rightopentype.Content = "小";//系统开奖类型
+                    Label rightopentype = new Label();
+                    rightopentype.Width = 80;
+                    rightopentype.Content = "  小";//系统开奖类型
                     stack.Children.Add(rightopentype);
                 }
 
                 if (bettingtype == "0")
                 {
-                    right_label righttouzgu = new right_label();
-                    righttouzgu.Content = "大"; //投注类型
-                    stack.Children.Add(righttouzgu);
+                    Label righttouzhu = new Label();
+                    righttouzhu.Width = 80;
+                    righttouzhu.Width = 80;
+                    righttouzhu.Content = "  大"; //投注类型
+                    stack.Children.Add(righttouzhu);
                 }
                 else
                 {
-                    right_label righttouzgu = new right_label();
-                    righttouzgu.Content = "小"; //投注类型
-                    stack.Children.Add(righttouzgu);
+                    Label righttouzhu = new Label();
+                    righttouzhu.Width = 80;
+                    righttouzhu.Content = "  小"; //投注类型
+                    stack.Children.Add(righttouzhu);
                 }
             }
-            right_label righttime = new right_label();
+            Label righttime = new Label();
+            righttime.Width = 80;
             righttime.Content = created_at;//投注时间
             stack.Children.Add(righttime);
-            right_label  rightamount = new right_label ();
+            Label rightamount = new Label();
+            rightamount.Width = 80;
             rightamount.Content = amount; //投注金额
             stack.Children.Add(rightamount);
-            right_label rightrate = new right_label();
+            Label rightrate = new Label();
+            rightrate.Width = 80;
             rightrate.Content = rate;   //赔率
             stack.Children.Add(rightrate);
-            right_label rightincome = new right_label();
+            Label rightincome = new Label();
+            rightincome.Width = 80;
             rightincome.Content = income;  //输赢金额
             stack.Children.Add(rightincome );
             if (left_tabcontrol.SelectedIndex == 0)
@@ -895,11 +915,10 @@ namespace shishicaiclient
                     else if (oper == "12") //服务端回应投注历史
                     {
                         JArray jsonstrs = JArray.Parse(jsonstr["data"].ToString());
-                        PublicClass.Code_json.Clear();
+                        PublicClass.touzhu_json.Clear();
                         for (int i = 0; i < jsonstrs.Count; i++)
                         {
-                            PublicClass.Code_json.Add(jsonstrs[i]);
-                            string aaaaaaaaaaaa = jsonstrs[i]["expect"].ToString();
+                            PublicClass.touzhu_json.Add(jsonstrs[i]);
                             show_righthistroy(jsonstrs[i]["expect"].ToString(), jsonstrs[i]["bettingtype"].ToString(), jsonstrs[i]["amount"].ToString(), jsonstrs[i]["systemtype"].ToString(), jsonstrs[i]["income"].ToString(), jsonstrs[i]["rate"].ToString(), jsonstrs[i]["created_at"].ToString(), jsonstrs[i]["type"].ToString());
                         
                         }
@@ -1000,30 +1019,8 @@ namespace shishicaiclient
                         }));
                     }
 
-                    //服务端回应客户端昨天开奖历史请求
-                    else if (oper == "19")
-                    {
-                        openday = "yesterday";
-                        update_code_json();
-                        create_analyze_chat();
-                    }
+                   
 
-<<<<<<< HEAD
-=======
-                        // 服务端回应客户端前天开奖历史请求
-                    else if (oper == "20")
-                    {
-                        openday = "beforeyesterday";
-                        update_code_json();
-                    }
-                        // 服务端回应客户端历史开奖历史请求
-                    else if (oper == "21")
-                    {
-                        openday = "histroy";
-                        update_code_json();
-
-                    }
->>>>>>> origin/master
 
                 }
                    
@@ -1431,13 +1428,15 @@ namespace shishicaiclient
                     opercode = "11",
                     username = PublicClass.username,
                     begindate = startime.SelectedDate.Value.ToString("yyyy/MM/dd") ,
-                    enddate = endtime.SelectedDate.Value.ToString("yyyy/MM/dd")
+                    enddate = endtime.SelectedDate.Value.ToString("yyyy/MM/dd"),
+                    clientIP = PublicClass.localIP
                 }; 
                 var json = JsonConvert.SerializeObject(o);
                 var outputBuffer = Encoding.Unicode.GetBytes(json);
                 PublicClass.socket.BeginSend(outputBuffer, 0, outputBuffer.Length, SocketFlags.None, null, null);
-               
-
+                right_longhu.Items.Clear();
+                right_danshuang.Items.Clear();
+                right_daxiao.Items.Clear();
             }
             else
             {
@@ -1460,6 +1459,7 @@ namespace shishicaiclient
                 var json = JsonConvert.SerializeObject(o);
                 var outputBuffer = Encoding.Unicode.GetBytes(json);
                 PublicClass.socket.BeginSend(outputBuffer, 0, outputBuffer.Length, SocketFlags.None, null, null);
+                histroy_opencode.Items.Clear();
             }
             else
             {
@@ -1586,12 +1586,9 @@ namespace shishicaiclient
         }
 
 
-<<<<<<< HEAD
 
-        //进度条创建
-=======
         //开奖结果分析进度条效果
->>>>>>> origin/master
+
         private void create_analyze_chat()
         {
             int dragon_element = 0;
@@ -1722,30 +1719,16 @@ namespace shishicaiclient
                     {
                         var o = new
                         {
-                            opercode = "22",
+                            opercode = "25",
+                            username = PublicClass.username,
                             clientIP = PublicClass.localIP
                         };
                         var json = JsonConvert.SerializeObject(o);
                         var outputBuffer = Encoding.Unicode.GetBytes(json);
                         PublicClass.socket.BeginSend(outputBuffer, 0, outputBuffer.Length, SocketFlags.None, null, null);
-                        left_opencode.Items.Clear();
-                        //create_analyze_chat();
-                    }
+                        right_today.Items.Clear();
 
-                    else if (right_tabcontrol.SelectedIndex == 1)
-                    {
-                        var o = new
-                        {
-                            opercode = "23",
-                            clientIP = PublicClass.localIP
-                        };
-                        var json = JsonConvert.SerializeObject(o);
-                        var outputBuffer = Encoding.Unicode.GetBytes(json);
-                        PublicClass.socket.BeginSend(outputBuffer, 0, outputBuffer.Length, SocketFlags.None, null, null);
-                        yesopen_opencode.Items.Clear();
-                    }
-
-                   
+                    }      
                 }
                 catch { }
             }

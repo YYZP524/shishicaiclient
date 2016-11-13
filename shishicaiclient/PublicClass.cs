@@ -14,6 +14,7 @@ namespace shishicaiclient
         public static string zhucejson;  //注册信息json
         public static string loginjson;  //登录信息json
         public static List<JToken> Code_json = new List<JToken>();
+        public static List<JToken> touzhu_json = new List<JToken>();
        
         public static string localIP = "?";    //内网IP
         public static string username = "/";    //登录成功的用户名

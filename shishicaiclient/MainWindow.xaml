@@ -12,9 +12,9 @@
 
         <Menu Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
             
-            <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" Width="200">
+            <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" Width="213">
              <Label  Height="29" Name="user" Foreground="Blue" FontSize="13" HorizontalContentAlignment="Center"  Width="100" MouseDown="user_MouseDown"></Label>
-            <Label  Height="29" Name="amount" Foreground="Red" FontSize="13" HorizontalContentAlignment="Center"  Width="100" ></Label>
+            <Label  Height="29" Name="amount" Foreground="Red" FontSize="13" HorizontalContentAlignment="Center"  Width="113" ></Label>
             </StackPanel>
 
 
@@ -90,7 +90,7 @@
                             <avalonDock:LayoutDocument x:Name="maindocument" >
                                 <Grid>
                                     <Grid.RowDefinitions>
-                                        <RowDefinition Height="200" />
+                                        <RowDefinition Height="255" />
                                         <RowDefinition Height="235" />
                                         <RowDefinition  Height="350"/>
                                     </Grid.RowDefinitions>
@@ -98,15 +98,16 @@
                                     <StackPanel Grid.Row="0">
                                         <StackPanel x:Name="expectlast" Width="500" Height="40" HorizontalAlignment="Center" Margin="0,80,0,0"></StackPanel>
                                         <Grid>
-                                            <StackPanel Width="250" Height="50" HorizontalAlignment="Center" Margin="0,10,0,0" Orientation="Horizontal">
-                                                <Label Content="距"></Label>                                              
+                                            <StackPanel Width="256" Height="50" HorizontalAlignment="Center" Margin="0,10,0,0" Orientation="Horizontal">
+                                                <Label Content="距" FontSize="16"></Label>                                              
 
-                                                <Label x:Name="nextexpect" Width="90"></Label>
-                                                <TextBox x:Name="hidden_nextexpect" TextChanged="hidden_nextexpect_TextChanged" Visibility="Hidden" />
+                                                <Label x:Name="nextexpect" FontSize="16"></Label>
+                                                
 
  
-                                                <Label Content="期还剩"></Label>
-                                                <Label x:Name="countdown" Width="50"></Label>
+                                                <Label Content="期还剩" FontSize="16"></Label>
+                                                <Label x:Name="countdown" FontSize="16"></Label>
+                                                <TextBox x:Name="hidden_nextexpect" TextChanged="hidden_nextexpect_TextChanged" Visibility="Hidden" />
                                             </StackPanel>
                                         </Grid>
                                        

@@ -1197,7 +1197,7 @@ namespace shishicaiclient
             if (int.Parse((resultlong.Content).ToString()) > 0)
             {
                 resultlong.Content = (Convert.ToDouble(resultlong.Content) - Convert.ToDouble(100)).ToString();
-                
+               
             }
             else
             {
@@ -1734,15 +1734,14 @@ namespace shishicaiclient
             }
         }
 
-      
+        private void cal_user_balance(float before_touzhu, float tijiao_touzhu)
+        {
 
-      
-       
+        }
 
-       
-       
-
-
-
+        private void close_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close(); 
+        }
     }
 }

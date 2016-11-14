@@ -497,7 +497,7 @@ namespace shishicaiclient
            
 
             //连接到指定服务器的指定端口
-            PublicClass.socket.Connect("192.168.1.110", 4530);
+            PublicClass.socket.Connect("192.168.1.108", 4530);
             if (!PublicClass.socket.Connected)
             {
                 MessageBox.Show("connect to the server");
@@ -520,7 +520,7 @@ namespace shishicaiclient
             stack.Orientation = Orientation.Horizontal;
             stack.Height = 25;
             Label rightexpect = new Label();
-            rightexpect.Width = 80;
+            rightexpect.Width = 100;
             rightexpect.Content = expect; //开奖期数
             rightexpect.Foreground = Brushes.Gray;
             stack.Children.Add(rightexpect);
@@ -626,7 +626,6 @@ namespace shishicaiclient
                 {
                     Label righttouzhu = new Label();
                     righttouzhu.Width = 80;
-                    righttouzhu.Width = 80;
                     righttouzhu.Content = "  大"; //投注类型
                     stack.Children.Add(righttouzhu);
                 }
@@ -654,11 +653,11 @@ namespace shishicaiclient
             rightincome.Width = 80;
             rightincome.Content = income;  //输赢金额
             stack.Children.Add(rightincome );
-            if (left_tabcontrol.SelectedIndex == 0)
+            if (right_tabcontrol.SelectedIndex == 0)
             {
                 right_today.Items.Add(stack); //显示在页面的left_opencode的listbox里
             }
-            else if (left_tabcontrol.SelectedIndex == 1)
+            else if (right_tabcontrol.SelectedIndex == 1)
             {
                 if (type == "longhu")
                 {
@@ -778,18 +777,24 @@ namespace shishicaiclient
              }
              if(left_tabcontrol.SelectedIndex==0 )
              {
+                
             left_opencode.Items.Add(stack);  //显示在页面的left_opencode的listbox里
              }
              else if (left_tabcontrol.SelectedIndex == 1)
              {
+                
                  yesopen_opencode.Items.Add(stack);
              }
              else if (left_tabcontrol.SelectedIndex == 2)
              {
+                
                  toyesopen_opencode.Items.Add(stack);
              }
              else if (left_tabcontrol.SelectedIndex == 3)
              {
+                 //yesopen_opencode.Items.Clear();
+                 //toyesopen_opencode.Items.Clear();
+                 //histroy_opencode.Items.Clear();
                  histroy_opencode.Items.Add(stack);
              }
               }));
@@ -805,6 +810,7 @@ namespace shishicaiclient
        
             // select * from pulic.json where expect = '212012' 
             var lastexpect = from c in PublicClass.Code_json where c["expect"].ToString() == expect select c;   //查询Code_json的最后一条数据
+
             if (lastexpect.Count() > 0)
             {
                 last = lastexpect.First()["opencode"].ToString();
@@ -861,7 +867,7 @@ namespace shishicaiclient
                     jsonstr = JToken.Parse(histroyopen);
                     string oper = jsonstr["opercode"].ToString();
 
-                    //服务端返回密码修改信息
+                    //服务端返回倒计时
                     if (oper == "1")
                     {
                                                 Dispatcher.Invoke(new Action(delegate
@@ -870,6 +876,7 @@ namespace shishicaiclient
                             expect = jsonstr["expect"].ToString();
                             countdown.Content = timecount;
                             nextexpect.Content = jsonstr["nextissuse"].ToString();
+                            hidden_next.Text = nextexpect.Content.ToString();
                             if (nextexpect.Content.ToString() != hidden_nextexpect.Text)
                             {
                                 hidden_nextexpect.Text = nextexpect.Content.ToString();
@@ -905,8 +912,7 @@ namespace shishicaiclient
                    //服务端返回当天历史开奖记录
                     else if (oper == "10")   //操作数为10是历史记录
                     {
-
-
+                      
                         update_code_json();
                         create_analyze_chat();
                     }
@@ -1513,9 +1519,10 @@ namespace shishicaiclient
         //刷新纪录
         private void hidden_nextexpect_TextChanged(object sender, TextChangedEventArgs e)
         {
+           
+            
             if (left_tabcontrol.SelectedIndex == 0)
             {
-               
                 create_lab("all");
             }
             
@@ -1525,32 +1532,38 @@ namespace shishicaiclient
         {
             JArray jsonstrs = JArray.Parse(jsonstr["data"].ToString());
             PublicClass.Code_json.Clear();
+          
             for (int i = 0; i < jsonstrs.Count; i++)
             {
                 PublicClass.Code_json.Add(jsonstrs[i]);
-                string ccc = jsonstrs[i]["opencode"].ToString();
-                show_leftopenjiang(jsonstrs[i]["opencode"].ToString(), jsonstrs[i]["expect"].ToString());
+                show_leftopenjiang(PublicClass.Code_json[i]["opencode"].ToString(),PublicClass.Code_json[i]["expect"].ToString());
             }
             create_lab("all");
         }
         //开奖今天、昨天、前天显示的改变
         private void left_tabcontrol_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+
             if (left_tabcontrol.IsLoaded)
             {
+
                 try
                 {
+                    
                     if (left_tabcontrol.SelectedIndex == 0)
                     {
                         var o = new
                         {
-                            opercode = "22",
+                            opercode = "22",  //今日
                             clientIP = PublicClass.localIP
                         };
                         var json = JsonConvert.SerializeObject(o);
                         var outputBuffer = Encoding.Unicode.GetBytes(json);
-                        PublicClass.socket.BeginSend(outputBuffer, 0, outputBuffer.Length, SocketFlags.None, null, null);
+                        
                         left_opencode.Items.Clear();
+                        PublicClass.socket.BeginSend(outputBuffer, 0, outputBuffer.Length, SocketFlags.None, null, null);
+                        //left_opencode.UpdateLayout();
+                        //System.Windows.Forms.Application.DoEvents();
                         //create_analyze_chat();
                     }
 
@@ -1558,7 +1571,7 @@ namespace shishicaiclient
                     {
                         var o = new
                         {
-                            opercode = "23",
+                            opercode = "23",  //昨天
                             clientIP = PublicClass.localIP
                         };
                         var json = JsonConvert.SerializeObject(o);
@@ -1571,7 +1584,7 @@ namespace shishicaiclient
                     {
                         var o = new
                         {
-                            opercode = "24",
+                            opercode = "24",   //前天
                             clientIP = PublicClass.localIP
                         };
                         var json = JsonConvert.SerializeObject(o);
@@ -1582,8 +1595,37 @@ namespace shishicaiclient
                     }
                 }
                 catch { }
+ 
+            }
+            
+        }
+
+
+        //投注历史界面切换
+        private void right_tabcontrol_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (right_tabcontrol.IsLoaded)
+            {
+                try
+                {
+                    if (right_tabcontrol.SelectedIndex == 0)
+                    {
+                        var o = new
+                        {
+                            opercode = "25",
+                            username = PublicClass.username,
+                            clientIP = PublicClass.localIP
+                        };
+                        var json = JsonConvert.SerializeObject(o);
+                        var outputBuffer = Encoding.Unicode.GetBytes(json);
+                        PublicClass.socket.BeginSend(outputBuffer, 0, outputBuffer.Length, SocketFlags.None, null, null);
+                        right_today.Items.Clear();
+                    }
+                }
+                catch { }
             }
         }
+
 
 
 
@@ -1708,40 +1750,78 @@ namespace shishicaiclient
         }
 
 
-        //投注历史界面切换
-        private void right_tabcontrol_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (right_tabcontrol.IsLoaded)
-            {
-                try
-                {
-                    if (right_tabcontrol.SelectedIndex == 0)
-                    {
-                        var o = new
-                        {
-                            opercode = "25",
-                            username = PublicClass.username,
-                            clientIP = PublicClass.localIP
-                        };
-                        var json = JsonConvert.SerializeObject(o);
-                        var outputBuffer = Encoding.Unicode.GetBytes(json);
-                        PublicClass.socket.BeginSend(outputBuffer, 0, outputBuffer.Length, SocketFlags.None, null, null);
-                        right_today.Items.Clear();
-
-                    }      
-                }
-                catch { }
-            }
-        }
+      
 
         private void cal_user_balance(float before_touzhu, float tijiao_touzhu)
         {
 
         }
-
         private void close_Click(object sender, RoutedEventArgs e)
         {
             this.Close(); 
         }
+
+        private void left_opencode_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            e.Handled = true;
+        }
+
+        private void yesopen_opencode_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            e.Handled = true;
+        }
+
+        private void toyesopen_opencode_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            e.Handled = true;
+        }
+
+        private void histroy_opencode_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            e.Handled = true;
+        }
+
+        private void right_today_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            e.Handled = true;
+        }
+
+        private void right_longhu_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            e.Handled = true;
+        }
+
+        private void right_danshuang_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            e.Handled = true;
+        }
+
+        private void right_daxiao_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            e.Handled = true;
+        }
+
+        private void hidden_next_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            var o = new
+            {
+                opercode = "22",  //今日
+                clientIP = PublicClass.localIP
+            };
+            var json = JsonConvert.SerializeObject(o);
+            var outputBuffer = Encoding.Unicode.GetBytes(json);
+
+            left_opencode.Items.Clear();
+            PublicClass.socket.BeginSend(outputBuffer, 0, outputBuffer.Length, SocketFlags.None, null, null);
+            expect = nextexpect.Content.ToString();
+            
+        }
+
+       
+
+
+
+
+      
     }
 }

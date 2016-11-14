@@ -1203,17 +1203,20 @@ namespace shishicaiclient
             if (int.Parse((resultlong.Content).ToString()) > 0)
             {
                 resultlong.Content = (Convert.ToDouble(resultlong.Content) - Convert.ToDouble(100)).ToString();
-               
+
+                cal_user_balance(-100);
+              
             }
             else
             {
                 resultlong.Content = "0";
+               
             }
         }
         //投注虎
         private void jiahu_Click(object sender, RoutedEventArgs e)
         {
-           
+          
                 resulthu.Content = (Convert.ToDouble(resulthu.Content) + Convert.ToDouble(100)).ToString();
                 
            
@@ -1224,7 +1227,8 @@ namespace shishicaiclient
             if (int.Parse((resulthu.Content).ToString()) > 0)
             {
                 resulthu.Content = (Convert.ToDouble(resulthu.Content) - Convert.ToDouble(100)).ToString();
-                
+
+                cal_user_balance(-100);
             }
             else
             {
@@ -1246,7 +1250,7 @@ namespace shishicaiclient
             if (int.Parse((resulthe.Content).ToString()) > 0)
             {
                 resulthe.Content = (Convert.ToDouble(resulthe.Content) - Convert.ToDouble(100)).ToString();
-               
+                cal_user_balance(-100);
             }
             else
             {
@@ -1267,6 +1271,7 @@ namespace shishicaiclient
             if (int.Parse((resultdan.Content).ToString()) > 0)
             {
                 resultdan.Content = (Convert.ToDouble(resultdan.Content) - Convert.ToDouble(100)).ToString();
+                cal_user_balance(-100);
             }
             else
             {
@@ -1289,6 +1294,7 @@ namespace shishicaiclient
             if (int.Parse((resultshuang.Content).ToString()) > 0)
             {
                 resultshuang.Content = (Convert.ToDouble(resultshuang.Content) - Convert.ToDouble(100)).ToString();
+                cal_user_balance(-100);
             }
             else
             {
@@ -1307,6 +1313,7 @@ namespace shishicaiclient
             if (int.Parse((resultda.Content).ToString()) > 0)
             {
                 resultda.Content = (Convert.ToDouble(resultda.Content) - Convert.ToDouble(100)).ToString();
+                cal_user_balance(-100);
             }
             else
             {
@@ -1326,6 +1333,7 @@ namespace shishicaiclient
             if (int.Parse((resultxiao.Content).ToString()) > 0)
             {
                 resultxiao.Content = (Convert.ToDouble(resultxiao.Content) + Convert.ToDouble(100)).ToString();
+                cal_user_balance(-100);
             }
             else
             {
@@ -1761,6 +1769,7 @@ namespace shishicaiclient
             this.Close(); 
         }
 
+
         private void left_opencode_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             e.Handled = true;
@@ -1774,6 +1783,16 @@ namespace shishicaiclient
         private void toyesopen_opencode_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             e.Handled = true;
+        }
+
+        private void cal_user_balance(float balance)
+        {
+            amount.Content = "账户余额："+ (float.Parse(PublicClass.balance) + balance);
+           
+
+
+            
+
         }
 
         private void histroy_opencode_SelectionChanged(object sender, SelectionChangedEventArgs e)

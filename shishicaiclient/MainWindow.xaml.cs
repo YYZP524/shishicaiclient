@@ -74,7 +74,13 @@ namespace shishicaiclient
         static byte[] buffer = new byte[1024 * 1024];
         string histroyopen = "";
         string timecount;
-
+        string longmount;
+        string humount;
+        string hemount;
+        string danmount;
+        string shuangmount;
+        string damount;
+        string xiaomount;
         string expect;    //开奖期数
         string last;  //上一期开奖
         JToken jsonstr;
@@ -497,7 +503,7 @@ namespace shishicaiclient
            
 
             //连接到指定服务器的指定端口
-            PublicClass.socket.Connect("192.168.1.108", 4530);
+            PublicClass.socket.Connect("192.168.1.111", 4530);
             if (!PublicClass.socket.Connected)
             {
                 MessageBox.Show("connect to the server");
@@ -876,7 +882,7 @@ namespace shishicaiclient
                             expect = jsonstr["expect"].ToString();
                             countdown.Content = timecount;
                             nextexpect.Content = jsonstr["nextissuse"].ToString();
-                            hidden_next.Text = nextexpect.Content.ToString();
+                            
                             if (nextexpect.Content.ToString() != hidden_nextexpect.Text)
                             {
                                 hidden_nextexpect.Text = nextexpect.Content.ToString();
@@ -1023,6 +1029,48 @@ namespace shishicaiclient
                                 changepwd.Visibility = Visibility.Hidden;
                             }
                         }));
+                    }
+
+                    else if(oper == "26")
+                    {
+                        if (jsonstr["status"].ToString() == "100")
+                        {
+                            resultlong.Content = "0";
+                            resulthu.Content = "0";
+                            resulthe.Content = "0";
+                            resultdan.Content = "0";
+                            resultshuang.Content = "0";
+                            resultda.Content = "0";
+                            resultxiao.Content = "0";
+                            if (longmount != "0")
+                            {
+                                longhures.Content = " 龙 ： " + longmount;
+                            }
+                            if (humount != "0")
+                            {
+                                longhures.Content = longhures.Content + " 虎 : " + humount;
+                            }
+                            if (hemount != "0")
+                            {
+                                longhures.Content = longhures.Content + " 和 : " + hemount;
+                            }
+                            if (danmount != "0")
+                            {
+                                danshaungres.Content = " 单 ： " + danmount;
+                            }
+                            if (shuangmount != "0")
+                            {
+                                danshaungres.Content = danshaungres.Content + " 双 ： " + shuangmount;
+                            }
+                            if (damount != "0")
+                            {
+                                daxiaores.Content = " 大 ： " + damount;
+                            }
+                            if (xiaomount != "0")
+                            {
+                                daxiaores.Content = daxiaores.Content + " 小 ： " + xiaomount;
+                            }
+                        }
                     }
 
                    
@@ -1345,6 +1393,7 @@ namespace shishicaiclient
         {
             public string opercode;
             public string username;
+            public string clientIP;
             public List<touzhu_data> data = new List<touzhu_data>();
         }
         class touzhu_data
@@ -1353,6 +1402,7 @@ namespace shishicaiclient
             public string amount;
         }
 
+       
 
         //提交投注结果
         private void sure_Click(object sender, RoutedEventArgs e)
@@ -1360,23 +1410,26 @@ namespace shishicaiclient
             touzhu_head touzhu = new touzhu_head();
             if (PublicClass.username != "/")
             {
-                
+
                 touzhu.opercode = "2";
                 touzhu.username = PublicClass.username;
-               
+                touzhu.clientIP = PublicClass.localIP;
+
                 if (resultlong.Content.ToString() != "0")
                 {
                     touzhu_data data = new touzhu_data();
                     data.type = "long";
                     data.amount = resultlong.Content.ToString();
+                    longmount = resultlong.Content.ToString();
                     touzhu.data.Add(data);
-                    
+
                 }
                 if (resulthu.Content.ToString() != "0")
                 {
                     touzhu_data data = new touzhu_data();
                     data.type = "hu";
                     data.amount = resulthu.Content.ToString();
+                    humount = resulthu.Content.ToString();
                     touzhu.data.Add(data);
                 }
                 if (resulthe.Content.ToString() != "0")
@@ -1384,6 +1437,7 @@ namespace shishicaiclient
                     touzhu_data data = new touzhu_data();
                     data.type = "he";
                     data.amount = resulthe.Content.ToString();
+                    hemount = resulthe.Content.ToString();
                     touzhu.data.Add(data);
                 }
                 if (resultdan.Content.ToString() != "0")
@@ -1391,6 +1445,7 @@ namespace shishicaiclient
                     touzhu_data data = new touzhu_data();
                     data.type = "dan";
                     data.amount = resultdan.Content.ToString();
+                    danmount = resultdan.Content.ToString();
                     touzhu.data.Add(data);
                 }
                 if (resultshuang.Content.ToString() != "0")
@@ -1398,6 +1453,7 @@ namespace shishicaiclient
                     touzhu_data data = new touzhu_data();
                     data.type = "shuang";
                     data.amount = resultshuang.Content.ToString();
+                    shuangmount = resultshuang.Content.ToString();
                     touzhu.data.Add(data);
                 }
                 if (resultda.Content.ToString() != "0")
@@ -1405,6 +1461,7 @@ namespace shishicaiclient
                     touzhu_data data = new touzhu_data();
                     data.type = "da";
                     data.amount = resultda.Content.ToString();
+                    damount = resultda.Content.ToString();
                     touzhu.data.Add(data);
                 }
                 if (resultxiao.Content.ToString() != "0")
@@ -1412,21 +1469,31 @@ namespace shishicaiclient
                     touzhu_data data = new touzhu_data();
                     data.type = "xiao";
                     data.amount = resultxiao.Content.ToString();
+                    xiaomount = resultxiao.Content.ToString();
                     touzhu.data.Add(data);
                 }
 
-                   JToken touzhuJSON = JsonConvert.SerializeObject(touzhu);
-                    PublicClass.zhucejson = touzhuJSON.ToString();
-                    var message = PublicClass.zhucejson;
-                    var outputBuffer = Encoding.Unicode.GetBytes(message);
-                    PublicClass.socket.BeginSend(outputBuffer, 0, outputBuffer.Length, SocketFlags.None, null, null);
-                    resultlong.Content = "0";
-                    resulthu.Content = "0";
-                    resulthe.Content = "0";
-                    resultdan.Content = "0";
-                    resultshuang.Content = "0";
-                    resultda.Content = "0";
-                    resultxiao.Content = "0";
+                JToken touzhuJSON = JsonConvert.SerializeObject(touzhu);
+                PublicClass.zhucejson = touzhuJSON.ToString();
+                var message = PublicClass.zhucejson;
+                var outputBuffer = Encoding.Unicode.GetBytes(message);
+                PublicClass.socket.BeginSend(outputBuffer, 0, outputBuffer.Length, SocketFlags.None, null, null);
+                sure.IsEnabled = false;
+
+
+            }
+
+            else
+            {
+                resultlong.Content = "0";
+                resulthu.Content = "0";
+                resulthe.Content = "0";
+                resultdan.Content = "0";
+                resultshuang.Content = "0";
+                resultda.Content = "0";
+                resultxiao.Content = "0";
+                MessageBox.Show("请先登陆！");
+
             }
         }
 
@@ -1527,7 +1594,17 @@ namespace shishicaiclient
         //刷新纪录
         private void hidden_nextexpect_TextChanged(object sender, TextChangedEventArgs e)
         {
-           
+            var o = new
+            {
+                opercode = "22",  //今日
+                clientIP = PublicClass.localIP
+            };
+            var json = JsonConvert.SerializeObject(o);
+            var outputBuffer = Encoding.Unicode.GetBytes(json);
+
+            left_opencode.Items.Clear();
+            PublicClass.socket.BeginSend(outputBuffer, 0, outputBuffer.Length, SocketFlags.None, null, null);
+            expect = nextexpect.Content.ToString();
             
             if (left_tabcontrol.SelectedIndex == 0)
             {
@@ -1820,21 +1897,7 @@ namespace shishicaiclient
             e.Handled = true;
         }
 
-        private void hidden_next_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            var o = new
-            {
-                opercode = "22",  //今日
-                clientIP = PublicClass.localIP
-            };
-            var json = JsonConvert.SerializeObject(o);
-            var outputBuffer = Encoding.Unicode.GetBytes(json);
-
-            left_opencode.Items.Clear();
-            PublicClass.socket.BeginSend(outputBuffer, 0, outputBuffer.Length, SocketFlags.None, null, null);
-            expect = nextexpect.Content.ToString();
-            
-        }
+       
 
        
 

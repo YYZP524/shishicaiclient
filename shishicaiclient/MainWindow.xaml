@@ -160,8 +160,9 @@
                                     </StackPanel>
                                     <StackPanel Grid.Row="2" Background="White" Orientation="Horizontal"> 
                                         <StackPanel Width="730">
-                                        <Label Margin="0,20,0,0">投注</Label>
-                                        <StackPanel Orientation="Horizontal">
+                                        <Label Margin="0,20,0,0" FontSize="15">投注</Label>
+                                            <TextBlock>距开奖只有2分钟以后停止投注</TextBlock>
+                                        <StackPanel Orientation="Horizontal" Margin=" 0,30,0,0">
                                             <TextBlock Text="龙" Width="50" Height="30" HorizontalAlignment="Left" Margin="100,0,0,0"></TextBlock>
                                             <TextBlock Text="虎"  Width="50" Height="30" HorizontalAlignment="Left" Margin="150,0,0,0"></TextBlock>
                                             <TextBlock Text="和"  Width="50" Height="30" HorizontalAlignment="Left" Margin="150,0,0,0"></TextBlock>
@@ -228,7 +229,7 @@
                                         <Button x:Name="sure" HorizontalAlignment="Left" Width="60" Height="30" Margin="40,50,0,0" Click="sure_Click">投注</Button>
                                         </StackPanel>
                                         <StackPanel Width="200">
-                                            <Label Margin="0,20,0,0">投注结果</Label>
+                                            <Label Margin="0,20,0,0" FontSize="15">投注结果</Label>
                                             <Label Name="longhures"></Label>
                                             <Label Name="danshaungres"></Label>
                                             <Label Name="daxiaores"></Label>

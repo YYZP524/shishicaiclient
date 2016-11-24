@@ -19,6 +19,13 @@ namespace shishicaiclient
         public static string localIP = "?";    //内网IP
         public static string username = "/";    //登录成功的用户名
         public static string balance = "0";    //账户余额
+        public static string userbase = "";    //账户base
+        public static string longhufending = ""; // 封顶
+        public static string danshuangfending = "";
+        public static string daxiaofending = "";
+        public static string hefending = "";
+
+
 
 
         }

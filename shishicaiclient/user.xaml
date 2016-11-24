@@ -15,20 +15,20 @@
             <Label Content="金额 : " Width="70"></Label>
             <TextBlock Name= "amount" Width="90" Height="26"></TextBlock>
             <Label Content="投注基数 : " Width="70" Margin="20,0,0,0" ></Label>
-            <TextBlock Name= "base" Width="90" Height="26"></TextBlock>
+            <TextBlock Name= "userbase" Width="90" Height="26"></TextBlock>
         </StackPanel>
         
         <StackPanel Orientation="Horizontal" Height="30" VerticalAlignment="Top" Margin="0,130,0,0" HorizontalAlignment="Center" Width="340" >
             <Label Content="龙虎封顶 : " Width="70"></Label>
             <TextBlock Name= "longhucapping" Width="90" Height="26"></TextBlock>
             <Label Content="单双封顶 : " Width="70" Margin="20,0,0,0"></Label>
-            <Label Name= "danshuangcapping" Width="90"></Label>
+            <TextBlock Name= "danshuangcapping" Width="90"></TextBlock>
         </StackPanel>
         <StackPanel Orientation="Horizontal" Height="30" VerticalAlignment="Top" Margin="0,180,0,0" HorizontalAlignment="Center" Width="340" >
             <Label Content="大小封顶 : " Width="70"></Label>
-            <Label Name= "daxiaocapping" Width="90"></Label>
+            <TextBlock Name= "daxiaocapping" Width="90"></TextBlock>
             <Label Content="和封顶 : " Width="70" Margin="20,0,0,0"></Label>
-            <Label Name= "hecapping" Width="90"></Label>
+            <TextBlock Name= "hecapping" Width="90"></TextBlock>
         </StackPanel>
         
     </Grid>

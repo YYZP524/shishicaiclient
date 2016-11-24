@@ -84,6 +84,7 @@ namespace shishicaiclient
         string expect;    //开奖期数
         string last;  //上一期开奖
         string next;
+
         JToken jsonstr;
         List<JToken> Codejson = new List<JToken>();
 
@@ -505,7 +506,7 @@ namespace shishicaiclient
            
 
             //连接到指定服务器的指定端口
-            PublicClass.socket.Connect("192.168.1.106", 4530);
+            PublicClass.socket.Connect("192.168.1.107", 4530);
             if (!PublicClass.socket.Connected)
             {
                 MessageBox.Show("connect to the server");
@@ -1283,10 +1284,19 @@ namespace shishicaiclient
         //投注龙
         private void jialong_Click(object sender, RoutedEventArgs e)
         {
-          
+           
                 resultlong.Content = (Convert.ToDouble(resultlong.Content) + Convert.ToDouble(100)).ToString();
                 cal_user_balance(-100);
-            
+                if (float.Parse(amount.Content.ToString().Substring(5)) < 100f)
+                {
+                    jialong.IsEnabled = false;
+
+                 
+                }
+                else
+                {
+                    jialong.IsEnabled = true;
+                }
         }
 
         private void jianlong_Click(object sender, RoutedEventArgs e)
@@ -1296,7 +1306,17 @@ namespace shishicaiclient
                 resultlong.Content = (Convert.ToDouble(resultlong.Content) - Convert.ToDouble(100)).ToString();
 
                 cal_user_balance(100);
-              
+                if (float.Parse(amount.Content.ToString().Substring(5)) > 100f)
+                {
+                     jialong.IsEnabled = true;
+
+                    jiahu.IsEnabled = true;
+                    jiahe.IsEnabled = true;
+                    jiadan.IsEnabled = true;
+                    jiashuang.IsEnabled = true;
+                    jiada.IsEnabled = true;
+                    jiaxiao.IsEnabled = true;
+                }
             }
             else
             {
@@ -1310,7 +1330,16 @@ namespace shishicaiclient
           
                 resulthu.Content = (Convert.ToDouble(resulthu.Content) + Convert.ToDouble(100)).ToString();
                 cal_user_balance(-100);
-           
+                if (float.Parse(amount.Content.ToString().Substring(5)) < 100f)
+                {
+                    jiahu.IsEnabled = false;
+
+
+                }
+                else
+                {
+                    jiahu.IsEnabled = true;
+                }
         }
 
         private void jianhu_Click(object sender, RoutedEventArgs e)
@@ -1320,6 +1349,19 @@ namespace shishicaiclient
                 resulthu.Content = (Convert.ToDouble(resulthu.Content) - Convert.ToDouble(100)).ToString();
 
                 cal_user_balance(100);
+
+
+                if (float.Parse(amount.Content.ToString().Substring(5)) > 100f)
+                {
+                    jiahu.IsEnabled = true;
+
+                    jialong.IsEnabled = true;
+                    jiahe.IsEnabled = true;
+                    jiadan.IsEnabled = true;
+                    jiashuang.IsEnabled = true;
+                    jiada.IsEnabled = true;
+                    jiaxiao.IsEnabled = true;
+                }
             }
             else
             {
@@ -1333,6 +1375,16 @@ namespace shishicaiclient
 
             resulthe.Content = (Convert.ToDouble(resulthe.Content) + Convert.ToDouble(100)).ToString();
             cal_user_balance(-100);
+            if (float.Parse(amount.Content.ToString().Substring(5)) < 100f)
+            {
+                jiahe.IsEnabled = false;
+
+
+            }
+            else
+            {
+                jiahe.IsEnabled = true;
+            }
 
         }
 
@@ -1342,6 +1394,18 @@ namespace shishicaiclient
             {
                 resulthe.Content = (Convert.ToDouble(resulthe.Content) - Convert.ToDouble(100)).ToString();
                 cal_user_balance(100);
+                if (float.Parse(amount.Content.ToString().Substring(5)) > 100f)
+                {
+                    jiahe.IsEnabled = true;
+
+                    jialong.IsEnabled = true;
+                    jiahu.IsEnabled = true;
+                    jiadan.IsEnabled = true;
+                    jiashuang.IsEnabled = true;
+                    jiada.IsEnabled = true;
+                    jiaxiao.IsEnabled = true;
+                }
+
             }
             else
             {
@@ -1355,6 +1419,16 @@ namespace shishicaiclient
 
             resultdan.Content = (Convert.ToDouble(resultdan.Content) + Convert.ToDouble(100)).ToString();
             cal_user_balance(-100);
+            if (float.Parse(amount.Content.ToString().Substring(5)) < 100f)
+            {
+                jiadan.IsEnabled = false;
+
+
+            }
+            else
+            {
+                jiadan.IsEnabled = true;
+            }
         }
 
         private void jiandan_Click(object sender, RoutedEventArgs e)
@@ -1363,6 +1437,18 @@ namespace shishicaiclient
             {
                 resultdan.Content = (Convert.ToDouble(resultdan.Content) - Convert.ToDouble(100)).ToString();
                 cal_user_balance(100);
+
+                if (float.Parse(amount.Content.ToString().Substring(5)) > 100f)
+                {
+                    jiadan.IsEnabled = true;
+
+                    jialong.IsEnabled = true;
+                    jiahu.IsEnabled = true;
+                    jiahe.IsEnabled = true;
+                    jiashuang.IsEnabled = true;
+                    jiada.IsEnabled = true;
+                    jiaxiao.IsEnabled = true;
+                }
             }
             else
             {
@@ -1378,6 +1464,16 @@ namespace shishicaiclient
 
             resultshuang.Content = (Convert.ToDouble(resultshuang.Content) + Convert.ToDouble(100)).ToString();
             cal_user_balance(-100);
+            if (float.Parse(amount.Content.ToString().Substring(5)) < 100f)
+            {
+                jiashuang.IsEnabled = false;
+
+
+            }
+            else
+            {
+                jiashuang.IsEnabled = true;
+            }
         }
 
         private void jianshuang_Click(object sender, RoutedEventArgs e)
@@ -1386,6 +1482,19 @@ namespace shishicaiclient
             {
                 resultshuang.Content = (Convert.ToDouble(resultshuang.Content) - Convert.ToDouble(100)).ToString();
                 cal_user_balance(100);
+
+
+                if (float.Parse(amount.Content.ToString().Substring(5)) > 100f)
+                {
+                    jiashuang.IsEnabled = true;
+
+                    jialong.IsEnabled = true;
+                    jiahu.IsEnabled = true;
+                    jiahe.IsEnabled = true;
+                    jiadan.IsEnabled = true;
+                    jiada.IsEnabled = true;
+                    jiaxiao.IsEnabled = true;
+                }
             }
             else
             {
@@ -1398,6 +1507,16 @@ namespace shishicaiclient
         {
             resultda.Content = (Convert.ToDouble(resultda.Content) + Convert.ToDouble(100)).ToString();
             cal_user_balance(-100);
+            if (float.Parse(amount.Content.ToString().Substring(5)) < 100f)
+            {
+                jiada.IsEnabled = false;
+
+
+            }
+            else
+            {
+                jiada.IsEnabled = true;
+            }
         }
 
         private void jianda_Click(object sender, RoutedEventArgs e)
@@ -1406,6 +1525,19 @@ namespace shishicaiclient
             {
                 resultda.Content = (Convert.ToDouble(resultda.Content) - Convert.ToDouble(100)).ToString();
                 cal_user_balance(100);
+
+
+                if (float.Parse(amount.Content.ToString().Substring(5)) > 100f)
+                {
+                    jiada.IsEnabled = true;
+
+                    jialong.IsEnabled = true;
+                    jiahu.IsEnabled = true;
+                    jiahe.IsEnabled = true;
+                    jiadan.IsEnabled = true;
+                    jiashuang.IsEnabled = true;
+                    jiaxiao.IsEnabled = true;
+                }
             }
             else
             {
@@ -1419,6 +1551,16 @@ namespace shishicaiclient
         {
             resultxiao.Content = (Convert.ToDouble(resultxiao.Content) + Convert.ToDouble(100)).ToString();
             cal_user_balance(-100);
+            if (float.Parse(amount.Content.ToString().Substring(5)) < 100f)
+            {
+                jiaxiao.IsEnabled = false;
+
+
+            }
+            else
+            {
+                jiaxiao.IsEnabled = true;
+            }
         }
 
         private void jianxiao_Click(object sender, RoutedEventArgs e)
@@ -1427,6 +1569,18 @@ namespace shishicaiclient
             {
                 resultxiao.Content = (Convert.ToDouble(resultxiao.Content) + Convert.ToDouble(100)).ToString();
                 cal_user_balance(100);
+
+                if (float.Parse(amount.Content.ToString().Substring(5)) > 100f)
+                {
+                    jiaxiao.IsEnabled = true;
+
+                    jialong.IsEnabled = true;
+                    jiahu.IsEnabled = true;
+                    jiahe.IsEnabled = true;
+                    jiadan.IsEnabled = true;
+                    jiashuang.IsEnabled = true;
+                    jiada.IsEnabled = true;
+                }
             }
             else
             {
@@ -1921,7 +2075,8 @@ namespace shishicaiclient
 
         private void cal_user_balance(float balance)
         {
-            amount.Content = "账户余额："+ (float.Parse(PublicClass.balance) + balance);
+          
+            amount.Content = "账户余额：" + (float.Parse(amount.Content.ToString().Substring(5)) + balance);
            
 
 

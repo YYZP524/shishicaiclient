@@ -28,6 +28,11 @@ namespace shishicaiclient
         {
             UserName.Text = PublicClass.username;
             amount.Text = PublicClass.balance;
+            userbase.Text = PublicClass.userbase;
+            longhucapping.Text = PublicClass.longhufending;
+            danshuangcapping.Text = PublicClass.danshuangfending;
+            daxiaocapping.Text = PublicClass.daxiaofending;
+            hecapping.Text = PublicClass.hefending;
         }
 
         

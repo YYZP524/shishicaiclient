@@ -506,7 +506,7 @@ namespace shishicaiclient
            
 
             //连接到指定服务器的指定端口
-            PublicClass.socket.Connect("192.168.1.107", 4530);
+            PublicClass.socket.Connect("192.168.1.103", 4530);
             if (!PublicClass.socket.Connected)
             {
                 MessageBox.Show("connect to the server");
@@ -1871,7 +1871,7 @@ namespace shishicaiclient
 
             var o1 = new
             {
-                opercode = "25",
+                opercode = "29",
                 username = PublicClass.username,
                 clientIP = PublicClass.localIP
             };

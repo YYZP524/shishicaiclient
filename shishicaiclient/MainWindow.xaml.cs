@@ -1312,27 +1312,15 @@ namespace shishicaiclient
         //投注龙
         private void jialong_Click(object sender, RoutedEventArgs e)
         {
-
-           
-             
-
-          
                 resultlong.Content = (Convert.ToDouble(resultlong.Content) + Convert.ToDouble(PublicClass.userbase)).ToString();
-
                 cal_user_balance(-float.Parse(PublicClass.userbase)); 
                 if (float.Parse(amount.Content.ToString().Substring(5)) < 100f)
                 {
-                    allfalse();//调用判断投注大小与余额关联：  private void alltrue()
-
-
-
-
-
-                 
+                    allfalse();//调用判断投注大小与余额关联：  private void allfalse
                 }
                 else
                 {
-                    alltrue();// 调用判断投注大小与余额关联：  private void allfalse()
+                    alltrue();// 调用判断投注大小与余额关联：  private void alltrue()
 
                 }
         }
@@ -1346,13 +1334,13 @@ namespace shishicaiclient
                 cal_user_balance(float.Parse(PublicClass.userbase));
                 if (float.Parse(amount.Content.ToString().Substring(5)) < 100f)
                 {
-                    allfalse();//调用判断投注大小与余额关联：  private void alltrue()
+                    allfalse();//调用判断投注大小与余额关联：  private void allfalse()
                 }
                 else
                 {
 
 
-                    alltrue();// 调用判断投注大小与余额关联：  private void allfalse()
+                    alltrue();// 调用判断投注大小与余额关联：  private void alltrue()
                 }
                 
 
@@ -1371,14 +1359,14 @@ namespace shishicaiclient
                 cal_user_balance(-float.Parse(PublicClass.userbase));
                 if (float.Parse(amount.Content.ToString().Substring(5)) < 100f)
                 {
-                    allfalse();//调用判断投注大小与余额关联：  private void alltrue()
+                    allfalse();//调用判断投注大小与余额关联：  private void allfalse()
 
 
 
                 }
                 else
                 {
-                   alltrue();// 调用判断投注大小与余额关联：  private void allfalse()
+                    alltrue();// 调用判断投注大小与余额关联：  private void alltrue()
                 }
         }
 
@@ -1393,13 +1381,13 @@ namespace shishicaiclient
 
                 if (float.Parse(amount.Content.ToString().Substring(5)) < 100f)
                 {
-                    allfalse();//调用判断投注大小与余额关联：  private void alltrue()
+                    allfalse();//调用判断投注大小与余额关联：  private void allfalse()
                 }
 
                 else
                 {
 
-                    alltrue();// 调用判断投注大小与余额关联：  private void allfalse() 
+                    alltrue();// 调用判断投注大小与余额关联：  private void alltrue() 
                 }
             }
             else
@@ -1416,14 +1404,14 @@ namespace shishicaiclient
             cal_user_balance(-float.Parse(PublicClass.userbase));
             if (float.Parse(amount.Content.ToString().Substring(5)) < 100f)
             {
-                allfalse();//调用判断投注大小与余额关联：  private void alltrue()
+                allfalse();//调用判断投注大小与余额关联：  private void allfalse()
 
 
 
             }
             else
             {
-                alltrue();// 调用判断投注大小与余额关联：  private void allfalse()
+                alltrue();// 调用判断投注大小与余额关联：  private void alltrue()
             }
 
         }
@@ -1436,12 +1424,12 @@ namespace shishicaiclient
                 cal_user_balance(float.Parse(PublicClass.userbase));
                 if (float.Parse(amount.Content.ToString().Substring(5)) < 100f)
                 {
-                    allfalse();
+                    allfalse();//调用判断投注大小与余额关联：  private void allfalse()
                 }
                 else
                 {
 
-                    alltrue();
+                    alltrue();// 调用判断投注大小与余额关联：  private void alltrue()
                 }
 
             }
@@ -1459,11 +1447,11 @@ namespace shishicaiclient
             cal_user_balance(-float.Parse(PublicClass.userbase));
             if (float.Parse(amount.Content.ToString().Substring(5)) < 100f)
             {
-                allfalse();
+                allfalse();//调用判断投注大小与余额关联：  private void allfalse()
             }
             else
             {
-                alltrue();
+                alltrue();// 调用判断投注大小与余额关联：  private void alltrue()
             }
         }
 
@@ -1476,11 +1464,11 @@ namespace shishicaiclient
 
                 if (float.Parse(amount.Content.ToString().Substring(5)) < 100f)
                 {
-                    allfalse();
+                    allfalse();//调用判断投注大小与余额关联：  private void allfalse()
                 }
                 else
                 {
-                    alltrue();
+                    alltrue();// 调用判断投注大小与余额关联：  private void alltrue()
                 }
             }
             else
@@ -1499,12 +1487,12 @@ namespace shishicaiclient
             cal_user_balance(-float.Parse(PublicClass.userbase));
             if (float.Parse(amount.Content.ToString().Substring(5)) < 100f)
             {
-                allfalse();
+                allfalse();//调用判断投注大小与余额关联：  private void allfalse()
 
             }
             else
             {
-                alltrue();
+                alltrue();// 调用判断投注大小与余额关联：  private void alltrue()
             }
         }
 
@@ -1518,14 +1506,14 @@ namespace shishicaiclient
 
                 if (float.Parse(amount.Content.ToString().Substring(5)) < 100f)
                 {
-                    allfalse();
+                    allfalse();//调用判断投注大小与余额关联：  private void allfalse()
 
 
                 }
                 else
                 {
 
-                    alltrue();
+                    alltrue();// 调用判断投注大小与余额关联：  private void alltrue()
 
                 }
             }
@@ -1542,13 +1530,13 @@ namespace shishicaiclient
             cal_user_balance(-float.Parse(PublicClass.userbase));
             if (float.Parse(amount.Content.ToString().Substring(5)) < 100f)
             {
-                allfalse();
+                allfalse();//调用判断投注大小与余额关联：  private void allfalse()
 
 
             }
             else
             {
-                alltrue();
+                alltrue();// 调用判断投注大小与余额关联：  private void alltrue()
             }
         }
 
@@ -1562,12 +1550,12 @@ namespace shishicaiclient
 
                 if (float.Parse(amount.Content.ToString().Substring(5)) < 100f)
                 {
-                    allfalse();
+                    allfalse();//调用判断投注大小与余额关联：  private void allfalse()
                 }
 
                 else
                 {
-                    alltrue();
+                    alltrue();// 调用判断投注大小与余额关联：  private void alltrue()
 
                 }
             }
@@ -1585,14 +1573,14 @@ namespace shishicaiclient
             cal_user_balance(-float.Parse(PublicClass.userbase));
             if (float.Parse(amount.Content.ToString().Substring(5)) < 100f)
             {
-                allfalse();
+                allfalse();//调用判断投注大小与余额关联：  private void allfalse()
                
 
 
             }
             else
             {
-                alltrue();
+                alltrue();// 调用判断投注大小与余额关联：  private void alltrue()
             }
         }
 
@@ -1605,11 +1593,11 @@ namespace shishicaiclient
 
                 if (float.Parse(amount.Content.ToString().Substring(5)) < 100f)
                 {
-                    allfalse();
+                    allfalse();//调用判断投注大小与余额关联：  private void allfalse()
                 }
                 else
                 {
-                    alltrue();
+                    alltrue();// 调用判断投注大小与余额关联：  private void alltrue()
 
                 }
             }

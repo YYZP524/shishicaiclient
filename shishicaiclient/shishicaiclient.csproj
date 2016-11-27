@@ -83,6 +83,9 @@
     <Compile Include="Daxiaoxulie.xaml.cs">
       <DependentUpon>Daxiaoxulie.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Effect.xaml.cs">
+      <DependentUpon>Effect.xaml</DependentUpon>
+    </Compile>
     <Compile Include="elllab.xaml.cs">
       <DependentUpon>elllab.xaml</DependentUpon>
     </Compile>
@@ -137,6 +140,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Daxiaoxulie.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Effect.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

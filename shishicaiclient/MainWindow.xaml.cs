@@ -1336,7 +1336,10 @@ namespace shishicaiclient
                     {
                         jialong.IsEnabled = false;
 
-
+                cal_user_balance(-float.Parse(PublicClass.userbase)); 
+                if (float.Parse(amount.Content.ToString().Substring(5)) < 100f)
+                {
+                    allfalse();//调用判断投注大小与余额关联：  private void alltrue()
                     }
                     else
                     {
@@ -1345,14 +1348,19 @@ namespace shishicaiclient
                 }
                 else
                 {
-                    resultlong.Content = resultlong.Content;
+                  resultlong.Content = resultlong.Content;
+
+                    alltrue();// 调用判断投注大小与余额关联：  private void allfalse()
+
                 }
             }
             else
             {
                 MessageBox.Show("请先登录");
             }
+            }
         }
+
 
         private void jianlong_Click(object sender, RoutedEventArgs e)
         {
@@ -1363,10 +1371,23 @@ namespace shishicaiclient
                 resultlong.Content = (Convert.ToDouble(resultlong.Content) - Convert.ToDouble(PublicClass.userbase)).ToString();
 
                 cal_user_balance(float.Parse(PublicClass.userbase));
-                if (float.Parse(amount.Content.ToString().Substring(5)) > 100f)
+
+               if (float.Parse(amount.Content.ToString().Substring(5)) > 100f)
                 {
                      jialong.IsEnabled = true;
+
+                if (float.Parse(amount.Content.ToString().Substring(5)) < 100f)
+                {
+                    allfalse();//调用判断投注大小与余额关联：  private void alltrue()
                 }
+                else
+                {
+
+
+                    alltrue();// 调用判断投注大小与余额关联：  private void allfalse()
+                }
+                
+
             }
             else
             {
@@ -1380,6 +1401,7 @@ namespace shishicaiclient
                 MessageBox.Show("请先登录");
             }
         }
+        }
         //投注虎
         private void jiahu_Click(object sender, RoutedEventArgs e)
         {
@@ -1387,12 +1409,14 @@ namespace shishicaiclient
             {
                 if (double.Parse(resulthu.Content.ToString()) < double.Parse(PublicClass.longhufending))
                 {
+
                     resulthu.Content = (Convert.ToDouble(resulthu.Content) + Convert.ToDouble(PublicClass.userbase)).ToString();
                     cal_user_balance(-float.Parse(PublicClass.userbase));
                     if (float.Parse(amount.Content.ToString().Substring(5)) < 100f)
                     {
                         jiahu.IsEnabled = false;
 
+                    allfalse();//调用判断投注大小与余额关联：  private void alltrue()
 
                     }
                     else
@@ -1400,11 +1424,12 @@ namespace shishicaiclient
                         jiahu.IsEnabled = true;
                     }
                 }
+
                  else
                      {
                          resulthu.Content = resulthu.Content;
-                     }
-                    
+                          alltrue();// 调用判断投注大小与余额关联：  private void allfalse()
+                     }                    
             }
                      
             else
@@ -1424,6 +1449,7 @@ namespace shishicaiclient
                     cal_user_balance(float.Parse(PublicClass.userbase));
 
 
+
                     if (float.Parse(amount.Content.ToString().Substring(5)) > 100f)
                     {
                         jiahu.IsEnabled = true;
@@ -1434,7 +1460,19 @@ namespace shishicaiclient
                 else
                 {
                     resulthu.Content = "0";
+
+                if (float.Parse(amount.Content.ToString().Substring(5)) < 100f)
+                {
+                    allfalse();//调用判断投注大小与余额关联：  private void alltrue()
                 }
+
+                else
+                {
+
+                    alltrue();// 调用判断投注大小与余额关联：  private void allfalse() 
+
+                }
+            }
             }
             else
             {
@@ -1446,15 +1484,14 @@ namespace shishicaiclient
         {
             if (double.Parse(PublicClass.balance) > 0)
             {
+
                 if (double.Parse(resulthe.Content.ToString()) < double.Parse(PublicClass.hefending))
                 {
                     resulthe.Content = (Convert.ToDouble(resulthe.Content) + Convert.ToDouble(PublicClass.userbase)).ToString();
                     cal_user_balance(-float.Parse(PublicClass.userbase));
                     if (float.Parse(amount.Content.ToString().Substring(5)) < 100f)
                     {
-                        jiahe.IsEnabled = false;
-
-
+                allfalse();//调用判断投注大小与余额关联：  private void alltrue()
                     }
                     else
                     {
@@ -1464,10 +1501,12 @@ namespace shishicaiclient
                 else
                 {
                     resulthe.Content = resulthe.Content;
+                     alltrue();// 调用判断投注大小与余额关联：  private void allfalse()
                 }
             }
             else
             {
+
                 MessageBox.Show("请先登录");
             }
         }
@@ -1476,15 +1515,20 @@ namespace shishicaiclient
         {
             if (double.Parse(PublicClass.balance) > 0)
             {
+
                 if (int.Parse((resulthe.Content).ToString()) > 0)
                 {
-                    resulthe.Content = (Convert.ToDouble(resulthe.Content) - Convert.ToDouble(PublicClass.userbase)).ToString();
-                    cal_user_balance(float.Parse(PublicClass.userbase));
-                    if (float.Parse(amount.Content.ToString().Substring(5)) > 100f)
-                    {
-                        jiahe.IsEnabled = true;
-                    }
+               resulthe.Content = (Convert.ToDouble(resulthe.Content) - Convert.ToDouble(PublicClass.userbase)).ToString();
+                cal_user_balance(float.Parse(PublicClass.userbase));
+                if (float.Parse(amount.Content.ToString().Substring(5)) < 100f)
+                {
+                    allfalse();
+                }
+                else
+                {
 
+                    alltrue();
+                }
                 }
                 else
                 {
@@ -1520,12 +1564,16 @@ namespace shishicaiclient
                 else
                 {
                     resultdan.Content = resultdan.Content;
+                      alltrue();
                 }
             }
             else
             {
                 MessageBox.Show("请先登录");
+
+                allfalse();
             }
+           
         }
 
         private void jiandan_Click(object sender, RoutedEventArgs e)
@@ -1537,10 +1585,14 @@ namespace shishicaiclient
                     resultdan.Content = (Convert.ToDouble(resultdan.Content) - Convert.ToDouble(PublicClass.userbase)).ToString();
                     cal_user_balance(float.Parse(PublicClass.userbase));
 
-                    if (float.Parse(amount.Content.ToString().Substring(5)) > 100f)
-                    {
-                        jiadan.IsEnabled = true;
-                    }
+                    if (float.Parse(amount.Content.ToString().Substring(5)) < 100f)
+                {
+                    allfalse();
+                }
+                else
+                {
+                    alltrue();
+                }
                 }
                 else
                 {
@@ -1559,6 +1611,7 @@ namespace shishicaiclient
         {
             if (double.Parse(PublicClass.balance) > 0)
             {
+
                 if (double.Parse(resultshuang.Content.ToString()) < double.Parse(PublicClass.danshuangfending))
                 {
                     resultshuang.Content = (Convert.ToDouble(resultshuang.Content) + Convert.ToDouble(PublicClass.userbase)).ToString();
@@ -1566,8 +1619,6 @@ namespace shishicaiclient
                     if (float.Parse(amount.Content.ToString().Substring(5)) < 100f)
                     {
                         jiashuang.IsEnabled = false;
-
-
                     }
                     else
                     {
@@ -1577,10 +1628,12 @@ namespace shishicaiclient
                 else
                 {
                     resultshuang.Content = resultshuang.Content;
+                    alltrue();
                 }
             }
             else
             {
+
                 MessageBox.Show("请先登录");
             }
         }
@@ -1593,18 +1646,20 @@ namespace shishicaiclient
                 {
                     resultshuang.Content = (Convert.ToDouble(resultshuang.Content) - Convert.ToDouble(PublicClass.userbase)).ToString();
                     cal_user_balance(float.Parse(PublicClass.userbase));
+                if (float.Parse(amount.Content.ToString().Substring(5)) < 100f)
+                {
+                    allfalse();
+                }
+                else
+                {
 
-
-                    if (float.Parse(amount.Content.ToString().Substring(5)) > 100f)
-                    {
-                        jiashuang.IsEnabled = true;
-
-
-                    }
+                    alltrue();
+                }
                 }
                 else
                 {
                     resultshuang.Content = "0";
+
                 }
             }
             else
@@ -1618,15 +1673,14 @@ namespace shishicaiclient
         {
             if (double.Parse(PublicClass.balance) > 0)
             {
+
                 if (double.Parse(resultda.Content.ToString()) < double.Parse(PublicClass.daxiaofending))
                 {
                     resultda.Content = (Convert.ToDouble(resultda.Content) + Convert.ToDouble(PublicClass.userbase)).ToString();
                     cal_user_balance(-float.Parse(PublicClass.userbase));
                     if (float.Parse(amount.Content.ToString().Substring(5)) < 100f)
                     {
-                        jiada.IsEnabled = false;
-
-
+                allfalse();
                     }
                     else
                     {
@@ -1636,10 +1690,12 @@ namespace shishicaiclient
                 else
                 {
                     resultda.Content = resultda.Content;
+                    alltrue();
                 }
             }
             else
             {
+
                 MessageBox.Show("请先登录");
             }
         }
@@ -1653,11 +1709,15 @@ namespace shishicaiclient
                     resultda.Content = (Convert.ToDouble(resultda.Content) - Convert.ToDouble(PublicClass.userbase)).ToString();
                     cal_user_balance(float.Parse(PublicClass.userbase));
 
+                    if (float.Parse(amount.Content.ToString().Substring(5)) < 100f)
+                {
+                    allfalse();
+                }
 
-                    if (float.Parse(amount.Content.ToString().Substring(5)) > 100f)
-                    {
-                        jiada.IsEnabled = true;
-                    }
+                else
+                {
+                    alltrue();
+                }
                 }
                 else
                 {
@@ -1676,15 +1736,15 @@ namespace shishicaiclient
         {
             if (double.Parse(PublicClass.balance) > 0)
             {
+
                 if (double.Parse(resultxiao.Content.ToString()) < double.Parse(PublicClass.daxiaofending))   //封顶限制
                 {
                     resultxiao.Content = (Convert.ToDouble(resultxiao.Content) + Convert.ToDouble(PublicClass.userbase)).ToString();
                     cal_user_balance(-float.Parse(PublicClass.userbase));
                     if (float.Parse(amount.Content.ToString().Substring(5)) < 100f)
                     {
-                        jiaxiao.IsEnabled = false;
 
-
+                      allfalse();
                     }
                     else
                     {
@@ -1694,10 +1754,12 @@ namespace shishicaiclient
                 else
                 {
                     resultxiao.Content = resultxiao.Content;
+                       alltrue();
                 }
             }
             else
             {
+
                 MessageBox.Show("请先登录");
             }
         }
@@ -1709,15 +1771,20 @@ namespace shishicaiclient
         {
             if (double.Parse(PublicClass.balance) > 0)
             {
+
                 if (int.Parse((resultxiao.Content).ToString()) > 0)
                 {
                     resultxiao.Content = (Convert.ToDouble(resultxiao.Content) + Convert.ToDouble(PublicClass.userbase)).ToString();
                     cal_user_balance(float.Parse(PublicClass.userbase));
 
-                    if (float.Parse(amount.Content.ToString().Substring(5)) > 100f)
-                    {
-                        jiaxiao.IsEnabled = true;
-                    }
+                    if (float.Parse(amount.Content.ToString().Substring(5)) < 100f)
+                {
+                    allfalse();
+                }
+                else
+                {
+                    alltrue();
+                }
                 }
                 else
                 {
@@ -1728,6 +1795,33 @@ namespace shishicaiclient
             {
                 MessageBox.Show("请先登录");
             }
+        }
+
+        //判断投注大小与余额关联
+        private void alltrue()//（余额>=100)，“+”能点
+        {
+            jiaxiao.IsEnabled = true;
+
+            jialong.IsEnabled = true;
+            jiahu.IsEnabled = true;
+            jiahe.IsEnabled = true;
+            jiadan.IsEnabled = true;
+            jiashuang.IsEnabled = true;
+            jiada.IsEnabled = true;
+        }
+
+
+        //判断投注大小与余额关联
+        private void allfalse()//(余额<100),“-”不能点
+        {
+            jiaxiao.IsEnabled = false;
+
+            jialong.IsEnabled = false;
+            jiahu.IsEnabled = false;
+            jiahe.IsEnabled = false;
+            jiadan.IsEnabled = false;
+            jiashuang.IsEnabled = false;
+            jiada.IsEnabled = false;
         }
 
         class touzhu_head
@@ -1946,6 +2040,7 @@ namespace shishicaiclient
         {
             if (hidden_nextexpect.Text != "")
             {
+
                 var o = new
                 {
                     opercode = "27",  //查询刚刚开奖的期数号吗
@@ -1971,6 +2066,7 @@ namespace shishicaiclient
                    
                     create_lab("all");
                 }
+
             }
             
         }

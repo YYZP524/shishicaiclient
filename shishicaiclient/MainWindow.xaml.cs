@@ -734,11 +734,12 @@ namespace shishicaiclient
 
             
              int number1 = int.Parse(sinopen[1]); //第二个数字
+             int number0 = int.Parse(sinopen[0]);
              int number4 = int.Parse(sinopen[4]); //最后一个数字
 
              //开奖结果显示
              //判断龙虎和结果
-             if (number1 > number4)
+             if (number0 > number4)
              {
                  LeftEll ellreturn = new LeftEll();
                  ellreturn.create_lab("龙", 1);
@@ -746,7 +747,7 @@ namespace shishicaiclient
                  ellreturn.Height = 24;
                  stack.Children.Add(ellreturn);
              }
-             else if (number1 < number4)
+             else if (number0 < number4)
              {
                  LeftEll ellreturn = new LeftEll();
                  ellreturn.create_lab("虎", 1);
@@ -767,7 +768,7 @@ namespace shishicaiclient
              //判断单双结果
              int last = number4;
 
-             int sum = number1 + int.Parse(sinopen[2]) + int.Parse(sinopen[3]) + number4;
+             int sum = number0 + number1 + int.Parse(sinopen[2]) + int.Parse(sinopen[3]) + number4;
              if (sum % 2 == 0)
 
              {
@@ -1052,23 +1053,30 @@ namespace shishicaiclient
                     //服务端返回下线通知
                     else if (oper == "17")
                     {
-                        MessageBox.Show("用户下线");
-                        right_today.Items.Clear();
-                        right_longhu.Items.Clear();
-                        right_danshuang.Items.Clear();
-                        right_daxiao.Items.Clear();
-                        Dispatcher.Invoke(new Action(delegate         //线程加载
+                        MessageBoxResult dr = MessageBox.Show("用户下线", "提示", MessageBoxButton.OK);
+                        if (dr == MessageBoxResult.OK)
                         {
-                            login.Visibility = System.Windows.Visibility.Visible;
-                            user.Visibility = System.Windows.Visibility.Hidden;
-                            amount.Visibility = System.Windows.Visibility.Hidden;
-                            PublicClass.username = "";
-                            PublicClass.balance = "";
-                            if (changepwd.Visibility == Visibility.Visible)
+                            Dispatcher.Invoke(new Action(delegate         //线程加载
                             {
-                                changepwd.Visibility = Visibility.Hidden;
-                            }
-                        }));
+                                user.Content = "";
+                                amount.Content = "";
+                                login.Visibility = System.Windows.Visibility.Visible;
+                                user.Visibility = System.Windows.Visibility.Hidden;
+                                amount.Visibility = System.Windows.Visibility.Hidden;
+                                PublicClass.username = "";
+                                PublicClass.balance = "";
+                                right_today.Items.Clear();
+                                right_longhu.Items.Clear();
+                                right_danshuang.Items.Clear();
+                                right_daxiao.Items.Clear();
+                                if (changepwd.Visibility == Visibility.Visible)
+                                {
+                                    changepwd.Visibility = Visibility.Hidden;
+                                }
+                            }));
+                         
+                        }
+                    
                     }
 
                     else if(oper == "26")
@@ -1122,13 +1130,21 @@ namespace shishicaiclient
                     {
                         Dispatcher.Invoke(new Action(delegate         //线程加载
                         {
-                           
+                         
                         expectlast.Children.Clear();
                         string expect1 = jsonstr["lastexpect"].ToString();
                         string opencode1 = jsonstr["lastopencode"].ToString();
                         if (PublicClass.Code_json.Last()["expect"].ToString() != expect1)
                         {
+                            var o = new
+                                {
+                                    expect =expect1,
+                                    opencode = opencode1
+                                };
+                            var json =  JsonConvert.SerializeObject(o);
+                             PublicClass.Code_json.Add(json);
                             show_leftopenjiang(opencode1, expect1);
+                            create_lab("all");
                         }
                         StackPanel stack = new StackPanel(); //实例化
                         stack.Orientation = Orientation.Horizontal;  //stackpanel横向调节

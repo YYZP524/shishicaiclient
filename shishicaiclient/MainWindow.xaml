@@ -226,7 +226,7 @@
                                                 <Button Name="jiaxiao" Content="+" Height="30" Width="30" Click="jiaxiao_Click"></Button>
                                             </StackPanel>
                                         </StackPanel>
-                                        <Button x:Name="sure" HorizontalAlignment="Left" Width="60" Height="30" Margin="40,50,0,0" Click="sure_Click">投注</Button>
+                                        <Button x:Name="sure" HorizontalAlignment="Left" Width="60" Height="30" Margin="40,30,0,0" Click="sure_Click">投注</Button>
                                         </StackPanel>
                                         <StackPanel Width="200">
                                             <Label Margin="0,20,0,0" FontSize="15">投注结果</Label>

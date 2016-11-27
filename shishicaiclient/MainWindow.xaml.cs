@@ -506,7 +506,7 @@ namespace shishicaiclient
            
 
             //连接到指定服务器的指定端口
-            PublicClass.socket.Connect("192.168.1.107", 4530);
+            PublicClass.socket.Connect("192.168.1.103", 4530);
             if (!PublicClass.socket.Connected)
             {
                 MessageBox.Show("connect to the server");
@@ -1005,6 +1005,7 @@ namespace shishicaiclient
                         {
 
                             MessageBoxResult dr = MessageBox.Show("登录成功", "提示", MessageBoxButton.OK);
+                           
                             if (dr == MessageBoxResult.OK)
                             {
                                 Dispatcher.Invoke(new Action(delegate
@@ -1052,6 +1053,10 @@ namespace shishicaiclient
                     else if (oper == "17")
                     {
                         MessageBox.Show("用户下线");
+                        right_today.Items.Clear();
+                        right_longhu.Items.Clear();
+                        right_danshuang.Items.Clear();
+                        right_daxiao.Items.Clear();
                         Dispatcher.Invoke(new Action(delegate         //线程加载
                         {
                             login.Visibility = System.Windows.Visibility.Visible;
@@ -1117,12 +1122,14 @@ namespace shishicaiclient
                     {
                         Dispatcher.Invoke(new Action(delegate         //线程加载
                         {
+                           
                         expectlast.Children.Clear();
-                      
-                   
                         string expect1 = jsonstr["lastexpect"].ToString();
                         string opencode1 = jsonstr["lastopencode"].ToString();
-                        show_leftopenjiang(opencode1,expect1);
+                        if (PublicClass.Code_json.Last()["expect"].ToString() != expect1)
+                        {
+                            show_leftopenjiang(opencode1, expect1);
+                        }
                         StackPanel stack = new StackPanel(); //实例化
                         stack.Orientation = Orientation.Horizontal;  //stackpanel横向调节
                         Label lab = new Label();
@@ -1146,6 +1153,11 @@ namespace shishicaiclient
 
                         expectlast.Children.Add(stack);
                             }));
+                    }
+
+                    else if (oper == "30")
+                    {
+                        PublicClass.balance = jsonstr["amount"].ToString();
                     }
                         
                     }
@@ -1234,6 +1246,7 @@ namespace shishicaiclient
         //注销登录向服务端发送申请数据
         private void exit_MouseDown(object sender, MouseButtonEventArgs e)
         {
+           
             string str = "";
             var o = new
             {
@@ -1312,43 +1325,47 @@ namespace shishicaiclient
         //投注龙
         private void jialong_Click(object sender, RoutedEventArgs e)
         {
-
-           
-             
-
-          
-                resultlong.Content = (Convert.ToDouble(resultlong.Content) + Convert.ToDouble(PublicClass.userbase)).ToString();
-
-                cal_user_balance(-100);
-                if (float.Parse(amount.Content.ToString().Substring(5)) < 100f)
+            if (double.Parse(PublicClass.balance) > 0)
+            {
+                if (double.Parse(resultlong.Content.ToString()) < double.Parse(PublicClass.longhufending))
                 {
-                    jialong.IsEnabled = false;
+                    resultlong.Content = (Convert.ToDouble(resultlong.Content) + Convert.ToDouble(PublicClass.userbase)).ToString();
 
-                 
+                    cal_user_balance(-float.Parse(PublicClass.userbase));
+                    if (float.Parse(amount.Content.ToString().Substring(5)) < 100f)
+                    {
+                        jialong.IsEnabled = false;
+
+
+                    }
+                    else
+                    {
+                        jialong.IsEnabled = true;
+                    }
                 }
                 else
                 {
-                    jialong.IsEnabled = true;
+                    resultlong.Content = resultlong.Content;
                 }
+            }
+            else
+            {
+                MessageBox.Show("请先登录");
+            }
         }
 
         private void jianlong_Click(object sender, RoutedEventArgs e)
         {
+            if (double.Parse(PublicClass.balance) > 0)
+            {
             if (int.Parse((resultlong.Content).ToString()) > 0)
             {
                 resultlong.Content = (Convert.ToDouble(resultlong.Content) - Convert.ToDouble(PublicClass.userbase)).ToString();
 
-                cal_user_balance(100);
+                cal_user_balance(float.Parse(PublicClass.userbase));
                 if (float.Parse(amount.Content.ToString().Substring(5)) > 100f)
                 {
                      jialong.IsEnabled = true;
-
-                    jiahu.IsEnabled = true;
-                    jiahe.IsEnabled = true;
-                    jiadan.IsEnabled = true;
-                    jiashuang.IsEnabled = true;
-                    jiada.IsEnabled = true;
-                    jiaxiao.IsEnabled = true;
                 }
             }
             else
@@ -1356,220 +1373,300 @@ namespace shishicaiclient
                 resultlong.Content = "0";
                
             }
+             
+            }
+             else
+            {
+                MessageBox.Show("请先登录");
+            }
         }
         //投注虎
         private void jiahu_Click(object sender, RoutedEventArgs e)
         {
-          
-                resulthu.Content = (Convert.ToDouble(resulthu.Content) + Convert.ToDouble(PublicClass.userbase)).ToString();
-                cal_user_balance(-float.Parse(PublicClass.userbase));
-                if (float.Parse(amount.Content.ToString().Substring(5)) < 100f)
+            if (double.Parse(PublicClass.balance) > 0)
+            {
+                if (double.Parse(resulthu.Content.ToString()) < double.Parse(PublicClass.longhufending))
                 {
-                    jiahu.IsEnabled = false;
+                    resulthu.Content = (Convert.ToDouble(resulthu.Content) + Convert.ToDouble(PublicClass.userbase)).ToString();
+                    cal_user_balance(-float.Parse(PublicClass.userbase));
+                    if (float.Parse(amount.Content.ToString().Substring(5)) < 100f)
+                    {
+                        jiahu.IsEnabled = false;
 
 
+                    }
+                    else
+                    {
+                        jiahu.IsEnabled = true;
+                    }
                 }
-                else
-                {
-                    jiahu.IsEnabled = true;
-                }
+                 else
+                     {
+                         resulthu.Content = resulthu.Content;
+                     }
+                    
+            }
+                     
+            else
+            {
+                MessageBox.Show("请先登录");
+            }
         }
 
         private void jianhu_Click(object sender, RoutedEventArgs e)
         {
-            if (int.Parse((resulthu.Content).ToString()) > 0)
+            if (double.Parse(PublicClass.balance) > 0)
             {
-                resulthu.Content = (Convert.ToDouble(resulthu.Content) - Convert.ToDouble(PublicClass.userbase)).ToString();
-
-                cal_user_balance(float.Parse(PublicClass.userbase));
-
-
-                if (float.Parse(amount.Content.ToString().Substring(5)) > 100f)
+                if (int.Parse((resulthu.Content).ToString()) > 0)
                 {
-                    jiahu.IsEnabled = true;
+                    resulthu.Content = (Convert.ToDouble(resulthu.Content) - Convert.ToDouble(PublicClass.userbase)).ToString();
 
-                    jialong.IsEnabled = true;
-                    jiahe.IsEnabled = true;
-                    jiadan.IsEnabled = true;
-                    jiashuang.IsEnabled = true;
-                    jiada.IsEnabled = true;
-                    jiaxiao.IsEnabled = true;
+                    cal_user_balance(float.Parse(PublicClass.userbase));
+
+
+                    if (float.Parse(amount.Content.ToString().Substring(5)) > 100f)
+                    {
+                        jiahu.IsEnabled = true;
+
+
+                    }
+                }
+                else
+                {
+                    resulthu.Content = "0";
                 }
             }
             else
             {
-                resulthu.Content = "0";
+                MessageBox.Show("请先登录");
             }
-               
         }
         //投注和
         private void jiahe_Click(object sender, RoutedEventArgs e)
         {
-
-            resulthe.Content = (Convert.ToDouble(resulthe.Content) + Convert.ToDouble(PublicClass.userbase)).ToString();
-            cal_user_balance(-float.Parse(PublicClass.userbase));
-            if (float.Parse(amount.Content.ToString().Substring(5)) < 100f)
+            if (double.Parse(PublicClass.balance) > 0)
             {
-                jiahe.IsEnabled = false;
+                if (double.Parse(resulthe.Content.ToString()) < double.Parse(PublicClass.hefending))
+                {
+                    resulthe.Content = (Convert.ToDouble(resulthe.Content) + Convert.ToDouble(PublicClass.userbase)).ToString();
+                    cal_user_balance(-float.Parse(PublicClass.userbase));
+                    if (float.Parse(amount.Content.ToString().Substring(5)) < 100f)
+                    {
+                        jiahe.IsEnabled = false;
 
 
+                    }
+                    else
+                    {
+                        jiahe.IsEnabled = true;
+                    }
+                }
+                else
+                {
+                    resulthe.Content = resulthe.Content;
+                }
             }
             else
             {
-                jiahe.IsEnabled = true;
+                MessageBox.Show("请先登录");
             }
-
         }
 
         private void jianhe_Click(object sender, RoutedEventArgs e)
         {
-            if (int.Parse((resulthe.Content).ToString()) > 0)
+            if (double.Parse(PublicClass.balance) > 0)
             {
-                resulthe.Content = (Convert.ToDouble(resulthe.Content) - Convert.ToDouble(PublicClass.userbase)).ToString();
-                cal_user_balance(float.Parse(PublicClass.userbase));
-                if (float.Parse(amount.Content.ToString().Substring(5)) > 100f)
+                if (int.Parse((resulthe.Content).ToString()) > 0)
                 {
-                    jiahe.IsEnabled = true;
+                    resulthe.Content = (Convert.ToDouble(resulthe.Content) - Convert.ToDouble(PublicClass.userbase)).ToString();
+                    cal_user_balance(float.Parse(PublicClass.userbase));
+                    if (float.Parse(amount.Content.ToString().Substring(5)) > 100f)
+                    {
+                        jiahe.IsEnabled = true;
+                    }
 
-                    jialong.IsEnabled = true;
-                    jiahu.IsEnabled = true;
-                    jiadan.IsEnabled = true;
-                    jiashuang.IsEnabled = true;
-                    jiada.IsEnabled = true;
-                    jiaxiao.IsEnabled = true;
                 }
-
+                else
+                {
+                    resulthe.Content = "0";
+                }
             }
             else
             {
-                resulthe.Content = "0";
+                MessageBox.Show("请先登录");
             }
         }
 
         //投注单
         private void jiadan_Click(object sender, RoutedEventArgs e)
         {
-
-            resultdan.Content = (Convert.ToDouble(resultdan.Content) + Convert.ToDouble(PublicClass.userbase)).ToString();
-            cal_user_balance(-float.Parse(PublicClass.userbase));
-            if (float.Parse(amount.Content.ToString().Substring(5)) < 100f)
+            if (double.Parse(PublicClass.balance) > 0)
             {
-                jiadan.IsEnabled = false;
+                if (double.Parse(resultdan.Content.ToString()) < double.Parse(PublicClass.danshuangfending))
+                {
+                    resultdan.Content = (Convert.ToDouble(resultdan.Content) + Convert.ToDouble(PublicClass.userbase)).ToString();
+                    cal_user_balance(-float.Parse(PublicClass.userbase));
+                    if (float.Parse(amount.Content.ToString().Substring(5)) < 100f)
+                    {
+                        jiadan.IsEnabled = false;
 
 
+                    }
+                    else
+                    {
+                        jiadan.IsEnabled = true;
+                    }
+                }
+                else
+                {
+                    resultdan.Content = resultdan.Content;
+                }
             }
             else
             {
-                jiadan.IsEnabled = true;
+                MessageBox.Show("请先登录");
             }
         }
 
         private void jiandan_Click(object sender, RoutedEventArgs e)
         {
-            if (int.Parse((resultdan.Content).ToString()) > 0)
+            if (double.Parse(PublicClass.balance) > 0)
             {
-                resultdan.Content = (Convert.ToDouble(resultdan.Content) - Convert.ToDouble(PublicClass.userbase)).ToString();
-                cal_user_balance(float.Parse(PublicClass.userbase));
-
-                if (float.Parse(amount.Content.ToString().Substring(5)) > 100f)
+                if (int.Parse((resultdan.Content).ToString()) > 0)
                 {
-                    jiadan.IsEnabled = true;
+                    resultdan.Content = (Convert.ToDouble(resultdan.Content) - Convert.ToDouble(PublicClass.userbase)).ToString();
+                    cal_user_balance(float.Parse(PublicClass.userbase));
 
-                    jialong.IsEnabled = true;
-                    jiahu.IsEnabled = true;
-                    jiahe.IsEnabled = true;
-                    jiashuang.IsEnabled = true;
-                    jiada.IsEnabled = true;
-                    jiaxiao.IsEnabled = true;
+                    if (float.Parse(amount.Content.ToString().Substring(5)) > 100f)
+                    {
+                        jiadan.IsEnabled = true;
+                    }
+                }
+                else
+                {
+                    resultdan.Content = "0";
                 }
             }
             else
             {
-                resultdan.Content = "0";
+                MessageBox.Show("请先登录");
             }
-            
 
         }
 
         //投注双
         private void jiashuang_Click(object sender, RoutedEventArgs e)
         {
-
-            resultshuang.Content = (Convert.ToDouble(resultshuang.Content) + Convert.ToDouble(PublicClass.userbase)).ToString();
-            cal_user_balance(-float.Parse(PublicClass.userbase));
-            if (float.Parse(amount.Content.ToString().Substring(5)) < 100f)
+            if (double.Parse(PublicClass.balance) > 0)
             {
-                jiashuang.IsEnabled = false;
+                if (double.Parse(resultshuang.Content.ToString()) < double.Parse(PublicClass.danshuangfending))
+                {
+                    resultshuang.Content = (Convert.ToDouble(resultshuang.Content) + Convert.ToDouble(PublicClass.userbase)).ToString();
+                    cal_user_balance(-float.Parse(PublicClass.userbase));
+                    if (float.Parse(amount.Content.ToString().Substring(5)) < 100f)
+                    {
+                        jiashuang.IsEnabled = false;
 
 
+                    }
+                    else
+                    {
+                        jiashuang.IsEnabled = true;
+                    }
+                }
+                else
+                {
+                    resultshuang.Content = resultshuang.Content;
+                }
             }
             else
             {
-                jiashuang.IsEnabled = true;
+                MessageBox.Show("请先登录");
             }
         }
 
         private void jianshuang_Click(object sender, RoutedEventArgs e)
         {
-            if (int.Parse((resultshuang.Content).ToString()) > 0)
+            if (double.Parse(PublicClass.balance) > 0)
             {
-                resultshuang.Content = (Convert.ToDouble(resultshuang.Content) - Convert.ToDouble(PublicClass.userbase)).ToString();
-                cal_user_balance(float.Parse(PublicClass.userbase));
-
-
-                if (float.Parse(amount.Content.ToString().Substring(5)) > 100f)
+                if (int.Parse((resultshuang.Content).ToString()) > 0)
                 {
-                    jiashuang.IsEnabled = true;
+                    resultshuang.Content = (Convert.ToDouble(resultshuang.Content) - Convert.ToDouble(PublicClass.userbase)).ToString();
+                    cal_user_balance(float.Parse(PublicClass.userbase));
 
-                  
+
+                    if (float.Parse(amount.Content.ToString().Substring(5)) > 100f)
+                    {
+                        jiashuang.IsEnabled = true;
+
+
+                    }
+                }
+                else
+                {
+                    resultshuang.Content = "0";
                 }
             }
             else
             {
-                resultshuang.Content = "0";
+                MessageBox.Show("请先登录");
             }
         }
 
         //投注大
         private void jiada_Click(object sender, RoutedEventArgs e)
         {
-            resultda.Content = (Convert.ToDouble(resultda.Content) + Convert.ToDouble(PublicClass.userbase)).ToString();
-            cal_user_balance(-float.Parse(PublicClass.userbase));
-            if (float.Parse(amount.Content.ToString().Substring(5)) < 100f)
+            if (double.Parse(PublicClass.balance) > 0)
             {
-                jiada.IsEnabled = false;
+                if (double.Parse(resultda.Content.ToString()) < double.Parse(PublicClass.daxiaofending))
+                {
+                    resultda.Content = (Convert.ToDouble(resultda.Content) + Convert.ToDouble(PublicClass.userbase)).ToString();
+                    cal_user_balance(-float.Parse(PublicClass.userbase));
+                    if (float.Parse(amount.Content.ToString().Substring(5)) < 100f)
+                    {
+                        jiada.IsEnabled = false;
 
 
+                    }
+                    else
+                    {
+                        jiada.IsEnabled = true;
+                    }
+                }
+                else
+                {
+                    resultda.Content = resultda.Content;
+                }
             }
             else
             {
-                jiada.IsEnabled = true;
+                MessageBox.Show("请先登录");
             }
         }
 
         private void jianda_Click(object sender, RoutedEventArgs e)
         {
-            if (int.Parse((resultda.Content).ToString()) > 0)
+            if (double.Parse(PublicClass.balance) > 0)
             {
-                resultda.Content = (Convert.ToDouble(resultda.Content) - Convert.ToDouble(PublicClass.userbase)).ToString();
-                cal_user_balance(float.Parse(PublicClass.userbase));
-
-
-                if (float.Parse(amount.Content.ToString().Substring(5)) > 100f)
+                if (int.Parse((resultda.Content).ToString()) > 0)
                 {
-                    jiada.IsEnabled = true;
+                    resultda.Content = (Convert.ToDouble(resultda.Content) - Convert.ToDouble(PublicClass.userbase)).ToString();
+                    cal_user_balance(float.Parse(PublicClass.userbase));
 
-                    jialong.IsEnabled = true;
-                    jiahu.IsEnabled = true;
-                    jiahe.IsEnabled = true;
-                    jiadan.IsEnabled = true;
-                    jiashuang.IsEnabled = true;
-                    jiaxiao.IsEnabled = true;
+
+                    if (float.Parse(amount.Content.ToString().Substring(5)) > 100f)
+                    {
+                        jiada.IsEnabled = true;
+                    }
+                }
+                else
+                {
+                    resultda.Content = "0";
                 }
             }
             else
             {
-                resultda.Content = "0";
+                MessageBox.Show("请先登录");
             }
         }
 
@@ -1577,42 +1674,59 @@ namespace shishicaiclient
         //投注小
         private void jiaxiao_Click(object sender, RoutedEventArgs e)
         {
-            resultxiao.Content = (Convert.ToDouble(resultxiao.Content) + Convert.ToDouble(PublicClass.userbase)).ToString();
-            cal_user_balance(-float.Parse(PublicClass.userbase));
-            if (float.Parse(amount.Content.ToString().Substring(5)) < 100f)
+            if (double.Parse(PublicClass.balance) > 0)
             {
-                jiaxiao.IsEnabled = false;
-
-
-            }
-            else
-            {
-                jiaxiao.IsEnabled = true;
-            }
-        }
-
-        private void jianxiao_Click(object sender, RoutedEventArgs e)
-        {
-            if (int.Parse((resultxiao.Content).ToString()) > 0)
-            {
-                resultxiao.Content = (Convert.ToDouble(resultxiao.Content) + Convert.ToDouble(PublicClass.userbase)).ToString();
-                cal_user_balance(float.Parse(PublicClass.userbase));
-
-                if (float.Parse(amount.Content.ToString().Substring(5)) > 100f)
+                if (double.Parse(resultxiao.Content.ToString()) < double.Parse(PublicClass.daxiaofending))   //封顶限制
                 {
-                    jiaxiao.IsEnabled = true;
+                    resultxiao.Content = (Convert.ToDouble(resultxiao.Content) + Convert.ToDouble(PublicClass.userbase)).ToString();
+                    cal_user_balance(-float.Parse(PublicClass.userbase));
+                    if (float.Parse(amount.Content.ToString().Substring(5)) < 100f)
+                    {
+                        jiaxiao.IsEnabled = false;
 
-                    jialong.IsEnabled = true;
-                    jiahu.IsEnabled = true;
-                    jiahe.IsEnabled = true;
-                    jiadan.IsEnabled = true;
-                    jiashuang.IsEnabled = true;
-                    jiada.IsEnabled = true;
+
+                    }
+                    else
+                    {
+                        jiaxiao.IsEnabled = true;
+                    }
+                }
+                else
+                {
+                    resultxiao.Content = resultxiao.Content;
                 }
             }
             else
             {
-                resultxiao.Content = "0";
+                MessageBox.Show("请先登录");
+            }
+        }
+
+
+       
+
+        private void jianxiao_Click(object sender, RoutedEventArgs e)
+        {
+            if (double.Parse(PublicClass.balance) > 0)
+            {
+                if (int.Parse((resultxiao.Content).ToString()) > 0)
+                {
+                    resultxiao.Content = (Convert.ToDouble(resultxiao.Content) + Convert.ToDouble(PublicClass.userbase)).ToString();
+                    cal_user_balance(float.Parse(PublicClass.userbase));
+
+                    if (float.Parse(amount.Content.ToString().Substring(5)) > 100f)
+                    {
+                        jiaxiao.IsEnabled = true;
+                    }
+                }
+                else
+                {
+                    resultxiao.Content = "0";
+                }
+            }
+            else
+            {
+                MessageBox.Show("请先登录");
             }
         }
 
@@ -1722,7 +1836,8 @@ namespace shishicaiclient
                 MessageBox.Show("请先登陆！");
 
             }
-            }
+            } 
+            
 
         
             else
@@ -1829,30 +1944,33 @@ namespace shishicaiclient
         //刷新纪录
         private void hidden_nextexpect_TextChanged(object sender, TextChangedEventArgs e)
         {
-           
-            var o = new
+            if (hidden_nextexpect.Text != "")
             {
-                opercode = "27",  //查询刚刚开奖的期数号吗
-                clientIP = PublicClass.localIP
-            };
-            var json = JsonConvert.SerializeObject(o);
-            var outputBuffer = Encoding.Unicode.GetBytes(json);
-            PublicClass.socket.BeginSend(outputBuffer, 0, outputBuffer.Length, SocketFlags.None, null, null);
-
-            var o1 = new
-            {
-                opercode = "25",
-                username = PublicClass.username,
-                clientIP = PublicClass.localIP
-            };
-            var json1 = JsonConvert.SerializeObject(o1);
-            var outputBuffer1 = Encoding.Unicode.GetBytes(json1);
-            PublicClass.socket.BeginSend(outputBuffer, 0, outputBuffer.Length, SocketFlags.None, null, null);
-           
-           
-            if (left_tabcontrol.SelectedIndex == 0)
-            {
-                create_lab("all");
+                var o = new
+                {
+                    opercode = "27",  //查询刚刚开奖的期数号吗
+                    clientIP = PublicClass.localIP
+                };
+                var json = JsonConvert.SerializeObject(o);
+                var outputBuffer = Encoding.Unicode.GetBytes(json);
+                PublicClass.socket.BeginSend(outputBuffer, 0, outputBuffer.Length, SocketFlags.None, null, null);
+                if (PublicClass.username != "/")
+                {
+                    var o2 = new
+                    {
+                        opercode = "29",  //查询开奖以后余额
+                        username = PublicClass.username,
+                        clientIP = PublicClass.localIP
+                    };
+                    var json2 = JsonConvert.SerializeObject(o2);
+                    var outputBuffer2 = Encoding.Unicode.GetBytes(json2);
+                    PublicClass.socket.BeginSend(outputBuffer2, 0, outputBuffer2.Length, SocketFlags.None, null, null);
+                }
+                if (left_tabcontrol.SelectedIndex == 0)
+                {
+                   
+                    create_lab("all");
+                }
             }
             
         }

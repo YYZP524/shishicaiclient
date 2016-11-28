@@ -506,7 +506,7 @@ namespace shishicaiclient
            
 
             //连接到指定服务器的指定端口
-            PublicClass.socket.Connect("192.168.1.103", 4530);
+            PublicClass.socket.Connect("192.168.1.107", 4530);
             if (!PublicClass.socket.Connected)
             {
                 MessageBox.Show("connect to the server");
@@ -1350,33 +1350,24 @@ namespace shishicaiclient
                     cal_user_balance(-float.Parse(PublicClass.userbase));
                     if (float.Parse(amount.Content.ToString().Substring(5)) < 100f)
                     {
-                        jialong.IsEnabled = false;
-
-                        cal_user_balance(-float.Parse(PublicClass.userbase));
-                        if (float.Parse(amount.Content.ToString().Substring(5)) < 100f)
-                        {
-                            allfalse();//调用判断投注大小与余额关联：  private void alltrue()
-                        }
-                        else
-                        {
-                            jialong.IsEnabled = true;
-                        }
+                        allfalse();//调用判断投注大小与余额关联：  private void allfalse
                     }
                     else
                     {
-                        resultlong.Content = resultlong.Content;
-
-                        alltrue();// 调用判断投注大小与余额关联：  private void allfalse()
+                        alltrue();// 调用判断投注大小与余额关联：  private void alltrue()
 
                     }
-                }
-                else
-                {
-                    MessageBox.Show("请先登录");
+                      
+               
                 }
             }
-        }
+             
 
+            else
+            {
+                MessageBox.Show("请先登录");
+            }
+        }
 
         private void jianlong_Click(object sender, RoutedEventArgs e)
         {

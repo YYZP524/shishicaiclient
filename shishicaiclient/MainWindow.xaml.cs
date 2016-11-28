@@ -1367,6 +1367,7 @@ namespace shishicaiclient
                     cal_user_balance(-float.Parse(PublicClass.userbase));
                     if (float.Parse(amount.Content.ToString().Substring(5)) < 100f)
                     {
+
                         jialong.IsEnabled = false;
 
                         cal_user_balance(-float.Parse(PublicClass.userbase));
@@ -1382,19 +1383,20 @@ namespace shishicaiclient
                     }
                     else
                     {
-                        resultlong.Content = resultlong.Content;
-
-                        alltrue();// 调用判断投注大小与余额关联：  private void allfalse()
+                        alltrue();// 调用判断投注大小与余额关联：  private void alltrue()
 
                     }
-                }
-                else
-                {
-                    MessageBox.Show("请先登录");
+                      
+               
                 }
             }
-        }
+             
 
+            else
+            {
+                MessageBox.Show("请先登录");
+            }
+        }
 
         private void jianlong_Click(object sender, RoutedEventArgs e)
         {

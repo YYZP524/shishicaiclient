@@ -266,7 +266,7 @@
                                                                     <Label Content="输赢" Width="80"></Label>
                                                                     </StackPanel>
                                                                     <StackPanel>
-                                                                <ListBox x:Name="right_today" SelectionChanged="right_today_SelectionChanged"></ListBox>
+                                                                <ListBox x:Name="right_today" SelectionChanged="right_today_SelectionChanged" Height="450"></ListBox>
                                                                     </StackPanel>
                                                                 </StackPanel>
                                                             </ScrollViewer.Content>
@@ -304,7 +304,7 @@
                                                                                     <Label Content="输赢" Width="80"></Label>
                                                                                         </StackPanel>
                                                                                         <StackPanel>
-                                                                                            <ListBox x:Name="right_longhu" SelectionChanged="right_longhu_SelectionChanged"></ListBox>
+                                                                                            <ListBox x:Name="right_longhu" SelectionChanged="right_longhu_SelectionChanged" Height="450" ></ListBox>
                                                                                         </StackPanel>
                                                                                     </StackPanel>
                                                                                
@@ -329,7 +329,7 @@
                                                                                             <Label Content="输赢" Width="80"></Label>
                                                                                         </StackPanel>
                                                                                         <StackPanel>
-                                                                                            <ListBox x:Name="right_danshuang" SelectionChanged="right_danshuang_SelectionChanged"></ListBox>
+                                                                                            <ListBox x:Name="right_danshuang" SelectionChanged="right_danshuang_SelectionChanged" Height="450" ></ListBox>
                                                                                         </StackPanel>
                                                                                     </StackPanel>
                                                                                 
@@ -353,7 +353,7 @@
                                                                                             <Label Content="输赢" Width="80"></Label>
                                                                                         </StackPanel>
                                                                                         <StackPanel>
-                                                                                            <ListBox x:Name="right_daxiao" SelectionChanged="right_daxiao_SelectionChanged"></ListBox>
+                                                                                            <ListBox x:Name="right_daxiao" SelectionChanged="right_daxiao_SelectionChanged" Height="450"></ListBox>
                                                                                         </StackPanel>
                                                                                     </StackPanel>
                                                                                 </ScrollViewer.Content>

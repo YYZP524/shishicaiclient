@@ -119,11 +119,11 @@ namespace shishicaiclient
                             rectlab rect = new rectlab();
                             rect.Width = 30;
                             rect.Height = 30;
-                            if (int.Parse(opencodes[1]) > int.Parse(opencodes[4]))//第二位大于第五位为龙
+                            if (int.Parse(opencodes[0]) > int.Parse(opencodes[4]))//第二位大于第五位为龙
                             {
                                 rect.create_rect(0, "龙");
                             }
-                            else if (int.Parse(opencodes[1]) == int.Parse(opencodes[4]))//第二位等于第五位
+                            else if (int.Parse(opencodes[0]) == int.Parse(opencodes[4]))//第二位等于第五位
                             {
                                 rect.create_rect(2, "和");
                             }
@@ -155,7 +155,7 @@ namespace shishicaiclient
                         rect.Width = 30;
                         rect.Height = 30;
 
-                        int daxiaocount = int.Parse(opencodes[1]) + int.Parse(opencodes[2]) + int.Parse(opencodes[3]) + int.Parse(opencodes[4]);//大小判断（第二位加第三位加到第五位的和来判断大小）
+                        int daxiaocount = int.Parse(opencodes[1]) + int.Parse(opencodes[2]) + int.Parse(opencodes[3]) + int.Parse(opencodes[4]) + int.Parse(opencodes[0]);//大小判断（第二位加第三位加到第五位的和来判断大小）
                         if (daxiaocount > 17)//大于17为大
                         {
                             rect.create_rect(0, "大");
@@ -188,7 +188,7 @@ namespace shishicaiclient
                         rect.Width = 30;
                         rect.Height = 30;
 
-                        int daxiaocount = int.Parse(opencodes[1]) + int.Parse(opencodes[2]) + int.Parse(opencodes[3]) + int.Parse(opencodes[4]);//单双判断（奇偶）
+                        int daxiaocount = int.Parse(opencodes[1]) + int.Parse(opencodes[2]) + int.Parse(opencodes[3]) + int.Parse(opencodes[4]) + int.Parse(opencodes[0]);//单双判断（奇偶）
                         if (daxiaocount %2==0)//单双判断依据：第二位加到底五位的和
                         {
                             rect.create_rect(1, "双");
@@ -222,7 +222,7 @@ namespace shishicaiclient
                     {
                         string opencode = PublicClass.Code_json[i]["opencode"].ToString();
                         string[] sopencode = opencode.Split(',');
-                        int mod = int.Parse(sopencode[1]) + int.Parse(sopencode[2]) + int.Parse(sopencode[3]) + int.Parse(sopencode[4]);//大小序列判断
+                        int mod = int.Parse(sopencode[1]) + int.Parse(sopencode[2]) + int.Parse(sopencode[3]) + int.Parse(sopencode[4]) + int.Parse(sopencode[0]);//大小序列判断
                         //mod = mod % 2;
                         if (mod > 17)//18.............
                         {
@@ -506,7 +506,7 @@ namespace shishicaiclient
            
 
             //连接到指定服务器的指定端口
-            PublicClass.socket.Connect("192.168.1.103", 4530);
+            PublicClass.socket.Connect("192.168.1.107", 4530);
             if (!PublicClass.socket.Connected)
             {
                 MessageBox.Show("connect to the server");
@@ -1124,6 +1124,21 @@ namespace shishicaiclient
                             }
                         }));
                         }
+
+                        if (jsonstr["status"].ToString() == "200")
+                        {
+                            MessageBox.Show("已经投注过了，请等待下次投注");
+                             Dispatcher.Invoke(new Action(delegate         //线程加载
+                        {
+                            resultlong.Content = "0";
+                            resulthu.Content = "0";
+                            resulthe.Content = "0";
+                            resultdan.Content = "0";
+                            resultshuang.Content = "0";
+                            resultda.Content = "0";
+                            resultxiao.Content = "0";
+                        }));
+                        }
                     }
 
                     else if (oper == "28")
@@ -1136,15 +1151,17 @@ namespace shishicaiclient
                         string opencode1 = jsonstr["lastopencode"].ToString();
                         if (PublicClass.Code_json.Last()["expect"].ToString() != expect1)
                         {
-                            var o = new
-                                {
-                                    expect =expect1,
-                                    opencode = opencode1
-                                };
-                            var json =  JsonConvert.SerializeObject(o);
-                             PublicClass.Code_json.Add(json);
                             show_leftopenjiang(opencode1, expect1);
-                            create_lab("all");
+                            var o = new
+                            {
+                                opercode = "22",  //今日
+                                clientIP = PublicClass.localIP
+                            };
+                            var json = JsonConvert.SerializeObject(o);
+                            var outputBuffer = Encoding.Unicode.GetBytes(json);
+                            left_opencode.Items.Clear();
+                            PublicClass.socket.BeginSend(outputBuffer, 0, outputBuffer.Length, SocketFlags.None, null, null);
+                            
                         }
                         StackPanel stack = new StackPanel(); //实例化
                         stack.Orientation = Orientation.Horizontal;  //stackpanel横向调节
@@ -1356,6 +1373,7 @@ namespace shishicaiclient
                         if (float.Parse(amount.Content.ToString().Substring(5)) < 100f)
                         {
                             allfalse();//调用判断投注大小与余额关联：  private void alltrue()
+                            cal_user_balance(-float.Parse(PublicClass.userbase));
                         }
                         else
                         {
@@ -1933,7 +1951,7 @@ namespace shishicaiclient
                 var message = PublicClass.zhucejson;
                 var outputBuffer = Encoding.Unicode.GetBytes(message);
                 PublicClass.socket.BeginSend(outputBuffer, 0, outputBuffer.Length, SocketFlags.None, null, null);
-                sure.IsEnabled = false;
+               
             }
             else
             {

@@ -687,7 +687,7 @@ namespace shishicaiclient
             {
                 right_today.Items.Add(stack); //显示在页面的left_opencode的listbox里
             }
-            else if (right_tabcontrol.SelectedIndex == 1)
+             if (right_tabcontrol.SelectedIndex == 1)
             {
                 if (type == "longhu")
                 {
@@ -1007,18 +1007,19 @@ namespace shishicaiclient
 
                             MessageBoxResult dr = MessageBox.Show("登录成功", "提示", MessageBoxButton.OK);
                            
+                           
                             if (dr == MessageBoxResult.OK)
                             {
                                 Dispatcher.Invoke(new Action(delegate
                                 {
-                                    user.Content = PublicClass.username;
+                                    user.Header = PublicClass.username;
                                     PublicClass.balance = jsonstr["amount"].ToString();
                                     PublicClass.userbase =  jsonstr["base"].ToString();
                                     PublicClass.longhufending=  jsonstr["longhucapping"].ToString();
                                     PublicClass.danshuangfending= jsonstr["danshuangcapping"].ToString();
                                     PublicClass.daxiaofending= jsonstr["daxiaocapping"].ToString();
                                     PublicClass.hefending = jsonstr["hecapping"].ToString();
-                                    amount.Content = "账户余额：" + PublicClass.balance.ToString();
+                                    amount.Header = "余额：" + PublicClass.balance.ToString();
                                     if (user.Visibility == Visibility.Hidden || amount.Visibility == Visibility.Hidden)
                                     {
                                         user.Visibility = Visibility.Visible;
@@ -1026,6 +1027,7 @@ namespace shishicaiclient
                                     }
                                     login.Visibility = System.Windows.Visibility.Collapsed;
                                     changepwd.Visibility = System.Windows.Visibility.Visible;
+                                    exit.Visibility = System.Windows.Visibility.Visible;
                                     //关闭登录窗口
                                     C1.WPF.C1Window close1 = MainWindow.FindChild<C1.WPF.C1Window>(
                                         Application.Current.MainWindow, "closelogin");
@@ -1053,13 +1055,15 @@ namespace shishicaiclient
                     //服务端返回下线通知
                     else if (oper == "17")
                     {
+
                         MessageBoxResult dr = MessageBox.Show("用户下线", "提示", MessageBoxButton.OK);
+                       
                         if (dr == MessageBoxResult.OK)
                         {
                             Dispatcher.Invoke(new Action(delegate         //线程加载
                             {
-                                user.Content = "";
-                                amount.Content = "";
+                                user.Header = "";
+                                amount.Header = "";
                                 login.Visibility = System.Windows.Visibility.Visible;
                                 user.Visibility = System.Windows.Visibility.Hidden;
                                 amount.Visibility = System.Windows.Visibility.Hidden;
@@ -1069,9 +1073,10 @@ namespace shishicaiclient
                                 right_longhu.Items.Clear();
                                 right_danshuang.Items.Clear();
                                 right_daxiao.Items.Clear();
-                                if (changepwd.Visibility == Visibility.Visible)
+                                if (changepwd.Visibility == Visibility.Visible || exit.Visibility==Visibility.Visible)
                                 {
                                     changepwd.Visibility = Visibility.Hidden;
+                                    exit.Visibility = Visibility.Hidden;
                                 }
                             }));
                          
@@ -1084,6 +1089,7 @@ namespace shishicaiclient
                         if (jsonstr["status"].ToString() == "100")
                         {
                             MessageBox.Show("投注成功！");
+                           
                           
                                                     Dispatcher.Invoke(new Action(delegate         //线程加载
                         {
@@ -1096,11 +1102,11 @@ namespace shishicaiclient
                             resultxiao.Content = "0";
                             if (longmount != null)
                             {
-                                longhures.Content = " 龙 ： " + longmount + "      ";
+                                longhures.Content = "龙 ： " + longmount + "     ";
                             }
                             if (humount != null)
                             {
-                                longhures.Content = longhures.Content + " 虎 : " + humount + "      ";
+                                longhures.Content = longhures.Content + " 虎 : " + humount + "     ";
                             }
                             if (hemount != null)
                             {
@@ -1108,19 +1114,19 @@ namespace shishicaiclient
                             }
                             if (danmount != null)
                             {
-                                danshaungres.Content = " 单 ： " + danmount + "      ";
+                                danshaungres.Content = "单 ： " + danmount + "      ";
                             }
                             if (shuangmount != null)
                             {
-                                danshaungres.Content = danshaungres.Content + " 双 ： " + shuangmount + "      ";
+                                danshaungres.Content = danshaungres.Content + "双 ： " + shuangmount + "      ";
                             }
                             if (damount != null)
                             {
-                                daxiaores.Content = " 大 ： " + damount + "      ";
+                                daxiaores.Content = "大 ： " + damount + "      ";
                             }
                             if (xiaomount != null)
                             {
-                                daxiaores.Content = daxiaores.Content + " 小 ： " + xiaomount + "      ";
+                                daxiaores.Content = daxiaores.Content + "小 ： " + xiaomount + "      ";
                             }
                         }));
                         }
@@ -1159,8 +1165,8 @@ namespace shishicaiclient
                             };
                             var json = JsonConvert.SerializeObject(o);
                             var outputBuffer = Encoding.Unicode.GetBytes(json);
-                            left_opencode.Items.Clear();
                             PublicClass.socket.BeginSend(outputBuffer, 0, outputBuffer.Length, SocketFlags.None, null, null);
+                            left_opencode.Items.Clear();
                             
                         }
                         StackPanel stack = new StackPanel(); //实例化
@@ -1190,7 +1196,11 @@ namespace shishicaiclient
 
                     else if (oper == "30")
                     {
+                        Dispatcher.Invoke(new Action(delegate         //线程加载
+                        {
                         PublicClass.balance = jsonstr["amount"].ToString();
+                        amount.Header = "余额：" + PublicClass.balance.ToString();
+                        }));
                     }
                         
                     }
@@ -1207,10 +1217,8 @@ namespace shishicaiclient
 
        
         //用户注册窗口弹窗
-        private void sign_MouseDown(object sender, MouseButtonEventArgs e)
+        private void sign_Click(object sender, RoutedEventArgs e)
         {
-            
-           
             sub_sign login = new sub_sign();//用户注册窗口login
             C1Window win = new C1Window();//C1:win宽高
             win.Name = "closesign";
@@ -1222,10 +1230,9 @@ namespace shishicaiclient
             win.Margin = new Thickness((SystemParameters.WorkArea.Width - win.Width) / 2, (SystemParameters.WorkArea.Height - win.Height) / 2, 0, 0);//用户注册窗口居中：（屏幕宽度-窗口宽度）除以2，高度一样的方法
             win.Content = login;//内容
             win.Show();
-            
         }
         //登录窗口弹窗
-        private void login_MouseDown(object sender, MouseButtonEventArgs e)
+        private void login_Click(object sender, RoutedEventArgs e)
         {
             login sign = new login();
             C1Window lo = new C1Window();
@@ -1239,11 +1246,10 @@ namespace shishicaiclient
             lo.Content = sign;
             lo.Show();
             lo.Name = "closelogin";
-
         }
 
         //密码修改窗口弹窗
-        private void changepwd_MouseDown(object sender, MouseButtonEventArgs e)
+        private void changepwd_Click(object sender, RoutedEventArgs e)
         {
             chang change = new chang();
             C1Window cg = new C1Window();
@@ -1257,10 +1263,14 @@ namespace shishicaiclient
             cg.Show();
             cg.Name = "change";
         }
+
+       
+
+       
         //点击用户名显示用户信息
-        private void user_MouseDown(object sender, MouseButtonEventArgs e)
+        private void user_Click(object sender, RoutedEventArgs e)
         {
-            if ((user.Content).ToString() == PublicClass.username)
+            if ((user.Header).ToString() == PublicClass.username)
             {
                 User usermessage = new User();
                 C1Window um = new C1Window();
@@ -1277,7 +1287,7 @@ namespace shishicaiclient
 
 
         //注销登录向服务端发送申请数据
-        private void exit_MouseDown(object sender, MouseButtonEventArgs e)
+        private void exit_Click(object sender, RoutedEventArgs e)
         {
            
             string str = "";
@@ -1365,7 +1375,7 @@ namespace shishicaiclient
                     resultlong.Content = (Convert.ToDouble(resultlong.Content) + Convert.ToDouble(PublicClass.userbase)).ToString();
 
                     cal_user_balance(-float.Parse(PublicClass.userbase));
-                    if (float.Parse(amount.Content.ToString().Substring(5)) < 100f)
+                    if (float.Parse(amount.Header.ToString().Substring(3)) < 100f)
                     {
                         allfalse();//调用判断投注大小与余额关联：  private void allfalse
                     }
@@ -1376,12 +1386,16 @@ namespace shishicaiclient
                         alltrue();// 调用判断投注大小与余额关联：  private void alltrue()
                     }
 
-
                 }
                 else
                 {
-                    MessageBox.Show("请先登录");
+                    resultlong.Content = resultlong.Content;
                 }
+               
+            }
+            else
+            {
+                MessageBox.Show("请先登录");
             }
         }
 
@@ -1396,7 +1410,7 @@ namespace shishicaiclient
                     cal_user_balance(float.Parse(PublicClass.userbase));
 
 
-                        if (float.Parse(amount.Content.ToString().Substring(5)) < 100f)
+                        if (float.Parse(amount.Header.ToString().Substring(3)) < 100f)
                         {
                             allfalse();//调用判断投注大小与余额关联：  private void alltrue()
                         }
@@ -1430,7 +1444,7 @@ namespace shishicaiclient
 
                     resulthu.Content = (Convert.ToDouble(resulthu.Content) + Convert.ToDouble(PublicClass.userbase)).ToString();
                     cal_user_balance(-float.Parse(PublicClass.userbase));
-                    if (float.Parse(amount.Content.ToString().Substring(5)) < 100f)
+                    if (float.Parse(amount.Header.ToString().Substring(3)) < 100f)
                     {
                         allfalse();//调用判断投注大小与余额关联：  private void allfalse
                     }
@@ -1443,10 +1457,16 @@ namespace shishicaiclient
 
 
                 }
-                else
+                     else
                 {
-                    MessageBox.Show("请先登录");
+                    resulthu.Content = resulthu.Content;
                 }
+               
+            }
+
+            else
+            {
+                MessageBox.Show("请先登录");
             }
         }
 
@@ -1461,7 +1481,7 @@ namespace shishicaiclient
                     cal_user_balance(float.Parse(PublicClass.userbase));
 
                    
-                        if (float.Parse(amount.Content.ToString().Substring(5)) < 100f)
+                        if (float.Parse(amount.Header.ToString().Substring(3)) < 100f)
                         {
                             allfalse();//调用判断投注大小与余额关联：  private void alltrue()
                         }
@@ -1493,7 +1513,7 @@ namespace shishicaiclient
                 {
                     resulthe.Content = (Convert.ToDouble(resulthe.Content) + Convert.ToDouble(PublicClass.userbase)).ToString();
                     cal_user_balance(-float.Parse(PublicClass.userbase));
-                    if (float.Parse(amount.Content.ToString().Substring(5)) < 100f)
+                    if (float.Parse(amount.Header.ToString().Substring(3)) < 100f)
                     {
                         allfalse();//调用判断投注大小与余额关联：  private void allfalse
                     }
@@ -1503,13 +1523,15 @@ namespace shishicaiclient
                     {
                         alltrue();// 调用判断投注大小与余额关联：  private void alltrue()
                     }
-
-
                 }
                 else
                 {
-                    MessageBox.Show("请先登录");
-                }
+                   resulthe.Content = resulthe.Content;
+                }   
+            }
+            else
+            {
+                MessageBox.Show("请先登录");
             }
         }
 
@@ -1525,7 +1547,7 @@ namespace shishicaiclient
 
                     
 
-                        if (float.Parse(amount.Content.ToString().Substring(5)) < 100f)
+                        if (float.Parse(amount.Header.ToString().Substring(3)) < 100f)
                         {
                             allfalse();//调用判断投注大小与余额关联：  private void alltrue()
                         }
@@ -1557,7 +1579,7 @@ namespace shishicaiclient
                 {
                     resultdan.Content = (Convert.ToDouble(resultdan.Content) + Convert.ToDouble(PublicClass.userbase)).ToString();
                       cal_user_balance(-float.Parse(PublicClass.userbase));
-                    if (float.Parse(amount.Content.ToString().Substring(5)) < 100f)
+                    if (float.Parse(amount.Header.ToString().Substring(3)) < 100f)
                     {
                         allfalse();//调用判断投注大小与余额关联：  private void alltrue()
                     }
@@ -1588,7 +1610,7 @@ namespace shishicaiclient
                     resultdan.Content = (Convert.ToDouble(resultdan.Content) - Convert.ToDouble(PublicClass.userbase)).ToString();
                     cal_user_balance(float.Parse(PublicClass.userbase));
 
-                    if (float.Parse(amount.Content.ToString().Substring(5)) < 100f)
+                    if (float.Parse(amount.Header.ToString().Substring(3)) < 100f)
                     {
                         allfalse();
                     }
@@ -1619,7 +1641,7 @@ namespace shishicaiclient
                 {
                     resultshuang.Content = (Convert.ToDouble(resultshuang.Content) + Convert.ToDouble(PublicClass.userbase)).ToString();
                     cal_user_balance(-float.Parse(PublicClass.userbase));
-                    if (float.Parse(amount.Content.ToString().Substring(5)) < 100f)
+                    if (float.Parse(amount.Header.ToString().Substring(3)) < 100f)
                     {
                         allfalse();//调用判断投注大小与余额关联：  private void alltrue()
                     }
@@ -1649,7 +1671,7 @@ namespace shishicaiclient
                 {
                     resultshuang.Content = (Convert.ToDouble(resultshuang.Content) - Convert.ToDouble(PublicClass.userbase)).ToString();
                     cal_user_balance(float.Parse(PublicClass.userbase));
-                    if (float.Parse(amount.Content.ToString().Substring(5)) < 100f)
+                    if (float.Parse(amount.Header.ToString().Substring(3)) < 100f)
                     {
                         allfalse();
                     }
@@ -1681,7 +1703,7 @@ namespace shishicaiclient
                 {
                     resultda.Content = (Convert.ToDouble(resultda.Content) + Convert.ToDouble(PublicClass.userbase)).ToString();
                     cal_user_balance(-float.Parse(PublicClass.userbase));
-                    if (float.Parse(amount.Content.ToString().Substring(5)) < 100f)
+                    if (float.Parse(amount.Header.ToString().Substring(3)) < 100f)
                     {
                         allfalse();
                     }
@@ -1712,7 +1734,7 @@ namespace shishicaiclient
                     resultda.Content = (Convert.ToDouble(resultda.Content) - Convert.ToDouble(PublicClass.userbase)).ToString();
                     cal_user_balance(float.Parse(PublicClass.userbase));
 
-                    if (float.Parse(amount.Content.ToString().Substring(5)) < 100f)
+                    if (float.Parse(amount.Header.ToString().Substring(3)) < 100f)
                     {
                         allfalse();
                     }
@@ -1744,7 +1766,7 @@ namespace shishicaiclient
                 {
                     resultxiao.Content = (Convert.ToDouble(resultxiao.Content) + Convert.ToDouble(PublicClass.userbase)).ToString();
                     cal_user_balance(-float.Parse(PublicClass.userbase));
-                    if (float.Parse(amount.Content.ToString().Substring(5)) < 100f)
+                    if (float.Parse(amount.Header.ToString().Substring(3)) < 100f)
                     {
 
                         allfalse();
@@ -1777,10 +1799,10 @@ namespace shishicaiclient
 
                 if (int.Parse((resultxiao.Content).ToString()) > 0)
                 {
-                    resultxiao.Content = (Convert.ToDouble(resultxiao.Content) + Convert.ToDouble(PublicClass.userbase)).ToString();
+                    resultxiao.Content = (Convert.ToDouble(resultxiao.Content) - Convert.ToDouble(PublicClass.userbase)).ToString();
                     cal_user_balance(float.Parse(PublicClass.userbase));
 
-                    if (float.Parse(amount.Content.ToString().Substring(5)) < 100f)
+                    if (float.Parse(amount.Header.ToString().Substring(3)) < 100f)
                     {
                         allfalse();
                     }
@@ -1920,7 +1942,7 @@ namespace shishicaiclient
                 var message = PublicClass.zhucejson;
                 var outputBuffer = Encoding.Unicode.GetBytes(message);
                 PublicClass.socket.BeginSend(outputBuffer, 0, outputBuffer.Length, SocketFlags.None, null, null);
-               
+                PublicClass.touzhu_json.Clear();
             }
             else
             {
@@ -2331,7 +2353,7 @@ namespace shishicaiclient
         private void cal_user_balance(float balance)
         {
           
-            amount.Content = "账户余额：" + (float.Parse(amount.Content.ToString().Substring(5)) + balance);
+            amount.Header = "余额：" + (float.Parse(amount.Header.ToString().Substring(3)) + balance);
            
 
 
@@ -2363,6 +2385,12 @@ namespace shishicaiclient
         {
             e.Handled = true;
         }
+
+      
+
+     
+
+       
 
        
 

@@ -11,24 +11,15 @@
         </Grid.RowDefinitions>
 
         <Menu Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
-            
-            <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" Width="213">
-             <Label  Height="29" Name="user" Foreground="Blue" FontSize="13" HorizontalContentAlignment="Center"  Width="100" MouseDown="user_MouseDown"></Label>
-            <Label  Height="29" Name="amount" Foreground="Red" FontSize="13" HorizontalContentAlignment="Center"  Width="113" ></Label>
-            </StackPanel>
-
-
-            <MenuItem Header="用户">       
-
-             <Label Content="修改密码" Height="29" Name="changepwd" FontSize="13" HorizontalContentAlignment="Center"  Width="63" MouseDown="changepwd_MouseDown" Visibility="Collapsed"></Label>
-            <Label Content="注册" Height="29" FontSize="13" HorizontalContentAlignment="Center"  Name="sign"  Width="42" MouseDown="sign_MouseDown"></Label>
-            <Label Content="登录" Height="29"  FontSize="13" HorizontalContentAlignment="Center"  Name="login" Width="42" MouseDown="login_MouseDown"></Label>
-            <Label Content="注销登录" Height="29" FontSize="13" HorizontalContentAlignment="Right" VerticalAlignment="Center" Name="exit" Width="61" MouseDown="exit_MouseDown"></Label>
-           </MenuItem>
-            <MenuItem Header="退出" FontSize="13" Name="close" HorizontalAlignment="Right" Click="close_Click">
+                <MenuItem  Height="29" Name="user" Foreground="Blue" FontSize="13"  HorizontalAlignment="Center" Click="user_Click"></MenuItem>
+                <MenuItem  Height="29" Name="amount" Foreground="Red" FontSize="13" HorizontalContentAlignment="Center" ></MenuItem>
+            <MenuItem Header="用户">
+                <MenuItem Header="注册" Height="29" FontSize="13" HorizontalContentAlignment="Center"  Name="sign"   Click="sign_Click"></MenuItem>
+                <MenuItem Header="登录" Height="29"  FontSize="13" HorizontalContentAlignment="Center"  Name="login" Click="login_Click"></MenuItem>
+                <MenuItem Header="注销登录" Height="29" FontSize="13" HorizontalContentAlignment="Right" VerticalAlignment="Center" Name="exit"  Click="exit_Click" Visibility="Collapsed"></MenuItem>
+                <MenuItem Header="修改密码" Height="29" Name="changepwd" FontSize="13" HorizontalAlignment="Center"  Visibility="Collapsed" Click="changepwd_Click"></MenuItem>
             </MenuItem>
-                
-          
+            <MenuItem Header="退出" FontSize="13" Name="close" HorizontalAlignment="Right" Click="close_Click"></MenuItem>
         </Menu>
         <ToolBar Grid.Row="1"/>
         <avalonDock:DockingManager x:Name="dockingManager" Grid.Row="2" >
@@ -253,7 +244,11 @@
                                                 <TabItem Header="今日投注记录">
                                                    
                                                         <Grid>
-                                                        <ScrollViewer x:Name="todayhistroy_scroll" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" CanContentScroll="True">
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="122" />
+                                                            <ColumnDefinition Width="266" />
+                                                        </Grid.ColumnDefinitions>
+                                                        <ScrollViewer x:Name="todayhistroy_scroll" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Hidden"  CanContentScroll="True" Grid.ColumnSpan="2">
                                                             <ScrollViewer.Content>
                                                                 <StackPanel VerticalAlignment="Top" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto">
                                                                     <StackPanel Orientation="Horizontal"  Height="25" Background="LightGray" >
@@ -266,7 +261,9 @@
                                                                     <Label Content="输赢" Width="80"></Label>
                                                                     </StackPanel>
                                                                     <StackPanel>
-                                                                <ListBox x:Name="right_today" SelectionChanged="right_today_SelectionChanged" Height="450"></ListBox>
+                                                                       
+                                                                <ListBox x:Name="right_today" SelectionChanged="right_today_SelectionChanged" Height="400"></ListBox>
+                                                                      
                                                                     </StackPanel>
                                                                 </StackPanel>
                                                             </ScrollViewer.Content>
@@ -277,7 +274,7 @@
                                                 
                                                                                               
                                                     <TabItem Header="历史投注记录">
-                                                    <ScrollViewer x:Name="slecthis_scroll" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"  CanContentScroll="True" >
+                                                    <ScrollViewer x:Name="slecthis_scroll" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Hidden"  CanContentScroll="True" >
                                                         <Grid>
                                                             <StackPanel  VerticalAlignment="Top"  Orientation="Horizontal" Height="25">
                                                                 <Label Content="起始日期 : " ></Label>
@@ -291,7 +288,7 @@
                                                                     <TabItem Header="龙虎">
                                                                         
                                                                             <Grid>
-                                                                            <ScrollViewer x:Name="longhuhistroy_scroll" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" CanContentScroll="True">
+                                                                            <ScrollViewer x:Name="longhuhistroy_scroll" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Hidden" CanContentScroll="True">
                                                                                 <ScrollViewer.Content>
                                                                                     <StackPanel VerticalAlignment="Top" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto">
                                                                                         <StackPanel Orientation="Horizontal" Height="25" Background="LightGray" >
@@ -304,7 +301,7 @@
                                                                                     <Label Content="输赢" Width="80"></Label>
                                                                                         </StackPanel>
                                                                                         <StackPanel>
-                                                                                            <ListBox x:Name="right_longhu" SelectionChanged="right_longhu_SelectionChanged" Height="450" ></ListBox>
+                                                                                            <ListBox x:Name="right_longhu" SelectionChanged="right_longhu_SelectionChanged" Height="320" ></ListBox>
                                                                                         </StackPanel>
                                                                                     </StackPanel>
                                                                                
@@ -316,9 +313,9 @@
 
                                                                     <TabItem Header="单双">
                                                                         <Grid>
-                                                                        <ScrollViewer x:Name="danshuanghistroy_scroll" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" CanContentScroll="True">
+                                                                        <ScrollViewer x:Name="danshuanghistroy_scroll" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Hidden" CanContentScroll="True">
                                                                                 <ScrollViewer.Content>
-                                                                                    <StackPanel VerticalAlignment="Top" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto">
+                                                                                    <StackPanel ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto">
                                                                                         <StackPanel Orientation="Horizontal"  Height="25" Background="LightGray" >
                                                                                             <Label Content="开奖期数" Width="80"></Label>
                                                                                             <Label Content="开奖类型" Width="80"></Label>
@@ -329,7 +326,7 @@
                                                                                             <Label Content="输赢" Width="80"></Label>
                                                                                         </StackPanel>
                                                                                         <StackPanel>
-                                                                                            <ListBox x:Name="right_danshuang" SelectionChanged="right_danshuang_SelectionChanged" Height="450" ></ListBox>
+                                                                                            <ListBox x:Name="right_danshuang" SelectionChanged="right_danshuang_SelectionChanged" Height="320" ></ListBox>
                                                                                         </StackPanel>
                                                                                     </StackPanel>
                                                                                 
@@ -340,7 +337,7 @@
 
                                                                     <TabItem Header="大小">
                                                                         <Grid>
-                                                                            <ScrollViewer x:Name="daxiaohistroy_scroll" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" CanContentScroll="True">
+                                                                            <ScrollViewer x:Name="daxiaohistroy_scroll" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Hidden" CanContentScroll="True">
                                                                                 <ScrollViewer.Content>
                                                                                     <StackPanel VerticalAlignment="Top" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto">
                                                                                         <StackPanel Orientation="Horizontal" Height="25" Background="LightGray">
@@ -353,7 +350,7 @@
                                                                                             <Label Content="输赢" Width="80"></Label>
                                                                                         </StackPanel>
                                                                                         <StackPanel>
-                                                                                            <ListBox x:Name="right_daxiao" SelectionChanged="right_daxiao_SelectionChanged" Height="450"></ListBox>
+                                                                                            <ListBox x:Name="right_daxiao" SelectionChanged="right_daxiao_SelectionChanged" Height="320"></ListBox>
                                                                                         </StackPanel>
                                                                                     </StackPanel>
                                                                                 </ScrollViewer.Content>

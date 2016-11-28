@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:avalonDock="http://schemas.xceed.com/wpf/xaml/avalondock"
         Title="MainWindow" Height="350" Width="525" Loaded="Window_Loaded" WindowState="Maximized" xmlns:c1="http://schemas.componentone.com/winfx/2006/xaml">
-    <Grid >
+    <Grid  x:Name="mainwindow">
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
             <RowDefinition Height="26"/>
@@ -13,7 +13,7 @@
         <Menu Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
             
             <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" Width="213">
-             <Label  Height="29" Name="user" Foreground="Blue" FontSize="13" HorizontalContentAlignment="Center"  Width="100" MouseDown="user_MouseDown"></Label>
+                <Label  Height="29" Name="user" Foreground="Blue" FontSize="13" HorizontalContentAlignment="Center"  Width="100" MouseDown="user_MouseDown"></Label>
             <Label  Height="29" Name="amount" Foreground="Red" FontSize="13" HorizontalContentAlignment="Center"  Width="113" ></Label>
             </StackPanel>
 
@@ -116,6 +116,10 @@
                                     <StackPanel Grid.Row="1" Orientation="Horizontal" x:Name="chat_stack" HorizontalAlignment="Stretch">
                                         <StackPanel x:Name="longhu_stack">
 
+                                       
+                                            
+                                            
+                                            
                                             <TabControl Height="230" Margin="2,0,0,0">
                                                 <TabItem Header="龙虎">
                                                     <ScrollViewer x:Name="longhu_scroll" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled" CanContentScroll="True" MouseEnter="longhu_scroll_MouseEnter" MouseLeave="longhu_scroll_MouseLeave">
@@ -384,5 +388,8 @@
 
             </avalonDock:LayoutRoot>
         </avalonDock:DockingManager>
+        <Button Content="龙虎" Height="23" HorizontalAlignment="Left" Margin="303,2,0,0" Name="button1" VerticalAlignment="Top" Width="49" Click="button1_Click" />
+        <Button Content="大小" Height="23" HorizontalAlignment="Left" Margin="358,2,0,0" Name="button2" VerticalAlignment="Top" Width="49" Click="button2_Click"/>
+        <Button Content="单双" Height="23" HorizontalAlignment="Left" Name="button3" Margin="416,2,32,5" VerticalAlignment="Top" Width="49" Click="button3_Click"/>
     </Grid>
 </Window>

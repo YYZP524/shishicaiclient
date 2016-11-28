@@ -450,7 +450,7 @@ namespace shishicaiclient
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-
+           
 
             //获取内网IP
             IPAddress ipaddr = Dns.Resolve(Dns.GetHostName()).AddressList[0];
@@ -516,6 +516,9 @@ namespace shishicaiclient
                 MessageBox.Show("welcome");
                 PublicClass.socket.BeginReceive(buffer, 0, buffer.Length, SocketFlags.None, new AsyncCallback(ReceiveMessage), PublicClass.socket);
             }
+
+
+           
            
 
         }
@@ -1141,14 +1144,53 @@ namespace shishicaiclient
                         }
                     }
 
+
+
+
+
                     else if (oper == "28")
                     {
                         Dispatcher.Invoke(new Action(delegate         //线程加载
                         {
-                         
+                  
                         expectlast.Children.Clear();
                         string expect1 = jsonstr["lastexpect"].ToString();
                         string opencode1 = jsonstr["lastopencode"].ToString();
+                        ///
+                        //Eff/开奖动画
+                        Longhu longhu = MainWindow.FindChild<Longhu>(Application.Current.MainWindow, "longhu");//龙虎开奖历史
+                        if (longhu != null)
+                        {
+                            Effectanimation animation = new Effectanimation();
+
+                            longhu.maincanvas.Children.Add(animation);
+                            animation.animationl(opencode1);
+
+                        }
+
+                        Longhu daxiao = MainWindow.FindChild<Longhu>(Application.Current.MainWindow, "daxiao");//daxiao开奖历史
+                        if (daxiao != null)
+                        {
+                            Effectanimation animation = new Effectanimation();
+
+                            longhu.maincanvas.Children.Add(animation);
+                            animation.animationd(opencode1);
+
+                        }
+
+                        Longhu danshuang = MainWindow.FindChild<Longhu>(Application.Current.MainWindow, "danshuang");//单双开奖历史
+                        if (danshuang != null)
+                        {
+                            Effectanimation animation = new Effectanimation();
+
+                            longhu.maincanvas.Children.Add(animation);
+                            animation.animations(opencode1);
+
+                        } 
+
+
+
+
                         if (PublicClass.Code_json.Last()["expect"].ToString() != expect1)
                         {
                             show_leftopenjiang(opencode1, expect1);
@@ -1185,7 +1227,22 @@ namespace shishicaiclient
                         }
 
                         expectlast.Children.Add(stack);
-                            }));
+                      
+
+
+                   
+                 
+
+
+
+
+
+
+
+
+      }));
+
+
                     }
 
                     else if (oper == "30")
@@ -2362,6 +2419,56 @@ namespace shishicaiclient
         private void right_daxiao_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             e.Handled = true;
+        }
+
+        private void button1_Click(object sender, RoutedEventArgs e)
+        {
+
+            Longhu longhu = MainWindow.FindChild<Longhu>(Application.Current.MainWindow, "longhu");//龙虎开奖历史
+            if (longhu != null)
+            {
+                Effectanimation animation = new Effectanimation();
+                animation.VerticalAlignment = VerticalAlignment.Center;
+                animation.HorizontalAlignment = HorizontalAlignment.Center;
+                animation.animationl("3,5,8,2,4");
+                longhu.maincanvas.Children.Add(animation);
+
+
+
+               
+            }
+            
+        }
+
+       
+
+        private void button2_Click(object sender, RoutedEventArgs e)
+        {
+            Longhu daxiao = MainWindow.FindChild<Longhu>(Application.Current.MainWindow, "daxiao");//大小开奖历史
+            if (daxiao != null)
+            {
+                Effectanimation animation = new Effectanimation();
+                animation.VerticalAlignment = VerticalAlignment.Center;
+                animation.HorizontalAlignment = HorizontalAlignment.Center;
+                animation.animationd("3,5,8,2,4");
+                daxiao.maincanvas.Children.Add(animation);
+
+            }
+        }
+
+        private void button3_Click(object sender, RoutedEventArgs e)
+        {
+
+            Longhu danshaung = MainWindow.FindChild<Longhu>(Application.Current.MainWindow, "danshuang");//大小开奖历史
+            if (danshaung != null)
+            {
+                Effectanimation animation = new Effectanimation();
+                animation.VerticalAlignment = VerticalAlignment.Center;
+                animation.HorizontalAlignment = HorizontalAlignment.Center;
+                animation.animations("3,5,8,2,4");
+                danshaung.maincanvas.Children.Add(animation);
+
+            }
         }
 
        

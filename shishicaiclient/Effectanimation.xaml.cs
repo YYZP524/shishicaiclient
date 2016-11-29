@@ -59,12 +59,12 @@ namespace shishicaiclient
 
             DoubleAnimation backanmi = new DoubleAnimation();
             backanmi.To = 200;
-            backanmi.Duration = TimeSpan.FromSeconds(0.3);
+            backanmi.Duration = TimeSpan.FromSeconds(0.6);
             back.BeginAnimation(Label.FontSizeProperty, backanmi);
 
             DoubleAnimation backop = new DoubleAnimation();
             backop.To = 0;
-            backop.Duration = TimeSpan.FromSeconds(0.3);
+            backop.Duration = TimeSpan.FromSeconds(0.6);
             back.BeginAnimation(Label.OpacityProperty, backop);
 
 
@@ -72,14 +72,14 @@ namespace shishicaiclient
 
             DoubleAnimation fontanmi = new DoubleAnimation();
             fontanmi.To = 100;
-            fontanmi.Duration = TimeSpan.FromSeconds(1);
+            fontanmi.Duration = TimeSpan.FromSeconds(1.5);
             font.BeginAnimation(Label.FontSizeProperty, fontanmi);
 
 
 
             DoubleAnimation fontop = new DoubleAnimation();
             fontop.To = 0;
-            fontop.Duration = TimeSpan.FromSeconds(1);
+            fontop.Duration = TimeSpan.FromSeconds(1.5);
             font.BeginAnimation(Label.OpacityProperty, fontop);
 
         }

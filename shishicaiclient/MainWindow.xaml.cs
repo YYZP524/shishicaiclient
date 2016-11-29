@@ -156,7 +156,7 @@ namespace shishicaiclient
                         rect.Height = 30;
 
                         int daxiaocount = int.Parse(opencodes[1]) + int.Parse(opencodes[2]) + int.Parse(opencodes[3]) + int.Parse(opencodes[4]) + int.Parse(opencodes[0]);//大小判断（第二位加第三位加到第五位的和来判断大小）
-                        if (daxiaocount > 17)//大于17为大
+                        if (daxiaocount > 23)//大于17为大
                         {
                             rect.create_rect(0, "大");
                         }
@@ -793,7 +793,7 @@ namespace shishicaiclient
 
              //判断大小结果
              
-              if (sum < 18)
+              if (sum < 23)
              {
                  LeftEll ellreturn = new LeftEll();
                  ellreturn.create_lab("小", 1);
@@ -1092,7 +1092,9 @@ namespace shishicaiclient
                         if (jsonstr["status"].ToString() == "100")
                         {
                             MessageBox.Show("投注成功！");
-                           
+                            longhures.Content = "";
+                            danshaungres.Content = "";
+                            daxiaores.Content = "";
                           
                                                     Dispatcher.Invoke(new Action(delegate         //线程加载
                         {
@@ -1179,7 +1181,7 @@ namespace shishicaiclient
                         {
                             Effectanimation animation = new Effectanimation();
 
-                            longhu.maincanvas.Children.Add(animation);
+                            daxiao.maincanvas.Children.Add(animation);
                             animation.animationd(opencode1);
 
                         }
@@ -1189,7 +1191,7 @@ namespace shishicaiclient
                         {
                             Effectanimation animation = new Effectanimation();
 
-                            longhu.maincanvas.Children.Add(animation);
+                            danshuang.maincanvas.Children.Add(animation);
                             animation.animations(opencode1);
 
                         } 

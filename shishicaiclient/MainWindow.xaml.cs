@@ -506,7 +506,7 @@ namespace shishicaiclient
            
 
             //连接到指定服务器的指定端口
-            PublicClass.socket.Connect("192.168.1.107", 4530);
+            PublicClass.socket.Connect("192.168.1.105", 4530);
             if (!PublicClass.socket.Connected)
             {
                 MessageBox.Show("connect to the server");
@@ -1092,12 +1092,13 @@ namespace shishicaiclient
                         if (jsonstr["status"].ToString() == "100")
                         {
                             MessageBox.Show("投注成功！");
-                            longhures.Content = "";
-                            danshaungres.Content = "";
-                            daxiaores.Content = "";
+                           
                           
                                                     Dispatcher.Invoke(new Action(delegate         //线程加载
                         {
+                            longhures.Content = "";
+                            danshaungres.Content = "";
+                            daxiaores.Content = "";
                             resultlong.Content = "0";
                             resulthu.Content = "0";
                             resulthe.Content = "0";
@@ -1107,31 +1108,31 @@ namespace shishicaiclient
                             resultxiao.Content = "0";
                             if (longmount != null)
                             {
-                                longhures.Content = "龙 ： " + longmount + "     ";
+                                longhures.Content = "龙 ：" + longmount + "     ";
                             }
                             if (humount != null)
                             {
-                                longhures.Content = longhures.Content + " 虎 : " + humount + "     ";
+                                longhures.Content = longhures.Content + "虎 : " + humount + "     ";
                             }
                             if (hemount != null)
                             {
-                                longhures.Content = longhures.Content + " 和 : " + hemount + "      ";
+                                longhures.Content = longhures.Content + "和 : " + hemount + "      ";
                             }
                             if (danmount != null)
                             {
-                                danshaungres.Content = "单 ： " + danmount + "      ";
+                                danshaungres.Content = "单 ：" + danmount + "      ";
                             }
                             if (shuangmount != null)
                             {
-                                danshaungres.Content = danshaungres.Content + "双 ： " + shuangmount + "      ";
+                                danshaungres.Content = danshaungres.Content + "双 ：" + shuangmount + "      ";
                             }
                             if (damount != null)
                             {
-                                daxiaores.Content = "大 ： " + damount + "      ";
+                                daxiaores.Content = "大 ：" + damount + "      ";
                             }
                             if (xiaomount != null)
                             {
-                                daxiaores.Content = daxiaores.Content + "小 ： " + xiaomount + "      ";
+                                daxiaores.Content = daxiaores.Content + "小 ：" + xiaomount + "      ";
                             }
                         }));
                         }
@@ -1293,6 +1294,7 @@ namespace shishicaiclient
         //登录窗口弹窗
         private void login_Click(object sender, RoutedEventArgs e)
         {
+            
             login sign = new login();
             C1Window lo = new C1Window();
             lo.Header = "用户登录";
@@ -2021,6 +2023,13 @@ namespace shishicaiclient
         
             else
             {
+                resultlong.Content = "0";
+                resulthu.Content = "0";
+                resulthe.Content = "0";
+                resultdan.Content = "0";
+                resultshuang.Content = "0";
+                resultda.Content = "0";
+                resultxiao.Content = "0";
                 MessageBox.Show("投注时间已过，请等待下次投注");
             }
 
@@ -2494,6 +2503,24 @@ namespace shishicaiclient
                 danshaung.maincanvas.Children.Add(animation);
 
             }
+        }
+
+        private void reset_Click(object sender, RoutedEventArgs e)
+        {
+            resultlong.Content = "0";
+            resulthu.Content = "0";
+            resulthe.Content = "0";
+            resultdan.Content = "0";
+            resultshuang.Content = "0";
+            resultda.Content = "0";
+            resultxiao.Content = "0";
+            longmount = null;
+            humount = null;
+            hemount = null;
+            danmount = null;
+            shuangmount = null;
+            damount = null;
+            xiaomount = null;
         }
 
 

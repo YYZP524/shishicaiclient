@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              d:DesignHeight="225" d:DesignWidth="225" >
-    <Grid  >
+    <Grid>
         <Canvas x:Name="maincanvas" HorizontalAlignment="Center" VerticalAlignment="Center">
         <Label x:Name="back" Content="龙"/>
         <Label x:Name="font" Content="龙"/>

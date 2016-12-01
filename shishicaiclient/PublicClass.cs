@@ -24,7 +24,7 @@ namespace shishicaiclient
         public static string danshuangfending = "";
         public static string daxiaofending = "";
         public static string hefending = "";
-
+        public static string loadClientIP = "";
 
 
 

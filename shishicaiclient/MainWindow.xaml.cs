@@ -16,7 +16,8 @@ using Newtonsoft.Json.Linq;
 using C1.WPF;
 using System.Net;
 using Newtonsoft.Json;
-
+using System.Configuration;
+using System.Xml;
 
 
 
@@ -502,11 +503,19 @@ namespace shishicaiclient
 
 
 
+            string strPath = "";
+            XmlDocument config = new XmlDocument();
+            config.Load("App.config");
 
-           
+            foreach (XmlNode node in config.SelectNodes("/config"))
+            {
+                strPath = node.SelectSingleNode("ip").InnerText;
+            }
 
+
+            
             //连接到指定服务器的指定端口
-            PublicClass.socket.Connect("192.168.1.105", 4530);
+            PublicClass.socket.Connect(strPath, 4530);
             if (!PublicClass.socket.Connected)
             {
                 MessageBox.Show("connect to the server");
@@ -1005,6 +1014,8 @@ namespace shishicaiclient
                     //服务端返回登录信息
                     else if (oper == "16")
                     {
+                     
+
                         if (jsonstr["status"].ToString() == "100")
                         {
 
@@ -1013,8 +1024,16 @@ namespace shishicaiclient
                            
                             if (dr == MessageBoxResult.OK)
                             {
+
                                 Dispatcher.Invoke(new Action(delegate
                                 {
+                                    //关闭登录窗口
+                                    C1.WPF.C1Window close1 = MainWindow.FindChild<C1.WPF.C1Window>(
+                                        Application.Current.MainWindow, "closelogin");
+                                    if (close1 != null)
+                                    {
+                                        close1.Close();
+                                    }
                                     user.Header = PublicClass.username;
                                     PublicClass.balance = jsonstr["amount"].ToString();
                                     PublicClass.userbase =  jsonstr["base"].ToString();
@@ -1031,13 +1050,7 @@ namespace shishicaiclient
                                     login.Visibility = System.Windows.Visibility.Collapsed;
                                     changepwd.Visibility = System.Windows.Visibility.Visible;
                                     exit.Visibility = System.Windows.Visibility.Visible;
-                                    //关闭登录窗口
-                                    C1.WPF.C1Window close1 = MainWindow.FindChild<C1.WPF.C1Window>(
-                                        Application.Current.MainWindow, "closelogin");
-                                    if (close1 != null)
-                                    {
-                                        close1.Close();
-                                    }
+                                    
 
                                 }));
                             }

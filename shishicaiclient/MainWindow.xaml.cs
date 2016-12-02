@@ -18,6 +18,8 @@ using System.Net;
 using Newtonsoft.Json;
 using System.Configuration;
 using System.Xml;
+using System.IO;
+using System.Xml.Serialization;
 
 
 
@@ -515,8 +517,11 @@ namespace shishicaiclient
 
             
             //连接到指定服务器的指定端口
-            PublicClass.socket.Connect(strPath, 4530);
-            if (!PublicClass.socket.Connected)
+            try
+            {
+
+                PublicClass.socket.Connect(strPath, 4530);
+                if (!PublicClass.socket.Connected)
             {
                 MessageBox.Show("connect to the server");
             }
@@ -525,6 +530,22 @@ namespace shishicaiclient
                 MessageBox.Show("welcome");
                 PublicClass.socket.BeginReceive(buffer, 0, buffer.Length, SocketFlags.None, new AsyncCallback(ReceiveMessage), PublicClass.socket);
             }
+
+            }
+            catch
+            {
+               
+                this.Close();
+                MessageBox.Show("地址不正确");
+              
+                StreamWriter writer = new StreamWriter("App.config");
+                config ccc = new config();
+                ccc.ip = "";
+                XmlSerializer serialier = new XmlSerializer(typeof(config));
+                serialier.Serialize(writer, ccc);
+                writer.Close();
+            }
+            
 
 
            
@@ -1248,23 +1269,9 @@ namespace shishicaiclient
                             stack.Children.Add(bigell);
                         }
 
-                        expectlast.Children.Add(stack);
-                      
-
-
-                   
-                 
-
-
-
-
-
-
-
+                        expectlast.Children.Add(stack);               
 
       }));
-
-
                     }
 
                     else if (oper == "30")
@@ -2536,7 +2543,33 @@ namespace shishicaiclient
             xiaomount = null;
         }
 
+        public struct config
+        {
+            public string ip;
+        }
 
+    
+
+        private void setting_Click_1(object sender, RoutedEventArgs e)
+        {
+            set();
+        }
+
+        private void set()
+        {
+            this.Close();
+            StreamWriter writer = new StreamWriter("App.config");
+            config ccc = new config();
+            ccc.ip = "";
+            XmlSerializer serialier = new XmlSerializer(typeof(config));
+            serialier.Serialize(writer, ccc);
+            writer.Close();
+
+            LoadClient la = new LoadClient();
+            la.Width = 300;
+            la.Height = 100;
+            la.Show();
+        }
       
 
      

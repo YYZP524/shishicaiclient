@@ -22,6 +22,9 @@
                 <MenuItem Header="修改密码" Height="29" Name="changepwd" FontSize="13" HorizontalAlignment="Center"  Visibility="Collapsed" Click="changepwd_Click"></MenuItem>
             </MenuItem>
             <MenuItem Header="退出" FontSize="13" Name="close" HorizontalAlignment="Right" Click="close_Click"></MenuItem>
+            <MenuItem Header="设置" FontSize="13">
+                <MenuItem Header="修改主机地址"  Name="setting" Click="setting_Click_1"></MenuItem>
+            </MenuItem>
         </Menu>
 
         <ToolBar Grid.Row="1"/>

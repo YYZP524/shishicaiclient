@@ -58,13 +58,7 @@ namespace shishicaiclient
 
         private void button1_Click(object sender, RoutedEventArgs e)
         {
-            PublicClass.loadClientIP = client.Text;
-
-            //Configuration cfa = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-            ////cfa.AppSettings.Settings["IPADDRESS"].Value = PublicClass.loadClientIP;
-            //cfa.AppSettings.Settings.Add("IPADDRESS", PublicClass.loadClientIP);
-            //cfa.Save();
-
+           
             StreamWriter writer = new StreamWriter("App.config");
             config ccc = new config();
             ccc.ip = client.Text;
